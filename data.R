@@ -7,3 +7,8 @@ obserwacje = read.csv('obserwacje.csv', na.strings = c("", " ", "NA"))
 
 
 ###Cleaning - obserwacje
+
+for (i in 13:21){
+	obserwacje[,i] = as.numeric(as.character(obserwacje[,i]))
+	obserwacje[,i][obserwacje[,i]<100] = NA
+}
