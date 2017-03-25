@@ -39,9 +39,10 @@ levels(obserwacje$eksponat) = c(levels(obserwacje$eksponat), "PRZERWA")
 obserwacje[obserwacje$kategorie==1,]$eksponat = "PRZERWA"
 obserwacje[obserwacje$eksponat=="INNE - PLANETARIUM",]$eksponat <- "PLANETARIUM"
 
-options(warn=-1)
+oldw <- getOption("warn")
+options(warn = -1)
 for (i in 13:21){
   obserwacje[,i] = as.numeric(as.character(obserwacje[,i]))
   obserwacje[,i][obserwacje[,i]<100] = NA
 }
-options(warn=0)
+options(warn=oldw)
