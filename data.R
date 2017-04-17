@@ -179,10 +179,39 @@ top_eksponaty_galerie = aggregate(.~Galeria, top_eksponaty, FUN = head, 1)
 top_eksponaty_galerie$`Liczba odwiedzeń` = as.numeric(as.character(top_eksponaty_galerie$`Liczba odwiedzeń`))
 arrange(top_eksponaty_galerie, desc(`Liczba odwiedzeń`))
 
+#Najbardziej absorbujące eksponaty
+m = 10
+
+avg = function(x) { mean(as.numeric(as.character(x)), na.rm = TRUE)}
+
+#Wg czasu
+avg_czas_all = avg(istotne$czas_w_sek)
+top_czas = arrange(summarize(group_by(istotne, eksponat, galeria), sredni_czas = mean(as.numeric(as.character(czas_w_sek))), n = length(czas_w_sek)), desc(sredni_czas))
+top_czas_over_m = arrange(filter(top_czas, n>m), desc(sredni_czas))
+top_czas_galerie = aggregate(.~galeria, top_czas_over_m, FUN = head, 1)[,-4]
 
 
+avg_zainteresowanie_all = avg(istotne$zach)
+top_zaangazowanie = arrange(summarize(group_by(istotne, eksponat, galeria), 
+																									srednie_zaangazowanie = mean(as.numeric(as.character(zach))), n = length(zach)), desc(srednie_zaangazowanie))
+top_zaangazowanie_over_m = arrange(filter(top_zaangazowanie, n>m), desc(srednie_zaangazowanie))
+top_zaangazowanie_not_brak = head(arrange(filter(top_zaangazowanie, n>m, galeria != "<brak>"), desc(srednie_zaangazowanie)), 10)
+top_zaangazowanie_galerie = aggregate(.~galeria, top_zaangazowanie_over_m, FUN = head, 1)[,-4]
 
 
+avg_opis_all = avg(istotne$opis)
+top_opis = arrange(summarize(group_by(istotne, eksponat, galeria), 
+																							 sredni_opis = mean(as.numeric(as.character(opis))), n = length(opis)), desc(sredni_opis))
+top_opis_over_m = arrange(filter(top_opis, n>m), desc(sredni_opis))
+top_opis_not_brak = head(arrange(filter(top_opis, n>m, galeria != "<brak>"), desc(sredni_opis)), 10)
+top_opis_galerie = aggregate(.~galeria, top_opis_over_m, FUN = head, 1)[,-4]
+
+avg_animator_all = avg(istotne$animator)
+top_animator = arrange(summarize(group_by(istotne, eksponat, galeria), 
+																 sredni_animator = mean(as.numeric(as.character(animator))), n = length(animator)), desc(sredni_animator))
+top_animator_over_m = arrange(filter(top_animator, n>m), desc(sredni_animator))
+top_animator_not_brak = head(arrange(filter(top_animator, n>m, galeria != "<brak>"), desc(sredni_animator)), 10)
+top_animator_galerie = aggregate(.~galeria, top_animator_over_m, FUN = head, 1)[,-4]
 
 
 
