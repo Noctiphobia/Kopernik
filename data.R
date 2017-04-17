@@ -43,3 +43,27 @@ for (i in 13:21){
   obserwacje[,i] = as.numeric(as.character(obserwacje[,i]))
   obserwacje[,i][obserwacje[,i]<100] = NA
 }
+
+###Creating dataframe groups
+library(dplyr)
+obserwacje2 = obserwacje
+#obserwacje2[, "grupa_id"] <- numeric(dim(obserwacje))
+for (i in 1:dim(obserwacje)[1])
+{
+  children = obserwacje[i, c(2, 13:20)]
+  children = children[!is.na(children)]
+  children = sort(children)
+  group_id = paste(children, collapse = ' ')
+  obserwacje2[i, "grupka_id"] = group_id
+  
+}
+grupki = count(obserwacje2, grupka_id)
+
+for (i in 1:dim(grupki)[1])
+{
+  children = grupki[i, ]
+  
+}
+
+
+arrange(grupki, desc(n))
