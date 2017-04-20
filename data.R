@@ -62,9 +62,9 @@ options(warn=oldw)
 
 # DZIECI
 
-# Czy wiedza o rodzicach jest zale?na od p?ci?
-# STUDIA
-# DANE
+## Czy wiedza o rodzicach jest zale¿na od p³ci?
+### STUDIA
+#### DANE
 data_girls <- subset(ankieta, ankieta$plec == "dziewczyna")
 data_girls_know_studies_none <- nrow(subset(data_girls, is.na(data_girls$studia_m) & is.na(data_girls$studia_t)))
 data_girls_know_studies_both <- nrow(subset(data_girls, !is.na(data_girls$studia_m) & !is.na(data_girls$studia_t)))
@@ -78,7 +78,7 @@ data_boys_know_studies_one <- nrow(data_boys) - data_boys_know_studies_both - da
 num_girls = nrow(data_girls)
 num_boys = nrow(data_boys)
 
-# WYKRESY KO?OWE
+#### WYKRESY KO£OWE
 pie_chart_data_girls <- c(data_girls_know_studies_none, data_girls_know_studies_one, data_girls_know_studies_both)
 percentlabels<- round(100*pie_chart_data_girls/num_girls, 1)
 pielabels<- paste(percentlabels, "%", sep="")
@@ -93,7 +93,7 @@ cols=rainbow(length(pie_chart_data_boys))
 pie(pie_chart_data_boys, main="Czy ch?opcy wiedz? o studiach rodzic?w?", col=cols, labels=pielabels, cex=0.8)
 legend("topright", c("Nie","O jednym","Tak"), cex=0.8, fill=cols)
 
-# WYKRES S?UPKOWY
+#### WYKRES S£UPKOWY
 data <- structure(list(Nie=c(round(100*data_girls_know_studies_none/num_girls,1),round(100*data_boys_know_studies_none/num_boys,1)),
                        Jeden=c(round(100*data_girls_know_studies_one/num_girls,1),round(100*data_boys_know_studies_one/num_boys,1)),
                        Tak=c(round(100*data_girls_know_studies_both/num_girls,1),round(100*data_boys_know_studies_both/num_boys,1))),
@@ -101,8 +101,8 @@ data <- structure(list(Nie=c(round(100*data_girls_know_studies_none/num_girls,1)
 colors <- c("red", "blue")
 barplot(as.matrix(data), main="Czy dzieci wiedz? o studiach rodzic?w?", cex.lab = 1.5, cex.main = 1.4, beside=TRUE, ylab = "Procent", ylim=c(0,100), legend=c("Dziewczynki", "Ch?opcy"), col=colors)
 
-# PRACA
-# DANE
+### PRACA
+#### DANE
 data_girls <- subset(ankieta, ankieta$plec == "dziewczyna")
 data_girls_know_work_none <- nrow(subset(data_girls, is.na(data_girls$praca_m) & is.na(data_girls$praca_o)))
 data_girls_know_work_both <- nrow(subset(data_girls, !is.na(data_girls$praca_m) & !is.na(data_girls$praca_o)))
@@ -116,7 +116,7 @@ data_boys_know_work_one <- nrow(data_boys) - data_boys_know_work_both - data_boy
 num_girls = nrow(data_girls)
 num_boys = nrow(data_boys)
 
-# WYKRESY KO?OWE
+#### WYKRESY KO£OWE
 pie_chart_data_girls <- c(data_girls_know_work_none, data_girls_know_work_one, data_girls_know_work_both)
 percentlabels<- round(100*pie_chart_data_girls/num_girls, 1)
 pielabels<- paste(percentlabels, "%", sep="")
@@ -131,13 +131,85 @@ cols=rainbow(length(pie_chart_data_boys))
 pie(pie_chart_data_boys, main="Czy ch?opcy wiedz? o pracy rodzic?w?", col=cols, labels=pielabels, cex=0.8)
 legend("topright", c("Nie","O jednym","Tak"), cex=0.8, fill=cols)
 
-# WYKRES S?UPKOWY
+#### WYKRES S£UPKOWY
 data <- structure(list(Nie=c(round(100*data_girls_know_work_none/num_girls,1),round(100*data_boys_know_work_none/num_boys,1)),
                        Jeden=c(round(100*data_girls_know_work_one/num_girls,1),round(100*data_boys_know_work_one/num_boys,1)),
                        Tak=c(round(100*data_girls_know_work_both/num_girls,1),round(100*data_boys_know_work_both/num_boys,1))),
                   .Names = c("Nie", "O jednym", "Tak"), class = "data.frame", row.names = c(NA, -2L))
 colors <- c("red", "blue")
 barplot(as.matrix(data), main="Czy dzieci wiedz? o pracy rodzic?w?", cex.lab = 1.5, cex.main = 1.4, beside=TRUE, ylab = "Procent", ylim=c(0,100), legend=c("Dziewczynki", "Ch?opcy"), args.legend = list(x ='topleft'), col=colors)
+
+# OCENY
+ankieta_clr = read.csv('ankieta_clr.csv')
+
+## BOXPLOT
+notes<-data.frame(Matematyka=ankieta_clr$ocena_matematyka,Polski=ankieta_clr$ocena_jêzyk_polski,Przyroda=ankieta_clr$ocena_przyroda)
+boxplot(notes, ylab ="Oceny", xlab ="Przedmiot", main="Oceny z przedmiotów", varwidth=TRUE)
+
+## Oceny dzieci vs. studia rodziców
+studying <- subset(ankieta, ankieta$studia_m == "tak" | ankieta$studia_t=="tak")
+notes_studying<-data.frame(Matematyka=studying$ocena_matematyka,Polski=studying$ocena_jêzyk_polski,Przyroda=studying$ocena_przyroda)
+notes_studying_num<-sapply(notes_studying, as.numeric)
+mean_studying <- rowMeans(notes_studying_num, na.rm = TRUE)
+cbind(notes_studying, Mean = mean_studying)
+
+not_studying <- subset(ankieta, (ankieta$studia_m == "nie" & ankieta$studia_t=="nie") | (is.na(ankieta$studia_m) & ankieta$studia_t=="nie") | (ankieta$studia_m == "nie" & is.na(ankieta$studia_t)))
+notes_not_studying<-data.frame(Matematyka=not_studying$ocena_matematyka,Polski=not_studying$ocena_jêzyk_polski,Przyroda=not_studying$ocena_przyroda)
+notes_not_studying_num<-sapply(notes_not_studying, as.numeric)
+mean_not_studying <- rowMeans(notes_not_studying_num, na.rm = TRUE)
+cbind(notes_not_studying, Mean = mean_not_studying)
+
+notes<-data.frame(Tak=mean_studying,Nie=mean_not_studying)
+boxplot(notes, ylab ="Œrednia ocen", xlab ="Studia rodziców", main="Czy studia rodziców wp³ywaj¹ na oceny dzieci?", varwidth=TRUE)
+
+lmts <- range(mean_studying,mean_not_studying, na.rm = TRUE)
+
+par(mfrow = c(1, 2))
+boxplot(mean_studying,ylim=lmts, ylab ="Œrednia ocen", xlab ="Ze studiami", varwidth=TRUE)
+boxplot(mean_not_studying,ylim=lmts, xlab ="Bez studiów", varwidth=TRUE)
+title(main="Czy studia rodziców wp³ywaj¹ na oceny dzieci?", line = -2, outer=TRUE)
+
+## Oceny dzieci vs. doping rodziców
+
+zd_tak<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie siê zgadzam")
+notes_zd_tak<-data.frame(Matematyka=zd_tak$ocena_matematyka,Polski=zd_tak$ocena_jêzyk_polski,Przyroda=zd_tak$ocena_przyroda)
+notes_zd_tak_num<-sapply(notes_zd_tak, as.numeric)
+mean_zd_tak <- rowMeans(notes_zd_tak_num, na.rm = TRUE)
+cbind(notes_zd_tak, Mean = mean_zd_tak)
+
+tak<-subset(ankieta, ankieta$p_19_b_4=="raczej siê zgadzam")
+notes_tak<-data.frame(Matematyka=tak$ocena_matematyka,Polski=tak$ocena_jêzyk_polski,Przyroda=tak$ocena_przyroda)
+notes_tak_num<-sapply(notes_tak, as.numeric)
+mean_tak <- rowMeans(notes_tak_num, na.rm = TRUE)
+cbind(notes_tak, Mean = mean_tak)
+
+tak_nie<-subset(ankieta, ankieta$p_19_b_4=="ani siê zgadzam ani siê nie zgadzam")
+notes_tak_nie<-data.frame(Matematyka=tak_nie$ocena_matematyka,Polski=tak_nie$ocena_jêzyk_polski,Przyroda=tak_nie$ocena_przyroda)
+notes_tak_nie_num<-sapply(notes_tak_nie, as.numeric)
+mean_tak_nie <- rowMeans(notes_tak_nie_num, na.rm = TRUE)
+cbind(notes_tak_nie, Mean = mean_tak_nie)
+
+nie<-subset(ankieta, ankieta$p_19_b_4=="raczej siê nie zgadzam")
+notes_nie<-data.frame(Matematyka=nie$ocena_matematyka,Polski=nie$ocena_jêzyk_polski,Przyroda=nie$ocena_przyroda)
+notes_nie_num<-sapply(notes_nie, as.numeric)
+mean_nie <- rowMeans(notes_nie_num, na.rm = TRUE)
+cbind(notes_nie, Mean = mean_nie)
+
+zd_nie<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie siê nie zgadzam")
+notes_zd_nie<-data.frame(Matematyka=zd_nie$ocena_matematyka,Polski=zd_nie$ocena_jêzyk_polski,Przyroda=zd_nie$ocena_przyroda)
+notes_zd_nie_num<-sapply(notes_zd_nie, as.numeric)
+mean_zd_nie <- rowMeans(notes_zd_nie_num, na.rm = TRUE)
+cbind(notes_zd_nie, Mean = mean_zd_nie)
+
+par(mfrow = c(1, 5))
+boxplot(mean_zd_tak,ylim=lmts, ylab ="Œrednia ocen", xlab ="Zdecydowanie siê zgadzam", varwidth=TRUE)
+boxplot(mean_tak,ylim=lmts, xlab ="Raczej siê zgadzam", varwidth=TRUE)
+boxplot(mean_tak_nie,ylim=lmts, xlab ="Ani siê zgadzam, ani siê nie zgadzam", varwidth=TRUE)
+boxplot(mean_nie,ylim=lmts, xlab ="Raczej siê nie zgadzam", varwidth=TRUE)
+boxplot(mean_zd_nie,ylim=lmts, xlab ="Zdecydowanie siê nie zgadzam", varwidth=TRUE)
+title(main="Czy doping rodziców wp³ywa na oceny dzieci?", line = -2, outer=TRUE)
+
+
 
 # EKSPONATY
 
