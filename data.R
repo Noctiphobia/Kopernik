@@ -1,4 +1,4 @@
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 ankieta = read.csv('ankieta.csv', na.strings=c(""," ","NA","nie wie","nie wiem","nieczytelne pismo", "dualizm odpowiedzi","brak odpowiedzi","nie pami?ta"))
 obserwacje = read.csv('obserwacje.csv', na.strings = c("", " ", "NA"))
 
@@ -62,7 +62,11 @@ options(warn=oldw)
 
 # DZIECI
 
-## Czy wiedza o rodzicach jest zale¿na od p³ci?
+## Liczba dzieci, dla ktorych jest zarowno ankieta, jak i obserwacje
+library(sqldf)
+sqldf("select count(distinct id_ucznia) from ankieta join obserwacje on id_ucznia = ID")
+
+## Czy wiedza o rodzicach jest zale?na od p?ci?
 ### STUDIA
 #### DANE
 data_girls <- subset(ankieta, ankieta$plec == "dziewczyna")
@@ -78,7 +82,7 @@ data_boys_know_studies_one <- nrow(data_boys) - data_boys_know_studies_both - da
 num_girls = nrow(data_girls)
 num_boys = nrow(data_boys)
 
-#### WYKRESY KO£OWE
+#### WYKRESY KO?OWE
 pie_chart_data_girls <- c(data_girls_know_studies_none, data_girls_know_studies_one, data_girls_know_studies_both)
 percentlabels<- round(100*pie_chart_data_girls/num_girls, 1)
 pielabels<- paste(percentlabels, "%", sep="")
@@ -93,7 +97,7 @@ cols=rainbow(length(pie_chart_data_boys))
 pie(pie_chart_data_boys, main="Czy ch?opcy wiedz? o studiach rodzic?w?", col=cols, labels=pielabels, cex=0.8)
 legend("topright", c("Nie","O jednym","Tak"), cex=0.8, fill=cols)
 
-#### WYKRES S£UPKOWY
+#### WYKRES S?UPKOWY
 data <- structure(list(Nie=c(round(100*data_girls_know_studies_none/num_girls,1),round(100*data_boys_know_studies_none/num_boys,1)),
                        Jeden=c(round(100*data_girls_know_studies_one/num_girls,1),round(100*data_boys_know_studies_one/num_boys,1)),
                        Tak=c(round(100*data_girls_know_studies_both/num_girls,1),round(100*data_boys_know_studies_both/num_boys,1))),
@@ -116,7 +120,7 @@ data_boys_know_work_one <- nrow(data_boys) - data_boys_know_work_both - data_boy
 num_girls = nrow(data_girls)
 num_boys = nrow(data_boys)
 
-#### WYKRESY KO£OWE
+#### WYKRESY KO?OWE
 pie_chart_data_girls <- c(data_girls_know_work_none, data_girls_know_work_one, data_girls_know_work_both)
 percentlabels<- round(100*pie_chart_data_girls/num_girls, 1)
 pielabels<- paste(percentlabels, "%", sep="")
@@ -131,7 +135,7 @@ cols=rainbow(length(pie_chart_data_boys))
 pie(pie_chart_data_boys, main="Czy ch?opcy wiedz? o pracy rodzic?w?", col=cols, labels=pielabels, cex=0.8)
 legend("topright", c("Nie","O jednym","Tak"), cex=0.8, fill=cols)
 
-#### WYKRES S£UPKOWY
+#### WYKRES S?UPKOWY
 data <- structure(list(Nie=c(round(100*data_girls_know_work_none/num_girls,1),round(100*data_boys_know_work_none/num_boys,1)),
                        Jeden=c(round(100*data_girls_know_work_one/num_girls,1),round(100*data_boys_know_work_one/num_boys,1)),
                        Tak=c(round(100*data_girls_know_work_both/num_girls,1),round(100*data_boys_know_work_both/num_boys,1))),
@@ -143,71 +147,71 @@ barplot(as.matrix(data), main="Czy dzieci wiedz? o pracy rodzic?w?", cex.lab = 1
 ankieta_clr = read.csv('ankieta_clr.csv')
 
 ## BOXPLOT
-notes<-data.frame(Matematyka=ankieta_clr$ocena_matematyka,Polski=ankieta_clr$ocena_jêzyk_polski,Przyroda=ankieta_clr$ocena_przyroda)
-boxplot(notes, ylab ="Oceny", xlab ="Przedmiot", main="Oceny z przedmiotów", varwidth=TRUE)
+notes<-data.frame(Matematyka=ankieta_clr$ocena_matematyka,Polski=ankieta_clr$ocena_j?zyk_polski,Przyroda=ankieta_clr$ocena_przyroda)
+boxplot(notes, ylab ="Oceny", xlab ="Przedmiot", main="Oceny z przedmiot?w", varwidth=TRUE)
 
-## Oceny dzieci vs. studia rodziców
+## Oceny dzieci vs. studia rodzic?w
 studying <- subset(ankieta, ankieta$studia_m == "tak" | ankieta$studia_t=="tak")
-notes_studying<-data.frame(Matematyka=studying$ocena_matematyka,Polski=studying$ocena_jêzyk_polski,Przyroda=studying$ocena_przyroda)
+notes_studying<-data.frame(Matematyka=studying$ocena_matematyka,Polski=studying$ocena_j?zyk_polski,Przyroda=studying$ocena_przyroda)
 notes_studying_num<-sapply(notes_studying, as.numeric)
 mean_studying <- rowMeans(notes_studying_num, na.rm = TRUE)
 cbind(notes_studying, Mean = mean_studying)
 
 not_studying <- subset(ankieta, (ankieta$studia_m == "nie" & ankieta$studia_t=="nie") | (is.na(ankieta$studia_m) & ankieta$studia_t=="nie") | (ankieta$studia_m == "nie" & is.na(ankieta$studia_t)))
-notes_not_studying<-data.frame(Matematyka=not_studying$ocena_matematyka,Polski=not_studying$ocena_jêzyk_polski,Przyroda=not_studying$ocena_przyroda)
+notes_not_studying<-data.frame(Matematyka=not_studying$ocena_matematyka,Polski=not_studying$ocena_j?zyk_polski,Przyroda=not_studying$ocena_przyroda)
 notes_not_studying_num<-sapply(notes_not_studying, as.numeric)
 mean_not_studying <- rowMeans(notes_not_studying_num, na.rm = TRUE)
 cbind(notes_not_studying, Mean = mean_not_studying)
 
 notes<-data.frame(Tak=mean_studying,Nie=mean_not_studying)
-boxplot(notes, ylab ="Œrednia ocen", xlab ="Studia rodziców", main="Czy studia rodziców wp³ywaj¹ na oceny dzieci?", varwidth=TRUE)
+boxplot(notes, ylab ="?rednia ocen", xlab ="Studia rodzic?w", main="Czy studia rodzic?w wp?ywaj? na oceny dzieci?", varwidth=TRUE)
 
 lmts <- range(mean_studying,mean_not_studying, na.rm = TRUE)
 
 par(mfrow = c(1, 2))
-boxplot(mean_studying,ylim=lmts, ylab ="Œrednia ocen", xlab ="Ze studiami", varwidth=TRUE)
-boxplot(mean_not_studying,ylim=lmts, xlab ="Bez studiów", varwidth=TRUE)
-title(main="Czy studia rodziców wp³ywaj¹ na oceny dzieci?", line = -2, outer=TRUE)
+boxplot(mean_studying,ylim=lmts, ylab ="?rednia ocen", xlab ="Ze studiami", varwidth=TRUE)
+boxplot(mean_not_studying,ylim=lmts, xlab ="Bez studi?w", varwidth=TRUE)
+title(main="Czy studia rodzic?w wp?ywaj? na oceny dzieci?", line = -2, outer=TRUE)
 
-## Oceny dzieci vs. doping rodziców
+## Oceny dzieci vs. doping rodzic?w
 
-zd_tak<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie siê zgadzam")
-notes_zd_tak<-data.frame(Matematyka=zd_tak$ocena_matematyka,Polski=zd_tak$ocena_jêzyk_polski,Przyroda=zd_tak$ocena_przyroda)
+zd_tak<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie si? zgadzam")
+notes_zd_tak<-data.frame(Matematyka=zd_tak$ocena_matematyka,Polski=zd_tak$ocena_j?zyk_polski,Przyroda=zd_tak$ocena_przyroda)
 notes_zd_tak_num<-sapply(notes_zd_tak, as.numeric)
 mean_zd_tak <- rowMeans(notes_zd_tak_num, na.rm = TRUE)
 cbind(notes_zd_tak, Mean = mean_zd_tak)
 
-tak<-subset(ankieta, ankieta$p_19_b_4=="raczej siê zgadzam")
-notes_tak<-data.frame(Matematyka=tak$ocena_matematyka,Polski=tak$ocena_jêzyk_polski,Przyroda=tak$ocena_przyroda)
+tak<-subset(ankieta, ankieta$p_19_b_4=="raczej si? zgadzam")
+notes_tak<-data.frame(Matematyka=tak$ocena_matematyka,Polski=tak$ocena_j?zyk_polski,Przyroda=tak$ocena_przyroda)
 notes_tak_num<-sapply(notes_tak, as.numeric)
 mean_tak <- rowMeans(notes_tak_num, na.rm = TRUE)
 cbind(notes_tak, Mean = mean_tak)
 
-tak_nie<-subset(ankieta, ankieta$p_19_b_4=="ani siê zgadzam ani siê nie zgadzam")
-notes_tak_nie<-data.frame(Matematyka=tak_nie$ocena_matematyka,Polski=tak_nie$ocena_jêzyk_polski,Przyroda=tak_nie$ocena_przyroda)
+tak_nie<-subset(ankieta, ankieta$p_19_b_4=="ani si? zgadzam ani si? nie zgadzam")
+notes_tak_nie<-data.frame(Matematyka=tak_nie$ocena_matematyka,Polski=tak_nie$ocena_j?zyk_polski,Przyroda=tak_nie$ocena_przyroda)
 notes_tak_nie_num<-sapply(notes_tak_nie, as.numeric)
 mean_tak_nie <- rowMeans(notes_tak_nie_num, na.rm = TRUE)
 cbind(notes_tak_nie, Mean = mean_tak_nie)
 
-nie<-subset(ankieta, ankieta$p_19_b_4=="raczej siê nie zgadzam")
-notes_nie<-data.frame(Matematyka=nie$ocena_matematyka,Polski=nie$ocena_jêzyk_polski,Przyroda=nie$ocena_przyroda)
+nie<-subset(ankieta, ankieta$p_19_b_4=="raczej si? nie zgadzam")
+notes_nie<-data.frame(Matematyka=nie$ocena_matematyka,Polski=nie$ocena_j?zyk_polski,Przyroda=nie$ocena_przyroda)
 notes_nie_num<-sapply(notes_nie, as.numeric)
 mean_nie <- rowMeans(notes_nie_num, na.rm = TRUE)
 cbind(notes_nie, Mean = mean_nie)
 
-zd_nie<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie siê nie zgadzam")
-notes_zd_nie<-data.frame(Matematyka=zd_nie$ocena_matematyka,Polski=zd_nie$ocena_jêzyk_polski,Przyroda=zd_nie$ocena_przyroda)
+zd_nie<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie si? nie zgadzam")
+notes_zd_nie<-data.frame(Matematyka=zd_nie$ocena_matematyka,Polski=zd_nie$ocena_j?zyk_polski,Przyroda=zd_nie$ocena_przyroda)
 notes_zd_nie_num<-sapply(notes_zd_nie, as.numeric)
 mean_zd_nie <- rowMeans(notes_zd_nie_num, na.rm = TRUE)
 cbind(notes_zd_nie, Mean = mean_zd_nie)
 
 par(mfrow = c(1, 5))
-boxplot(mean_zd_tak,ylim=lmts, ylab ="Œrednia ocen", xlab ="Zdecydowanie siê zgadzam", varwidth=TRUE)
-boxplot(mean_tak,ylim=lmts, xlab ="Raczej siê zgadzam", varwidth=TRUE)
-boxplot(mean_tak_nie,ylim=lmts, xlab ="Ani siê zgadzam, ani siê nie zgadzam", varwidth=TRUE)
-boxplot(mean_nie,ylim=lmts, xlab ="Raczej siê nie zgadzam", varwidth=TRUE)
-boxplot(mean_zd_nie,ylim=lmts, xlab ="Zdecydowanie siê nie zgadzam", varwidth=TRUE)
-title(main="Czy doping rodziców wp³ywa na oceny dzieci?", line = -2, outer=TRUE)
+boxplot(mean_zd_tak,ylim=lmts, ylab ="?rednia ocen", xlab ="Zdecydowanie si? zgadzam", varwidth=TRUE)
+boxplot(mean_tak,ylim=lmts, xlab ="Raczej si? zgadzam", varwidth=TRUE)
+boxplot(mean_tak_nie,ylim=lmts, xlab ="Ani si? zgadzam, ani si? nie zgadzam", varwidth=TRUE)
+boxplot(mean_nie,ylim=lmts, xlab ="Raczej si? nie zgadzam", varwidth=TRUE)
+boxplot(mean_zd_nie,ylim=lmts, xlab ="Zdecydowanie si? nie zgadzam", varwidth=TRUE)
+title(main="Czy doping rodzic?w wp?ywa na oceny dzieci?", line = -2, outer=TRUE)
 
 
 
@@ -285,5 +289,52 @@ top_animator_over_m = arrange(filter(top_animator, n>m), desc(sredni_animator))
 top_animator_not_brak = head(arrange(filter(top_animator, n>m, galeria != "<brak>"), desc(sredni_animator)), 10)
 top_animator_galerie = aggregate(.~galeria, top_animator_over_m, FUN = head, 1)[,-4]
 
+#top eksponaty dla najwyzszych i najnizszych kapitalow
+library(sqldf)
+top_kapital = sqldf("select * from ankieta where exists (select 1 from istotne where ID = id_ucznia limit 1) order by k_sum_4 desc limit 20")
+bottom_kapital = sqldf("select * from ankieta where exists (select 1 from istotne where ID = id_ucznia limit 1) order by k_sum_4 limit 20")
 
+top_kapital_obserwacje = inner_join(top_kapital, istotne, by = c("id_ucznia" = "ID"))
+bottom_kapital_obserwacje = inner_join(bottom_kapital, istotne, by = c("id_ucznia" = "ID"))
 
+ankieta_obserwacje = inner_join(ankieta, obserwacje, by = c("id_ucznia" = "ID"))
+
+top_eksponaty_top_kapital = as.data.frame(head(arrange(count(top_kapital_obserwacje, eksponat, galeria), desc(n)), 6))
+top_eksponaty_bottom_kapital = as.data.frame(head(arrange(count(bottom_kapital_obserwacje, eksponat, galeria), desc(n)), 6))
+
+#wielokrotnie odwiedzane
+#wszystkie
+liczba_odwiedzen_all = sqldf("select id_ucznia, eksponat, count(*) as liczba_odwiedzen from ankieta_obserwacje group by id_ucznia, eksponat")
+mean(liczba_odwiedzen_all$liczba_odwiedzen)
+
+##top kapital
+liczba_odwiedzen_top = sqldf("select id_ucznia, eksponat, count(*) as liczba_odwiedzen from top_kapital_obserwacje group by id_ucznia, eksponat")
+mean(liczba_odwiedzen_top$liczba_odwiedzen)
+
+##bottom kapital
+liczba_odwiedzen_bottom = sqldf("select id_ucznia, eksponat, count(*) as liczba_odwiedzen from bottom_kapital_obserwacje group by id_ucznia, eksponat")
+mean(liczba_odwiedzen_bottom$liczba_odwiedzen)
+
+##top dzieci rzadziej odwiedzaja wiecej niz raz od wszystkich
+t.test(liczba_odwiedzen_all$liczba_odwiedzen, liczba_odwiedzen_top$liczba_odwiedzen, alternative = "greater")$p.value < 0.05
+
+#bottom dzieci nie odwiedzaja czesciej od wszystkich
+t.test(liczba_odwiedzen_all$liczba_odwiedzen, liczba_odwiedzen_bottom$liczba_odwiedzen, alternative = "less")$p.value < 0.05
+
+#unikalne odwiedziny
+unikalne_eksponaty_all = distinct(ankieta_obserwacje, id_ucznia, eksponat)
+unikalne_odwiedzenia_all = count(unikalne_eksponaty_all, id_ucznia)
+mean(unikalne_odwiedzenia_all$n)
+
+unikalne_eksponaty_top = distinct(top_kapital_obserwacje, id_ucznia, eksponat)
+unikalne_odwiedzenia_top = count(unikalne_eksponaty_top, id_ucznia)
+mean(unikalne_odwiedzenia_top$n)
+
+unikalne_eksponaty_bottom = distinct(bottom_kapital_obserwacje, id_ucznia, eksponat)
+unikalne_odwiedzenia_bottom = count(unikalne_eksponaty_bottom, id_ucznia)
+mean(unikalne_odwiedzenia_bottom$n)
+
+#nie ma statystycznie istotnych roznic w liczbie unikalnych odwiedzonych
+t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_top$n, alternative = "less")$p.value < 0.05
+t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
+t.test(unikalne_odwiedzenia_top$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
