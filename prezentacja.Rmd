@@ -1,10 +1,10 @@
 ---
 title: "Obserwacje dzieci z CNK"
-author: "Ahmed Abdelkarim, Aleksandra Hernik, Ada WroĹ„ska"
+author: "Ahmed Abdelkarim, Aleksandra Hernik, Ada WroÄąâ€žska"
 date: "20 kwietnia 2017"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 #Uwagi co do danych
