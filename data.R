@@ -313,7 +313,7 @@ for (i in 1:dim(grupki)[1])
   grupki[i, "liczba_dzieci"] = length(children_ids)
   children = filter(ankieta, id_ucznia %in% children_ids)
   d = grupki[i, "liczba_dziewczynek"] = count(filter(children, plec == "dziewczyna"))
-  c = grupki[i, "liczba_chlopcow"] = count(filter(children, plec == "ch³opak"))
+  c = grupki[i, "liczba_chlopcow"] = count(filter(children, plec != "dziewczyna"))
   grupki[i, "procent_dziewczynek"] = d/(c + d)
 }
 
@@ -322,20 +322,35 @@ grupki_jednoosobowe = filter(grupki_wszystkie, liczba_dzieci == 1)
 grupki_jednoosobowe$grupka_id = as.numeric(grupki_jednoosobowe$grupka_id)
 grupki = filter(grupki_wszystkie, liczba_dzieci > 1)
 
+rozk³ad_licznosci_grupek = function()
+{
+  licznosci = summarize(group_by(grupki_wszystkie, liczba_dzieci), sum(n))
+  barplot(unlist(licznosci[, 2]), names.arg = 1:9)
+}
+
 liczba_eksponatow_podczas_wizyty = function()
 {
   liczba_eksponatow = count(obserwacje, ID)
-  boxplot(liczba_eksponatow[, "n"], horizontal = TRUE)
+  obserwacje_ankieta = inner_join(obserwacje, ankieta, c("ID" = "id_ucznia"))
+  liczba_eksponatow_dziewczynki = count(filter(obserwacje_ankieta, plec == "dziewczyna"), ID)
+  liczba_eksponatow_chlopcy = count(filter(obserwacje_ankieta, plec != "dziewczyna"), ID)
+  par(mfrow = c(3, 1))
+  lim = c(10, 130) 
+  boxplot(liczba_eksponatow[, "n"], ylim = lim, ylab ="Wszyscy", horizontal = TRUE)
+  boxplot(liczba_eksponatow_dziewczynki[, "n"], ylim = lim, ylab ="Dziewczynki", varwidth=TRUE, horizontal = TRUE)
+  boxplot(liczba_eksponatow_chlopcy[, "n"], ylim=lim, ylab ="Ch³opcy", varwidth=TRUE, horizontal = TRUE)
+  title(main="Liczba odwiedzeñ eksponatów", outer=TRUE)
+  par(mfrow = c(1, 1))
+  
 }
-count(grupki_jednoosobowe)
-count(distinct(obserwacje, ID))
-distinct(filter(left_join(filter(obserwacje, kategorie == 2), grupki_jednoosobowe, by=c("ID" = "grupka_id")), is.na(n)), ID)
-sqldf("select distinct ID from obserwacje ob where not exists(select * from obserwacje ob2 where ob.ID = ob2.ID and ILE_OSTOW > 0)")
 
-procent_dziewczynek = unlist(grupki[!is.na(grupki[, "procent_dziewczynek"]), "procent_dziewczynek"])
-
-mean(procent_dziewczynek)
-median(procent_dziewczynek)
+razem_czy_osobno = function()
+{
+  count(distinct(obserwacje, ID))
+  count(grupki_jednoosobowe)
+  distinct(filter(left_join(filter(obserwacje, kategorie == 2), grupki_jednoosobowe, by=c("ID" = "grupka_id")), is.na(n)), ID)
+  sqldf("select distinct ID from obserwacje ob where not exists(select * from obserwacje ob2 where ob.ID = ob2.ID and ILE_OSTOW > 0)")
+}
 
 grupki_plec = function()
 {
@@ -344,13 +359,14 @@ grupki_plec = function()
                             count(filter(grupki, procent_dziewczynek != 1 & procent_dziewczynek != 0))))
   pie(grupki_po_plci, main="Liczba grupek ze wzglêdu na p³eæ", labels=c("dziewczêce", "ch³opiêce", "mieszane"), col = c("pink", "lightblue", "white"))
 }
-liczba_dzieci = grupki_wszystkie[, "liczba_dzieci"]
-liczba_liczb_dzieci = count(liczba_dzieci, liczba_dzieci)
 
-#Najbardziej nieroz³¹czne grupki
-arrange(grupki_wszystkie, desc(n))
-grupki_wyczyszczone = arrange(filter(grupki, liczba_dzieci == liczba_dziewczynek + liczba_chlopcow), desc(n))
+trwale_grupki = function()
+{
+  print("Wszystkie grupki")
+  arrange(grupki_wszystkie, desc(n))
+  grupki_wyczyszczone = arrange(filter(grupki, liczba_dzieci == liczba_dziewczynek + liczba_chlopcow), desc(n))
+  print("Tylko grupki zawieraj¹ce co najmniej dwie osoby i da siê okreœliæ p³eæ wszystkich dzieci")
+  print(grupki_wyczyszczone)
+}
 
-#Liczba grupek o poszczególnych rozmiarach 
-barplot(unlist(liczba_liczb_dzieci[, "n"]), names.arg = 1:9)
 

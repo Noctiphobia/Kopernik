@@ -18,6 +18,10 @@ source("data.R")
 ```{r, echo=FALSE}
 
 ```
+### Zwiedzanie razem czy osobno?
+* 204 obserwowanych dzieci
+* 3 dzieci, które cały czas były w grupce
+* 3 dzieci, które cały czas były same
 
 
 #Analiza eksponatów
