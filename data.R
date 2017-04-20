@@ -169,6 +169,48 @@ boxplot(mean_studying,ylim=lmts, ylab ="Œrednia ocen", xlab ="Ze studiami", varw
 boxplot(mean_not_studying,ylim=lmts, xlab ="Bez studiów", varwidth=TRUE)
 title(main="Czy studia rodziców wp³ywaj¹ na oceny dzieci?", line = -2, outer=TRUE)
 
+## Oceny dzieci vs. doping rodziców
+
+zd_tak<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie siê zgadzam")
+notes_zd_tak<-data.frame(Matematyka=zd_tak$ocena_matematyka,Polski=zd_tak$ocena_jêzyk_polski,Przyroda=zd_tak$ocena_przyroda)
+notes_zd_tak_num<-sapply(notes_zd_tak, as.numeric)
+mean_zd_tak <- rowMeans(notes_zd_tak_num, na.rm = TRUE)
+cbind(notes_zd_tak, Mean = mean_zd_tak)
+
+tak<-subset(ankieta, ankieta$p_19_b_4=="raczej siê zgadzam")
+notes_tak<-data.frame(Matematyka=tak$ocena_matematyka,Polski=tak$ocena_jêzyk_polski,Przyroda=tak$ocena_przyroda)
+notes_tak_num<-sapply(notes_tak, as.numeric)
+mean_tak <- rowMeans(notes_tak_num, na.rm = TRUE)
+cbind(notes_tak, Mean = mean_tak)
+
+tak_nie<-subset(ankieta, ankieta$p_19_b_4=="ani siê zgadzam ani siê nie zgadzam")
+notes_tak_nie<-data.frame(Matematyka=tak_nie$ocena_matematyka,Polski=tak_nie$ocena_jêzyk_polski,Przyroda=tak_nie$ocena_przyroda)
+notes_tak_nie_num<-sapply(notes_tak_nie, as.numeric)
+mean_tak_nie <- rowMeans(notes_tak_nie_num, na.rm = TRUE)
+cbind(notes_tak_nie, Mean = mean_tak_nie)
+
+nie<-subset(ankieta, ankieta$p_19_b_4=="raczej siê nie zgadzam")
+notes_nie<-data.frame(Matematyka=nie$ocena_matematyka,Polski=nie$ocena_jêzyk_polski,Przyroda=nie$ocena_przyroda)
+notes_nie_num<-sapply(notes_nie, as.numeric)
+mean_nie <- rowMeans(notes_nie_num, na.rm = TRUE)
+cbind(notes_nie, Mean = mean_nie)
+
+zd_nie<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie siê nie zgadzam")
+notes_zd_nie<-data.frame(Matematyka=zd_nie$ocena_matematyka,Polski=zd_nie$ocena_jêzyk_polski,Przyroda=zd_nie$ocena_przyroda)
+notes_zd_nie_num<-sapply(notes_zd_nie, as.numeric)
+mean_zd_nie <- rowMeans(notes_zd_nie_num, na.rm = TRUE)
+cbind(notes_zd_nie, Mean = mean_zd_nie)
+
+par(mfrow = c(1, 5))
+boxplot(mean_zd_tak,ylim=lmts, ylab ="Œrednia ocen", xlab ="Zdecydowanie siê zgadzam", varwidth=TRUE)
+boxplot(mean_tak,ylim=lmts, xlab ="Raczej siê zgadzam", varwidth=TRUE)
+boxplot(mean_tak_nie,ylim=lmts, xlab ="Ani siê zgadzam, ani siê nie zgadzam", varwidth=TRUE)
+boxplot(mean_nie,ylim=lmts, xlab ="Raczej siê nie zgadzam", varwidth=TRUE)
+boxplot(mean_zd_nie,ylim=lmts, xlab ="Zdecydowanie siê nie zgadzam", varwidth=TRUE)
+title(main="Czy doping rodziców wp³ywa na oceny dzieci?", line = -2, outer=TRUE)
+
+
+
 # EKSPONATY
 
 #Najpopularniejsze
