@@ -139,9 +139,35 @@ data <- structure(list(Nie=c(round(100*data_girls_know_work_none/num_girls,1),ro
 colors <- c("red", "blue")
 barplot(as.matrix(data), main="Czy dzieci wiedz¹ o pracy rodziców?", cex.lab = 1.5, cex.main = 1.4, beside=TRUE, ylab = "Procent", ylim=c(0,100), legend=c("Dziewczynki", "Ch?opcy"), args.legend = list(x ='topleft'), col=colors)
 
-## OCENY
+# OCENY
 ankieta_clr = read.csv('ankieta_clr.csv')
 
+## BOXPLOT
+notes<-data.frame(Matematyka=ankieta_clr$ocena_matematyka,Polski=ankieta_clr$ocena_jêzyk_polski,Przyroda=ankieta_clr$ocena_przyroda)
+boxplot(notes, ylab ="Oceny", xlab ="Przedmiot", main="Oceny z przedmiotów", varwidth=TRUE)
+
+## Oceny dzieci vs. studia rodziców
+studying <- subset(ankieta, ankieta$studia_m == "tak" | ankieta$studia_t=="tak")
+notes_studying<-data.frame(Matematyka=studying$ocena_matematyka,Polski=studying$ocena_jêzyk_polski,Przyroda=studying$ocena_przyroda)
+notes_studying_num<-sapply(notes_studying, as.numeric)
+mean_studying <- rowMeans(notes_studying_num, na.rm = TRUE)
+cbind(notes_studying, Mean = mean_studying)
+
+not_studying <- subset(ankieta, (ankieta$studia_m == "nie" & ankieta$studia_t=="nie") | (is.na(ankieta$studia_m) & ankieta$studia_t=="nie") | (ankieta$studia_m == "nie" & is.na(ankieta$studia_t)))
+notes_not_studying<-data.frame(Matematyka=not_studying$ocena_matematyka,Polski=not_studying$ocena_jêzyk_polski,Przyroda=not_studying$ocena_przyroda)
+notes_not_studying_num<-sapply(notes_not_studying, as.numeric)
+mean_not_studying <- rowMeans(notes_not_studying_num, na.rm = TRUE)
+cbind(notes_not_studying, Mean = mean_not_studying)
+
+notes<-data.frame(Tak=mean_studying,Nie=mean_not_studying)
+boxplot(notes, ylab ="Œrednia ocen", xlab ="Studia rodziców", main="Czy studia rodziców wp³ywaj¹ na oceny dzieci?", varwidth=TRUE)
+
+lmts <- range(mean_studying,mean_not_studying, na.rm = TRUE)
+
+par(mfrow = c(1, 2))
+boxplot(mean_studying,ylim=lmts, ylab ="Œrednia ocen", xlab ="Ze studiami", varwidth=TRUE)
+boxplot(mean_not_studying,ylim=lmts, xlab ="Bez studiów", varwidth=TRUE)
+title(main="Czy studia rodziców wp³ywaj¹ na oceny dzieci?", line = -2, outer=TRUE)
 
 # EKSPONATY
 
