@@ -1,6 +1,6 @@
 ---
 title: "Obserwacje dzieci z CNK"
-author: "Ahmed Abdelkarim, Aleksandra Hernik, Ada WroÄąâ€žska"
+author: "Ahmed Abdelkarim, Aleksandra Hernik, Ada Wrońska"
 date: "20 kwietnia 2017"
 output:
   html_document: default
@@ -60,73 +60,77 @@ liczba_eksponatow_podczas_wizyty()
 
 ##Najbardziej absorbujące eksponaty
 ###Według czasu
-Średni czas spędzony na eksponacie to `avg_czas_all`.
+Średni czas spędzony na eksponacie to `r avg_czas_all`.
+
 ####Spośród wszystkich
 ```{r}
 head(top_czas, 10)
 ```
-####Powyżej `m`
+####Powyżej `r m`
 ```{r}
 head(top_czas_over_m, 10)
 ```
-####Powyżej `m` dla każdej galerii
+####Powyżej `r m` dla każdej galerii
 ```{r}
 top_czas_galerie
 ```
 
 ###Według zaangażowania
-Średni poziom zaangażowania (gdzie 1 -- tylko patrzy lub tylko dotyka, 2 -- korzysta, 3 -- eksperymentuje) wynosi `avg_zaangazowanie_all`.
+Średni poziom zaangażowania (gdzie 1 -- tylko patrzy lub tylko dotyka, 2 -- korzysta, 3 -- eksperymentuje) wynosi `r avg_zaangazowanie_all`.
+
 ####Spośród wszystkich
 ```{r}
 head(top_zaangazowanie, 10)
 ```
-####Powyżej `m`
+####Powyżej `r m`
 ```{r}
 head(top_zaangazowanie_over_m, 10)
 ```
-####Powyżej `m` z pominięciem eksponatów bez galerii
+####Powyżej `r m` z pominięciem eksponatów bez galerii
 ```{r}
 head(top_zaangazowanie_not_brak, 10)
 ```
-####Powyżej `m` dla każdej galerii
+####Powyżej `r m` dla każdej galerii
 ```{r}
 top_zaangazowanie_galerie
 ```
 
 ###Według czytania opisu
-Średni poziom czytania opisu to `avg_opis_all`.
+Średni poziom czytania opisu to `r avg_opis_all`.
+
 ####Spośród wszystkich
 ```{r}
 head(top_opis, 10)
 ```
-####Powyżej `m`
+####Powyżej `r m`
 ```{r}
 head(top_opis_over_m, 10)
 ```
-####Powyżej `m` z pominięciem eksponatów bez galerii
+####Powyżej `r m` z pominięciem eksponatów bez galerii
 ```{r}
 head(top_opis_not_brak, 10)
 ```
-####Powyżej `m` dla każdej galerii
+####Powyżej `r m` dla każdej galerii
 ```{r}
 top_opis_galerie
 ```
 
 ###Według interakcji z animatorem
-Średni poziom interakcji z animatorem to `avg_animator_all`.
+Średni poziom interakcji z animatorem to `r avg_animator_all`.
+
 ####Spośród wszystkich
 ```{r}
 head(top_animator, 10)
 ```
-####Powyżej `m`
+####Powyżej `r m`
 ```{r}
 head(top_animator_over_m, 10)
 ```
-####Powyżej `m` z pominięciem eksponatów bez galerii
+####Powyżej `r m` z pominięciem eksponatów bez galerii
 ```{r}
 head(top_animator_not_brak, 10)
 ```
-####Powyżej `m` dla każdej galerii
+####Powyżej `r m` dla każdej galerii
 ```{r}
 top_animator_galerie
 ```
@@ -143,18 +147,21 @@ top_eksponaty_bottom_kapital
 
 ##Obserwacje wielokrotnego odwiedzania eksponatów
 Średnia liczba odwiedzeń eksponatu przez dziecko, które go już odwiedziło:
-- Dla wszystkich dzieci: `srednia_liczba odwiedzen_all`
-- Dla 20 dzieci z najwyższym kapitałem: `srednia_liczba_odwiedzen_top`
-- Dla 20 dzieci z najniższym kapitałem: `srednia_liczba_odwiedzen_bottom`
+
+* Dla wszystkich dzieci: `r srednia_liczba_odwiedzen_all`
+* Dla 20 dzieci z najwyższym kapitałem: `r srednia_liczba_odwiedzen_top`
+* Dla 20 dzieci z najniższym kapitałem: `r srednia_liczba_odwiedzen_bottom`
 
 Według rangowego testu Wilcoxona, dzieci z najwyższym kapitałem istotnie rzadziej odwiedzają ten sam eksponat więcej niż raz, w porównaniu ze wszystkimi dziećmi. Dla dzieci z najniższym kapitałem różnica w liczbie wielokrotnych odwiedzeń względem wszystkich dzieci jest nieistotna.
 
 ##Liczba unikalnych odwiedzeń eksponatów
 Średnia liczba odwiedzeń eksponatu przez dzieci:
-- Dla wszystkich dzieci: `srednie_unikalne_odwiedzenia_all`
-- Dla 20 dzieci z najwyższym kapitałem: `srednie_unikalne_odwiedzenia_top`
-- Dla 20 dzieci z najniższym kapitałem: `srednie_unikalne_odwiedzenia_bottom`
 
+* Dla wszystkich dzieci: `r srednie_unikalne_odwiedzenia_all`
+* Dla 20 dzieci z najwyższym kapitałem: `r srednie_unikalne_odwiedzenia_top`
+* Dla 20 dzieci z najniższym kapitałem: `r srednie_unikalne_odwiedzenia_bottom`
+
+Dla powyżej opisanych danych t-test nie wykazał statystycznie istotnych różnic. 
 
 
 
