@@ -149,18 +149,19 @@ boxplot(notes, ylab ="Oceny", xlab ="Przedmiot", main="Oceny z przedmiotów", var
 ## Oceny dzieci vs. studia rodziców
 studying <- subset(ankieta, ankieta$studia_m == "tak" | ankieta$studia_t=="tak")
 notes_studying<-data.frame(Matematyka=studying$ocena_matematyka,Polski=studying$ocena_jêzyk_polski,Przyroda=studying$ocena_przyroda)
-notes_studying_num<-sapply(notes_studying, as.numeric)
+notes_studying_num[,"Matematyka"]<-as.numeric(as.character(notes_studying[,"Matematyka"]))
+notes_studying_num[,"Polski"]<-as.numeric(as.character(notes_studying[,"Polski"]))
+notes_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_studying[,"Przyroda"]))
 mean_studying <- rowMeans(notes_studying_num, na.rm = TRUE)
 cbind(notes_studying, Mean = mean_studying)
 
 not_studying <- subset(ankieta, (ankieta$studia_m == "nie" & ankieta$studia_t=="nie") | (is.na(ankieta$studia_m) & ankieta$studia_t=="nie") | (ankieta$studia_m == "nie" & is.na(ankieta$studia_t)))
 notes_not_studying<-data.frame(Matematyka=not_studying$ocena_matematyka,Polski=not_studying$ocena_jêzyk_polski,Przyroda=not_studying$ocena_przyroda)
-notes_not_studying_num<-sapply(notes_not_studying, as.numeric)
+notes_not_studying_num[,"Matematyka"]<-as.numeric(as.character(notes_not_studying[,"Matematyka"]))
+notes_not_studying_num[,"Polski"]<-as.numeric(as.character(notes_not_studying[,"Polski"]))
+notes_not_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_not_studying[,"Przyroda"]))
 mean_not_studying <- rowMeans(notes_not_studying_num, na.rm = TRUE)
 cbind(notes_not_studying, Mean = mean_not_studying)
-
-notes<-data.frame(Tak=mean_studying,Nie=mean_not_studying)
-boxplot(notes, ylab ="Œrednia ocen", xlab ="Studia rodziców", main="Czy studia rodziców wp³ywaj¹ na oceny dzieci?", varwidth=TRUE)
 
 lmts <- range(mean_studying,mean_not_studying, na.rm = TRUE)
 
@@ -173,31 +174,41 @@ title(main="Czy studia rodziców wp³ywaj¹ na oceny dzieci?", line = -2, outer=TRU
 
 zd_tak<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie siê zgadzam")
 notes_zd_tak<-data.frame(Matematyka=zd_tak$ocena_matematyka,Polski=zd_tak$ocena_jêzyk_polski,Przyroda=zd_tak$ocena_przyroda)
-notes_zd_tak_num<-sapply(notes_zd_tak, as.numeric)
+notes_zd_tak_num[,"Matematyka"]<-as.numeric(as.character(notes_zd_tak[,"Matematyka"]))
+notes_zd_tak_num[,"Polski"]<-as.numeric(as.character(notes_zd_tak[,"Polski"]))
+notes_zd_tak_num[,"Przyroda"]<-as.numeric(as.character(notes_zd_tak[,"Przyroda"]))
 mean_zd_tak <- rowMeans(notes_zd_tak_num, na.rm = TRUE)
 cbind(notes_zd_tak, Mean = mean_zd_tak)
 
 tak<-subset(ankieta, ankieta$p_19_b_4=="raczej siê zgadzam")
 notes_tak<-data.frame(Matematyka=tak$ocena_matematyka,Polski=tak$ocena_jêzyk_polski,Przyroda=tak$ocena_przyroda)
-notes_tak_num<-sapply(notes_tak, as.numeric)
+notes_tak_num[,"Matematyka"]<-as.numeric(as.character(notes_tak[,"Matematyka"]))
+notes_tak_num[,"Polski"]<-as.numeric(as.character(notes_tak[,"Polski"]))
+notes_tak_num[,"Przyroda"]<-as.numeric(as.character(notes_tak[,"Przyroda"]))
 mean_tak <- rowMeans(notes_tak_num, na.rm = TRUE)
 cbind(notes_tak, Mean = mean_tak)
 
 tak_nie<-subset(ankieta, ankieta$p_19_b_4=="ani siê zgadzam ani siê nie zgadzam")
 notes_tak_nie<-data.frame(Matematyka=tak_nie$ocena_matematyka,Polski=tak_nie$ocena_jêzyk_polski,Przyroda=tak_nie$ocena_przyroda)
-notes_tak_nie_num<-sapply(notes_tak_nie, as.numeric)
+notes_tak_nie_num[,"Matematyka"]<-as.numeric(as.character(notes_tak_nie[,"Matematyka"]))
+notes_tak_nie_num[,"Polski"]<-as.numeric(as.character(notes_tak_nie[,"Polski"]))
+notes_tak_nie_num[,"Przyroda"]<-as.numeric(as.character(notes_tak_nie[,"Przyroda"]))
 mean_tak_nie <- rowMeans(notes_tak_nie_num, na.rm = TRUE)
 cbind(notes_tak_nie, Mean = mean_tak_nie)
 
 nie<-subset(ankieta, ankieta$p_19_b_4=="raczej siê nie zgadzam")
 notes_nie<-data.frame(Matematyka=nie$ocena_matematyka,Polski=nie$ocena_jêzyk_polski,Przyroda=nie$ocena_przyroda)
-notes_nie_num<-sapply(notes_nie, as.numeric)
+notes_nie_num[,"Matematyka"]<-as.numeric(as.character(notes_nie[,"Matematyka"]))
+notes_nie_num[,"Polski"]<-as.numeric(as.character(notes_nie[,"Polski"]))
+notes_nie_num[,"Przyroda"]<-as.numeric(as.character(notes_nie[,"Przyroda"]))
 mean_nie <- rowMeans(notes_nie_num, na.rm = TRUE)
 cbind(notes_nie, Mean = mean_nie)
 
 zd_nie<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie siê nie zgadzam")
 notes_zd_nie<-data.frame(Matematyka=zd_nie$ocena_matematyka,Polski=zd_nie$ocena_jêzyk_polski,Przyroda=zd_nie$ocena_przyroda)
-notes_zd_nie_num<-sapply(notes_zd_nie, as.numeric)
+notes_zd_nie_num[,"Matematyka"]<-as.numeric(as.character(notes_zd_nie[,"Matematyka"]))
+notes_zd_nie_num[,"Polski"]<-as.numeric(as.character(notes_zd_nie[,"Polski"]))
+notes_zd_nie_num[,"Przyroda"]<-as.numeric(as.character(notes_zd_nie[,"Przyroda"]))
 mean_zd_nie <- rowMeans(notes_zd_nie_num, na.rm = TRUE)
 cbind(notes_zd_nie, Mean = mean_zd_nie)
 
@@ -208,6 +219,61 @@ boxplot(mean_tak_nie,ylim=lmts, xlab ="Ani siê zgadzam, ani siê nie zgadzam", va
 boxplot(mean_nie,ylim=lmts, xlab ="Raczej siê nie zgadzam", varwidth=TRUE)
 boxplot(mean_zd_nie,ylim=lmts, xlab ="Zdecydowanie siê nie zgadzam", varwidth=TRUE)
 title(main="Czy doping rodziców wp³ywa na oceny dzieci?", line = -2, outer=TRUE)
+
+## Kapita³ dzieci vs. studia rodziców
+studying <- subset(ankieta, ankieta$studia_m == "tak" | ankieta$studia_t=="tak")
+k_studying<-data.frame(Kapita³=studying$k_sum_4)
+studies_points<-as.numeric(as.character(studying[,"k_studia_m"]))+as.numeric(as.character(studying[,"k_studia_t"]))
+k_studying[,"Kapita³"]<-as.numeric(as.character(k_studying[,"Kapita³"]))-studies_points
+
+not_studying <- subset(ankieta, (ankieta$studia_m == "nie" & ankieta$studia_t=="nie") | (is.na(ankieta$studia_m) & ankieta$studia_t=="nie") | (ankieta$studia_m == "nie" & is.na(ankieta$studia_t)))
+k_not_studying<-data.frame(Kapita³=not_studying$k_sum_4)
+studies_points<-as.numeric(as.character(not_studying[,"k_studia_m"]))+as.numeric(as.character(not_studying[,"k_studia_t"]))
+k_not_studying[,"Kapita³"]<-as.numeric(as.character(k_not_studying[,"Kapita³"]))-studies_points
+
+lmts <- range(k_studying,k_not_studying, na.rm = TRUE)
+
+par(mfrow = c(1, 2))
+boxplot(k_studying,ylim=lmts, ylab ="Kapita³ naukowy", xlab ="Ze studiami", varwidth=TRUE)
+boxplot(k_not_studying,ylim=lmts, xlab ="Bez studiów", varwidth=TRUE)
+title(main="Czy studia rodziców wp³ywaj¹ na kapita³ naukowy dzieci?", line = -2, outer=TRUE)
+
+## Kapita³ dzieci (bez ocen) vs. studia rodziców
+studying <- subset(ankieta, ankieta$studia_m == "tak" | ankieta$studia_t=="tak")
+k_studying<-data.frame(Kapita³=studying$k_sum_4)
+studies_points<-as.numeric(as.character(studying[,"k_studia_m"]))+as.numeric(as.character(studying[,"k_studia_t"]))
+k_studying[,"Kapita³"]<-as.numeric(as.character(k_studying[,"Kapita³"]))-studies_points
+
+notes_studying<-data.frame(Matematyka=studying$ocena_matematyka,Polski=studying$ocena_jêzyk_polski,Przyroda=studying$ocena_przyroda)
+notes_studying_num[,"Matematyka"]<-as.numeric(as.character(notes_studying[,"Matematyka"]))
+notes_studying_num[,"Polski"]<-as.numeric(as.character(notes_studying[,"Polski"]))
+notes_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_studying[,"Przyroda"]))
+
+sum_studying <- rowSums(notes_studying_num, na.rm = TRUE)
+cbind(notes_studying, Sum = sum_studying)
+k_studying <- k_studying - sum_studying
+
+not_studying <- subset(ankieta, (ankieta$studia_m == "nie" & ankieta$studia_t=="nie") | (is.na(ankieta$studia_m) & ankieta$studia_t=="nie") | (ankieta$studia_m == "nie" & is.na(ankieta$studia_t)))
+k_not_studying<-data.frame(Kapita³=not_studying$k_sum_4)
+studies_points<-as.numeric(as.character(not_studying[,"k_studia_m"]))+as.numeric(as.character(not_studying[,"k_studia_t"]))
+k_not_studying[,"Kapita³"]<-as.numeric(as.character(k_not_studying[,"Kapita³"]))-studies_points
+
+notes_not_studying<-data.frame(Matematyka=not_studying$ocena_matematyka,Polski=not_studying$ocena_jêzyk_polski,Przyroda=not_studying$ocena_przyroda)
+notes_not_studying_num[,"Matematyka"]<-as.numeric(as.character(notes_not_studying[,"Matematyka"]))
+notes_not_studying_num[,"Polski"]<-as.numeric(as.character(notes_not_studying[,"Polski"]))
+notes_not_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_not_studying[,"Przyroda"]))
+
+sum_not_studying <- rowSums(notes_not_studying_num, na.rm = TRUE)
+cbind(notes_not_studying, Sum = sum_not_studying)
+k_not_studying <- k_not_studying - sum_not_studying
+
+
+lmts <- range(k_studying,k_not_studying, na.rm = TRUE)
+
+par(mfrow = c(1, 2))
+boxplot(k_studying,ylim=lmts, ylab ="Kapita³ naukowy", xlab ="Ze studiami", varwidth=TRUE)
+boxplot(k_not_studying,ylim=lmts, xlab ="Bez studiów", varwidth=TRUE)
+title(main="Czy studia rodziców wp³ywaj¹ na kapita³ naukowy(bez ocen) dzieci?", line = -2, outer=TRUE)
 
 
 
