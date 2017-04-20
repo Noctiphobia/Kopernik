@@ -156,7 +156,6 @@ notes_studying_num[,"Matematyka"]<-as.numeric(as.character(notes_studying[,"Mate
 notes_studying_num[,"Polski"]<-as.numeric(as.character(notes_studying[,"Polski"]))
 notes_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_studying[,"Przyroda"]))
 mean_studying <- rowMeans(notes_studying_num, na.rm = TRUE)
-cbind(notes_studying, Mean = mean_studying)
 
 not_studying <- subset(ankieta, (ankieta$studia_m == "nie" & ankieta$studia_t=="nie") | (is.na(ankieta$studia_m) & ankieta$studia_t=="nie") | (ankieta$studia_m == "nie" & is.na(ankieta$studia_t)))
 notes_not_studying<-data.frame(Matematyka=not_studying$ocena_matematyka,Polski=not_studying$ocena_język_polski,Przyroda=not_studying$ocena_przyroda)
@@ -165,7 +164,6 @@ notes_not_studying_num[,"Matematyka"]<-as.numeric(as.character(notes_not_studyin
 notes_not_studying_num[,"Polski"]<-as.numeric(as.character(notes_not_studying[,"Polski"]))
 notes_not_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_not_studying[,"Przyroda"]))
 mean_not_studying <- rowMeans(notes_not_studying_num, na.rm = TRUE)
-cbind(notes_not_studying, Mean = mean_not_studying)
 
 lmts <- range(mean_studying,mean_not_studying, na.rm = TRUE)
 
@@ -184,7 +182,6 @@ notes_zd_tak_num[,"Matematyka"]<-as.numeric(as.character(notes_zd_tak[,"Matematy
 notes_zd_tak_num[,"Polski"]<-as.numeric(as.character(notes_zd_tak[,"Polski"]))
 notes_zd_tak_num[,"Przyroda"]<-as.numeric(as.character(notes_zd_tak[,"Przyroda"]))
 mean_zd_tak <- rowMeans(notes_zd_tak_num, na.rm = TRUE)
-cbind(notes_zd_tak, Mean = mean_zd_tak)
 
 tak<-subset(ankieta, ankieta$p_19_b_4=="raczej się zgadzam")
 notes_tak<-data.frame(Matematyka=tak$ocena_matematyka,Polski=tak$ocena_język_polski,Przyroda=tak$ocena_przyroda)
@@ -193,7 +190,6 @@ notes_tak_num[,"Matematyka"]<-as.numeric(as.character(notes_tak[,"Matematyka"]))
 notes_tak_num[,"Polski"]<-as.numeric(as.character(notes_tak[,"Polski"]))
 notes_tak_num[,"Przyroda"]<-as.numeric(as.character(notes_tak[,"Przyroda"]))
 mean_tak <- rowMeans(notes_tak_num, na.rm = TRUE)
-cbind(notes_tak, Mean = mean_tak)
 
 tak_nie<-subset(ankieta, ankieta$p_19_b_4=="ani się zgadzam ani się nie zgadzam")
 notes_tak_nie<-data.frame(Matematyka=tak_nie$ocena_matematyka,Polski=tak_nie$ocena_język_polski,Przyroda=tak_nie$ocena_przyroda)
@@ -202,7 +198,6 @@ notes_tak_nie_num[,"Matematyka"]<-as.numeric(as.character(notes_tak_nie[,"Matema
 notes_tak_nie_num[,"Polski"]<-as.numeric(as.character(notes_tak_nie[,"Polski"]))
 notes_tak_nie_num[,"Przyroda"]<-as.numeric(as.character(notes_tak_nie[,"Przyroda"]))
 mean_tak_nie <- rowMeans(notes_tak_nie_num, na.rm = TRUE)
-cbind(notes_tak_nie, Mean = mean_tak_nie)
 
 nie<-subset(ankieta, ankieta$p_19_b_4=="raczej się nie zgadzam")
 notes_nie<-data.frame(Matematyka=nie$ocena_matematyka,Polski=nie$ocena_język_polski,Przyroda=nie$ocena_przyroda)
@@ -211,7 +206,6 @@ notes_nie_num[,"Matematyka"]<-as.numeric(as.character(notes_nie[,"Matematyka"]))
 notes_nie_num[,"Polski"]<-as.numeric(as.character(notes_nie[,"Polski"]))
 notes_nie_num[,"Przyroda"]<-as.numeric(as.character(notes_nie[,"Przyroda"]))
 mean_nie <- rowMeans(notes_nie_num, na.rm = TRUE)
-cbind(notes_nie, Mean = mean_nie)
 
 zd_nie<-subset(ankieta, ankieta$p_19_b_4=="zdecydowanie się nie zgadzam")
 notes_zd_nie<-data.frame(Matematyka=zd_nie$ocena_matematyka,Polski=zd_nie$ocena_język_polski,Przyroda=zd_nie$ocena_przyroda)
@@ -220,7 +214,6 @@ notes_zd_nie_num[,"Matematyka"]<-as.numeric(as.character(notes_zd_nie[,"Matematy
 notes_zd_nie_num[,"Polski"]<-as.numeric(as.character(notes_zd_nie[,"Polski"]))
 notes_zd_nie_num[,"Przyroda"]<-as.numeric(as.character(notes_zd_nie[,"Przyroda"]))
 mean_zd_nie <- rowMeans(notes_zd_nie_num, na.rm = TRUE)
-cbind(notes_zd_nie, Mean = mean_zd_nie)
 
 
 lmts <- range(zd_tak,tak,tak_nie,nie,zd_nie, na.rm = TRUE)
@@ -266,7 +259,6 @@ notes_studying_num[,"Polski"]<-as.numeric(as.character(notes_studying[,"Polski"]
 notes_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_studying[,"Przyroda"]))
 
 sum_studying <- rowSums(notes_studying_num, na.rm = TRUE)
-cbind(notes_studying, Sum = sum_studying)
 k_studying <- k_studying - sum_studying
 
 not_studying <- subset(ankieta, (ankieta$studia_m == "nie" & ankieta$studia_t=="nie") | (is.na(ankieta$studia_m) & ankieta$studia_t=="nie") | (ankieta$studia_m == "nie" & is.na(ankieta$studia_t)))
@@ -281,7 +273,6 @@ notes_not_studying_num[,"Polski"]<-as.numeric(as.character(notes_not_studying[,"
 notes_not_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_not_studying[,"Przyroda"]))
 
 sum_not_studying <- rowSums(notes_not_studying_num, na.rm = TRUE)
-cbind(notes_not_studying, Sum = sum_not_studying)
 k_not_studying <- k_not_studying - sum_not_studying
 
 
@@ -318,7 +309,6 @@ notes_more_100_num[,"Matematyka"]<-as.numeric(as.character(notes_more_100[,"Mate
 notes_more_100_num[,"Polski"]<-as.numeric(as.character(notes_more_100[,"Polski"]))
 notes_more_100_num[,"Przyroda"]<-as.numeric(as.character(notes_more_100[,"Przyroda"]))
 mean_more_100 <- rowMeans(notes_more_100_num, na.rm = TRUE)
-cbind(notes_more_100, Mean = mean_more_100)
 
 bduzo<-subset(ankieta, ankieta$p_16_2_4=="bardzo dużo (więcej niż 50 do 100)")
 notes_bduzo<-data.frame(Matematyka=bduzo$ocena_matematyka,Polski=bduzo$ocena_język_polski,Przyroda=bduzo$ocena_przyroda)
@@ -327,7 +317,6 @@ notes_bduzo_num[,"Matematyka"]<-as.numeric(as.character(notes_bduzo[,"Matematyka
 notes_bduzo_num[,"Polski"]<-as.numeric(as.character(notes_bduzo[,"Polski"]))
 notes_bduzo_num[,"Przyroda"]<-as.numeric(as.character(notes_bduzo[,"Przyroda"]))
 mean_bduzo <- rowMeans(notes_bduzo_num, na.rm = TRUE)
-cbind(notes_bduzo, Mean = mean_bduzo)
 
 duzo<-subset(ankieta, ankieta$p_16_2_4=="dużo (od 20 do 50)")
 notes_duzo<-data.frame(Matematyka=duzo$ocena_matematyka,Polski=duzo$ocena_język_polski,Przyroda=duzo$ocena_przyroda)
@@ -336,7 +325,6 @@ notes_duzo_num[,"Matematyka"]<-as.numeric(as.character(notes_duzo[,"Matematyka"]
 notes_duzo_num[,"Polski"]<-as.numeric(as.character(notes_duzo[,"Polski"]))
 notes_duzo_num[,"Przyroda"]<-as.numeric(as.character(notes_duzo[,"Przyroda"]))
 mean_duzo <- rowMeans(notes_duzo_num, na.rm = TRUE)
-cbind(notes_duzo, Mean = mean_duzo)
 
 kilka<-subset(ankieta, ankieta$p_16_2_4=="kilka (mniej niĹĽ 20)")
 notes_kilka<-data.frame(Matematyka=kilka$ocena_matematyka,Polski=kilka$ocena_język_polski,Przyroda=kilka$ocena_przyroda)
@@ -345,7 +333,6 @@ notes_kilka_num[,"Matematyka"]<-as.numeric(as.character(notes_kilka[,"Matematyka
 notes_kilka_num[,"Polski"]<-as.numeric(as.character(notes_kilka[,"Polski"]))
 notes_kilka_num[,"Przyroda"]<-as.numeric(as.character(notes_kilka[,"Przyroda"]))
 mean_kilka <- rowMeans(notes_kilka_num, na.rm = TRUE)
-cbind(notes_kilka, Mean = mean_kilka)
 
 zero<-subset(ankieta, ankieta$p_16_2_4=="nie ma ani jednej")
 notes_zero<-data.frame(Matematyka=zero$ocena_matematyka,Polski=zero$ocena_język_polski,Przyroda=zero$ocena_przyroda)
@@ -354,7 +341,6 @@ notes_zero_num[,"Matematyka"]<-as.numeric(as.character(notes_zero[,"Matematyka"]
 notes_zero_num[,"Polski"]<-as.numeric(as.character(notes_zero[,"Polski"]))
 notes_zero_num[,"Przyroda"]<-as.numeric(as.character(notes_zero[,"Przyroda"]))
 mean_zero <- rowMeans(notes_zero_num, na.rm = TRUE)
-cbind(notes_zero, Mean = mean_zero)
 
 lmts <- range(mean_more_100,mean_bduzo,mean_duzo,mean_kilka,mean_zero, na.rm = TRUE)
 
