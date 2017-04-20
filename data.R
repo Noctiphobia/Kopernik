@@ -216,7 +216,7 @@ notes_zd_nie_num[,"Przyroda"]<-as.numeric(as.character(notes_zd_nie[,"Przyroda"]
 mean_zd_nie <- rowMeans(notes_zd_nie_num, na.rm = TRUE)
 
 
-lmts <- range(zd_tak,tak,tak_nie,nie,zd_nie, na.rm = TRUE)
+lmts <- range(notes_zd_tak_num,notes_tak_num,notes_tak_nie_num,notes_nie_num,notes_zd_nie_num, na.rm = TRUE)
 
 par(mfrow = c(1, 5))
 boxplot(mean_zd_tak,ylim=lmts, ylab ="Srednia ocen", xlab ="Zdecydowanie sie zgadzam", varwidth=TRUE)
