@@ -494,7 +494,7 @@ top_eksponaty_galerie = aggregate(.~Galeria, top_eksponaty, FUN = head, 1)
 top_eksponaty_galerie$`Liczba odwiedzen` = as.numeric(as.character(top_eksponaty_galerie$`Liczba odwiedzen`))
 arrange(top_eksponaty_galerie, desc(`Liczba odwiedzen`))
 
-#Najbardziej absorbujÄ…ce eksponaty
+#Najbardziej absorbujace eksponaty
 m = 10
 
 avg = function(x) { mean(as.numeric(as.character(x)), na.rm = TRUE)}
