@@ -6,12 +6,15 @@ output:
   pdf_document: default
   html_document: default
 ---
-`r opts_chunk$set(echo=FALSE)`
+
+#Uwagi co do danych
+Obserwowanych było ponad 200 dzieci, a także dla ponad 200 dzieci zostały wypełnione ankiety. Zbiory te niestety w dużej mierze były rozłączne -- obserwowanych dzieci, dla których były dane na temat ankiety, było jedynie 79.
 
 #Cechy dzieci i czynniki środowiskowe
 
 ```{r echo=FALSE}
 knitr::opts_knit$set(root.dir = getSrcDirectory(function(dummy) {dummy}))
+knitr::opts_chunk$set(echo=FALSE)
 
 source("data.R")
 ```
@@ -48,6 +51,12 @@ top_eksponaty_ever()
 ```{r}
 top_eksponaty_w_galeriach()
 ```
+
+##Liczba odwiedzeń eksponatów w zależności od płci
+```{r}
+liczba_eksponatow_podczas_wizyty()
+```
+
 
 ##Najbardziej absorbujące eksponaty
 ###Według czasu
@@ -88,20 +97,64 @@ top_zaangazowanie_galerie
 Średni poziom czytania opisu to `avg_opis_all`.
 ####Spośród wszystkich
 ```{r}
-head(top_zaangazowanie, 10)
+head(top_opis, 10)
 ```
 ####Powyżej `m`
 ```{r}
-head(top_zaangazowanie_over_m, 10)
+head(top_opis_over_m, 10)
 ```
 ####Powyżej `m` z pominięciem eksponatów bez galerii
 ```{r}
-head(top_zaangazowanie_not_brak, 10)
+head(top_opis_not_brak, 10)
 ```
 ####Powyżej `m` dla każdej galerii
 ```{r}
-top_zaangazowanie_galerie
+top_opis_galerie
 ```
+
+###Według interakcji z animatorem
+Średni poziom interakcji z animatorem to `avg_animator_all`.
+####Spośród wszystkich
+```{r}
+head(top_animator, 10)
+```
+####Powyżej `m`
+```{r}
+head(top_animator_over_m, 10)
+```
+####Powyżej `m` z pominięciem eksponatów bez galerii
+```{r}
+head(top_animator_not_brak, 10)
+```
+####Powyżej `m` dla każdej galerii
+```{r}
+top_animator_galerie
+```
+
+##Najpopularniejsze eksponaty dla 20 dzieci z najwyższym i najniższym kapitałem
+###Najwyższy kapitał
+```{r}
+top_eksponaty_top_kapital
+```
+###Najniższy kapitał
+```{r}
+top_eksponaty_bottom_kapital
+```
+
+##Obserwacje wielokrotnego odwiedzania eksponatów
+Średnia liczba odwiedzeń eksponatu przez dziecko, które go już odwiedziło:
+- Dla wszystkich dzieci: `srednia_liczba odwiedzen_all`
+- Dla 20 dzieci z najwyższym kapitałem: `srednia_liczba_odwiedzen_top`
+- Dla 20 dzieci z najniższym kapitałem: `srednia_liczba_odwiedzen_bottom`
+
+Według rangowego testu Wilcoxona, dzieci z najwyższym kapitałem istotnie rzadziej odwiedzają ten sam eksponat więcej niż raz, w porównaniu ze wszystkimi dziećmi. Dla dzieci z najniższym kapitałem różnica w liczbie wielokrotnych odwiedzeń względem wszystkich dzieci jest nieistotna.
+
+##Liczba unikalnych odwiedzeń eksponatów
+Średnia liczba odwiedzeń eksponatu przez dzieci:
+- Dla wszystkich dzieci: `srednie_unikalne_odwiedzenia_all`
+- Dla 20 dzieci z najwyższym kapitałem: `srednie_unikalne_odwiedzenia_top`
+- Dla 20 dzieci z najniższym kapitałem: `srednie_unikalne_odwiedzenia_bottom`
+
 
 
 

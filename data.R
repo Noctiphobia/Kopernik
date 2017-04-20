@@ -508,7 +508,6 @@ top_animator_not_brak = head(arrange(filter(top_animator, n>m, galeria != "<brak
 top_animator_galerie = aggregate(.~galeria, top_animator_over_m, FUN = head, 1)[,-4]
 
 #top eksponaty dla najwyzszych i najnizszych kapitalow
-library(sqldf)
 top_kapital = sqldf("select * from ankieta where exists (select 1 from istotne where ID = id_ucznia limit 1) order by k_sum_4 desc limit 20")
 bottom_kapital = sqldf("select * from ankieta where exists (select 1 from istotne where ID = id_ucznia limit 1) order by k_sum_4 limit 20")
 
@@ -534,10 +533,10 @@ liczba_odwiedzen_bottom = sqldf("select id_ucznia, eksponat, count(*) as liczba_
 srednia_liczba_odwiedzen_bottom = mean(liczba_odwiedzen_bottom$liczba_odwiedzen)
 
 ##top dzieci rzadziej odwiedzaja wiecej niz raz od wszystkich
-t.test(liczba_odwiedzen_all$liczba_odwiedzen, liczba_odwiedzen_top$liczba_odwiedzen, alternative = "greater")$p.value < 0.05
+wilcox.test(liczba_odwiedzen_all$liczba_odwiedzen, liczba_odwiedzen_top$liczba_odwiedzen, alternative = "greater")$p.value < 0.05
 
 #bottom dzieci nie odwiedzaja czesciej od wszystkich
-t.test(liczba_odwiedzen_all$liczba_odwiedzen, liczba_odwiedzen_bottom$liczba_odwiedzen, alternative = "less")$p.value < 0.05
+wilcox.test(liczba_odwiedzen_all$liczba_odwiedzen, liczba_odwiedzen_bottom$liczba_odwiedzen, alternative = "less")$p.value < 0.05
 
 #unikalne odwiedziny
 unikalne_eksponaty_all = distinct(ankieta_obserwacje, id_ucznia, eksponat)
