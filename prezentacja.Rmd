@@ -8,24 +8,29 @@ output:
 ---
 `r opts_chunk$set(echo=FALSE)`
 
+#Cechy dzieci i czynniki środowiskowe
+
 ```{r echo=FALSE}
 knitr::opts_knit$set(root.dir = getSrcDirectory(function(dummy) {dummy}))
 
 source("data.R")
 ```
 
-#Cechy dzieci i czynniki środowiskowe
-
-
 #Obserwacja grupek w CNK
-```{r, echo=FALSE}
 
-```
 ### Zwiedzanie razem czy osobno?
 * 204 obserwowanych dzieci
 * 3 dzieci, które cały czas były w grupce
 * 3 dzieci, które cały czas były same
 
+
+```{r, echo=FALSE}
+rozklad_licznosci_grupek()
+
+grupki_plec()
+
+trwale_grupki()
+```
 
 #Analiza eksponatów
 
