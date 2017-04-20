@@ -80,21 +80,6 @@ data_boys_know_studies_one <- nrow(data_boys) - data_boys_know_studies_both - da
 num_girls = nrow(data_girls)
 num_boys = nrow(data_boys)
 
-#### WYKRESY KOLOWE
-pie_chart_data_girls <- c(data_girls_know_studies_none, data_girls_know_studies_one, data_girls_know_studies_both)
-percentlabels<- round(100*pie_chart_data_girls/num_girls, 1)
-pielabels<- paste(percentlabels, "%", sep="")
-cols=rainbow(length(pie_chart_data_girls))
-pie(pie_chart_data_girls, main="Czy dziewczynki wiedza o studiach rodzicow?", col=cols, labels=pielabels, cex=0.8)
-legend("topright", c("Nie","O jednym","Tak"), cex=0.8, fill=cols)
-
-pie_chart_data_boys <- c(data_boys_know_studies_none, data_boys_know_studies_one, data_boys_know_studies_both)
-percentlabels<- round(100*pie_chart_data_boys/num_boys, 1)
-pielabels<- paste(percentlabels, "%", sep="")
-cols=rainbow(length(pie_chart_data_boys))
-pie(pie_chart_data_boys, main="Czy chlopcy wiedza o studiach rodzicow?", col=cols, labels=pielabels, cex=0.8)
-legend("topright", c("Nie","O jednym","Tak"), cex=0.8, fill=cols)
-
 #### WYKRES SLUPKOWY
 data <- structure(list(Nie=c(round(100*data_girls_know_studies_none/num_girls,1),round(100*data_boys_know_studies_none/num_boys,1)),
 											 Jeden=c(round(100*data_girls_know_studies_one/num_girls,1),round(100*data_boys_know_studies_one/num_boys,1)),
@@ -117,21 +102,6 @@ data_boys_know_work_one <- nrow(data_boys) - data_boys_know_work_both - data_boy
 
 num_girls = nrow(data_girls)
 num_boys = nrow(data_boys)
-
-#### WYKRESY KOLOWE
-pie_chart_data_girls <- c(data_girls_know_work_none, data_girls_know_work_one, data_girls_know_work_both)
-percentlabels<- round(100*pie_chart_data_girls/num_girls, 1)
-pielabels<- paste(percentlabels, "%", sep="")
-cols=rainbow(length(pie_chart_data_girls))
-pie(pie_chart_data_girls, main="Czy dziewczynki wiedza o pracy rodzicow?", col=cols, labels=pielabels, cex=0.8)
-legend("topright", c("Nie","O jednym","Tak"), cex=0.8, fill=cols)
-
-pie_chart_data_boys <- c(data_boys_know_work_none, data_boys_know_work_one, data_boys_know_work_both)
-percentlabels<- round(100*pie_chart_data_boys/num_boys, 1)
-pielabels<- paste(percentlabels, "%", sep="")
-cols=rainbow(length(pie_chart_data_boys))
-pie(pie_chart_data_boys, main="Czy chlopcy wiedza o pracy rodzicow?", col=cols, labels=pielabels, cex=0.8)
-legend("topright", c("Nie","O jednym","Tak"), cex=0.8, fill=cols)
 
 #### WYKRES SLUPKOWY
 data <- structure(list(Nie=c(round(100*data_girls_know_work_none/num_girls,1),round(100*data_boys_know_work_none/num_boys,1)),
@@ -461,38 +431,43 @@ library(dplyr)
 istotne = filter(obserwacje, kategorie==2)
 
 #galerie
-top_galerie = arrange(count(istotne, galeria), desc(n))
-eksponaty_galerie = arrange(count(distinct(select(istotne, eksponat, galeria)), galeria), desc(n))
-joined = inner_join(top_galerie, eksponaty_galerie, by="galeria")
-joined$count_normalized = joined$n.x/joined$n.y
-names(joined) = c("Galeria", "Liczba odwiedzen", "Liczba eksponatow", "Znormalizowana liczba odwiedzen")
-rn = joined$Galeria
-joined = as.data.frame(joined[,2:4])
-row.names(joined) = rn
-
-joined_scaled = joined[,-2]
-scale = max(joined_scaled$`Liczba odwiedzen`) / max(joined_scaled$`Znormalizowana liczba odwiedzen`)
-joined_scaled$`Znormalizowana liczba odwiedzen` = joined_scaled$`Znormalizowana liczba odwiedzen` * scale
-joined_scaled = joined_scaled[order(joined_scaled$`Znormalizowana liczba odwiedzen`, decreasing = TRUE),]
-
-barplot(t(as.matrix(joined_scaled)), beside = TRUE, ylim=c(0, 4000), yaxt = "n", col = c("Red", "Green"), las=2)
-axis(2, seq(0, 4000, by=1000), col="Red")
-axis(4, pretty(seq(0, 4000, by=1000) / scale) * scale, pretty(seq(0, 4000, by=1000) / scale), col="Green" )
-legend("topright", legend = c("Nieprzetworzona", "Znormalizowana"), fill = c("Red", "Green"))
-title("Liczba odwiedzen galerii")
-
+liczba_odwiedzen_galerii = function(){
+	top_galerie = arrange(count(istotne, galeria), desc(n))
+	eksponaty_galerie = arrange(count(distinct(select(istotne, eksponat, galeria)), galeria), desc(n))
+	joined = inner_join(top_galerie, eksponaty_galerie, by="galeria")
+	joined$count_normalized = joined$n.x/joined$n.y
+	names(joined) = c("Galeria", "Liczba odwiedzen", "Liczba eksponatow", "Znormalizowana liczba odwiedzen")
+	rn = joined$Galeria
+	joined = as.data.frame(joined[,2:4])
+	row.names(joined) = rn
+	
+	joined_scaled = joined[,-2]
+	scale = max(joined_scaled$`Liczba odwiedzen`) / max(joined_scaled$`Znormalizowana liczba odwiedzen`)
+	joined_scaled$`Znormalizowana liczba odwiedzen` = joined_scaled$`Znormalizowana liczba odwiedzen` * scale
+	joined_scaled = joined_scaled[order(joined_scaled$`Znormalizowana liczba odwiedzen`, decreasing = TRUE),]
+	
+	barplot(t(as.matrix(joined_scaled)), beside = TRUE, ylim=c(0, 4000), yaxt = "n", col = c("Red", "Green"), las=2)
+	axis(2, seq(0, 4000, by=1000), col="Red")
+	axis(4, pretty(seq(0, 4000, by=1000) / scale) * scale, pretty(seq(0, 4000, by=1000) / scale), col="Green" )
+	legend("topright", legend = c("Nieprzetworzona", "Znormalizowana"), fill = c("Red", "Green"))
+	title("Liczba odwiedzen galerii")
+}
 
 #Eksponaty
-top_eksponaty = as.data.frame(head(arrange(count(istotne, eksponat, galeria), desc(n)), 6)) #top eksponaty
-names(top_eksponaty) = c("Eksponat", "Galeria", "Liczba odwiedzen")
-top_eksponaty
+top_eksponaty_ever = function(){
+	top_eksponaty = as.data.frame(head(arrange(count(istotne, eksponat, galeria), desc(n)), 6)) #top eksponaty
+	names(top_eksponaty) = c("Eksponat", "Galeria", "Liczba odwiedzen")
+	print(top_eksponaty)
+}
 
 #Eksponaty w obrebie galerii
-top_eksponaty = arrange(count(istotne, eksponat, galeria), desc(n))
-names(top_eksponaty) = c("Eksponat", "Galeria", "Liczba odwiedzen")
-top_eksponaty_galerie = aggregate(.~Galeria, top_eksponaty, FUN = head, 1)
-top_eksponaty_galerie$`Liczba odwiedzen` = as.numeric(as.character(top_eksponaty_galerie$`Liczba odwiedzen`))
-arrange(top_eksponaty_galerie, desc(`Liczba odwiedzen`))
+top_eksponaty_w_galeriach = function(){
+	top_eksponaty = arrange(count(istotne, eksponat, galeria), desc(n))
+	names(top_eksponaty) = c("Eksponat", "Galeria", "Liczba odwiedzen")
+	top_eksponaty_galerie = aggregate(.~Galeria, top_eksponaty, FUN = head, 1)
+	top_eksponaty_galerie$`Liczba odwiedzen` = as.numeric(as.character(top_eksponaty_galerie$`Liczba odwiedzen`))
+	print(arrange(top_eksponaty_galerie, desc(`Liczba odwiedzen`)))
+}
 
 #Najbardziej absorbujace eksponaty
 m = 10
@@ -505,6 +480,9 @@ top_czas = arrange(summarize(group_by(istotne, eksponat, galeria), sredni_czas =
 top_czas_over_m = arrange(filter(top_czas, n>m), desc(sredni_czas))
 top_czas_galerie = aggregate(.~galeria, top_czas_over_m, FUN = head, 1)[,-4]
 
+istotne$zach[istotne$zach==2] = 1
+istotne$zach[istotne$zach==3] = 2
+istotne$zach[istotne$zach==4] = 3
 
 avg_zaangazowanie_all = avg(istotne$zach)
 top_zaangazowanie = arrange(summarize(group_by(istotne, eksponat, galeria), 
@@ -544,15 +522,15 @@ top_eksponaty_bottom_kapital = as.data.frame(head(arrange(count(bottom_kapital_o
 #wielokrotnie odwiedzane
 #wszystkie
 liczba_odwiedzen_all = sqldf("select id_ucznia, eksponat, count(*) as liczba_odwiedzen from ankieta_obserwacje group by id_ucznia, eksponat")
-mean(liczba_odwiedzen_all$liczba_odwiedzen)
+srednia_liczba_odwiedzen_all = mean(liczba_odwiedzen_all$liczba_odwiedzen)
 
 ##top kapital
 liczba_odwiedzen_top = sqldf("select id_ucznia, eksponat, count(*) as liczba_odwiedzen from top_kapital_obserwacje group by id_ucznia, eksponat")
-mean(liczba_odwiedzen_top$liczba_odwiedzen)
+srednia_liczba_odwiedzen_top = mean(liczba_odwiedzen_top$liczba_odwiedzen)
 
 ##bottom kapital
 liczba_odwiedzen_bottom = sqldf("select id_ucznia, eksponat, count(*) as liczba_odwiedzen from bottom_kapital_obserwacje group by id_ucznia, eksponat")
-mean(liczba_odwiedzen_bottom$liczba_odwiedzen)
+srednia_liczba_odwiedzen_bottom = mean(liczba_odwiedzen_bottom$liczba_odwiedzen)
 
 ##top dzieci rzadziej odwiedzaja wiecej niz raz od wszystkich
 t.test(liczba_odwiedzen_all$liczba_odwiedzen, liczba_odwiedzen_top$liczba_odwiedzen, alternative = "greater")$p.value < 0.05
@@ -563,15 +541,15 @@ t.test(liczba_odwiedzen_all$liczba_odwiedzen, liczba_odwiedzen_bottom$liczba_odw
 #unikalne odwiedziny
 unikalne_eksponaty_all = distinct(ankieta_obserwacje, id_ucznia, eksponat)
 unikalne_odwiedzenia_all = count(unikalne_eksponaty_all, id_ucznia)
-mean(unikalne_odwiedzenia_all$n)
+srednie_unikalne_odwiedzenia_all = mean(unikalne_odwiedzenia_all$n)
 
 unikalne_eksponaty_top = distinct(top_kapital_obserwacje, id_ucznia, eksponat)
 unikalne_odwiedzenia_top = count(unikalne_eksponaty_top, id_ucznia)
-mean(unikalne_odwiedzenia_top$n)
+srednie_unikalne_odwiedzenia_top = mean(unikalne_odwiedzenia_top$n)
 
 unikalne_eksponaty_bottom = distinct(bottom_kapital_obserwacje, id_ucznia, eksponat)
 unikalne_odwiedzenia_bottom = count(unikalne_eksponaty_bottom, id_ucznia)
-mean(unikalne_odwiedzenia_bottom$n)
+srednie_unikalne_odwiedzenia_bottom = mean(unikalne_odwiedzenia_bottom$n)
 
 #nie ma statystycznie istotnych roznic w liczbie unikalnych odwiedzonych
 t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_top$n, alternative = "less")$p.value < 0.05

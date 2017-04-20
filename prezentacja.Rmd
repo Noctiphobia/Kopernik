@@ -6,6 +6,8 @@ output:
   pdf_document: default
   html_document: default
 ---
+`r opts_chunk$set(echo=FALSE)`
+
 ```{r echo=FALSE}
 knitr::opts_knit$set(root.dir = getSrcDirectory(function(dummy) {dummy}))
 
@@ -26,7 +28,75 @@ source("data.R")
 
 
 #Analiza eksponatów
-```{r}
 
+##Analiza liczby odwiedzeń galerii
+```{r}
+liczba_odwiedzen_galerii()
 ```
+
+##Najpopularniejsze eksponaty
+```{r}
+top_eksponaty_ever()
+```
+
+##Najpopularniejsze eksponaty w obrębie każdej galerii
+```{r}
+top_eksponaty_w_galeriach()
+```
+
+##Najbardziej absorbujące eksponaty
+###Według czasu
+Średni czas spędzony na eksponacie to `avg_czas_all`.
+####Spośród wszystkich
+```{r}
+head(top_czas, 10)
+```
+####Powyżej `m`
+```{r}
+head(top_czas_over_m, 10)
+```
+####Powyżej `m` dla każdej galerii
+```{r}
+top_czas_galerie
+```
+
+###Według zaangażowania
+Średni poziom zaangażowania (gdzie 1 -- tylko patrzy lub tylko dotyka, 2 -- korzysta, 3 -- eksperymentuje) wynosi `avg_zaangazowanie_all`.
+####Spośród wszystkich
+```{r}
+head(top_zaangazowanie, 10)
+```
+####Powyżej `m`
+```{r}
+head(top_zaangazowanie_over_m, 10)
+```
+####Powyżej `m` z pominięciem eksponatów bez galerii
+```{r}
+head(top_zaangazowanie_not_brak, 10)
+```
+####Powyżej `m` dla każdej galerii
+```{r}
+top_zaangazowanie_galerie
+```
+
+###Według czytania opisu
+Średni poziom czytania opisu to `avg_opis_all`.
+####Spośród wszystkich
+```{r}
+head(top_zaangazowanie, 10)
+```
+####Powyżej `m`
+```{r}
+head(top_zaangazowanie_over_m, 10)
+```
+####Powyżej `m` z pominięciem eksponatów bez galerii
+```{r}
+head(top_zaangazowanie_not_brak, 10)
+```
+####Powyżej `m` dla każdej galerii
+```{r}
+top_zaangazowanie_galerie
+```
+
+
 
