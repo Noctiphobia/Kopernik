@@ -4,6 +4,12 @@ author: "Ahmed Abdelkarim, Aleksandra Hernik, Ada Wrońska"
 date: "20 kwietnia 2017"
 output: html_document
 ---
+```{r echo=FALSE}
+knitr::opts_knit$set(root.dir = getSrcDirectory(function(dummy) {dummy}))
+
+source("data.R")
+```
+
 
 ```{r, echo=FALSE}
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
