@@ -82,6 +82,12 @@ data_boys_know_studies_one <- nrow(data_boys) - data_boys_know_studies_both - da
 num_girls = nrow(data_girls)
 num_boys = nrow(data_boys)
 
+vgirls = c(rep(0, data_girls_know_studies_none), rep(1, data_girls_know_studies_one), rep(2, data_girls_know_studies_both))
+vboys = c(rep(0, data_boys_know_studies_none), rep(1, data_boys_know_studies_one), rep(2, data_boys_know_studies_both))
+print("Wyniki testu statystycznej istotności większej wiedzy dziewczynek na temat studiów rodziców")
+print(wilcox.test(vgirls, vboys, alternative = "greater", correct = FALSE))
+
+
 #### WYKRES SLUPKOWY
 data <- structure(list(Nie=c(round(100*data_girls_know_studies_none/num_girls,1),round(100*data_boys_know_studies_none/num_boys,1)),
 											 Jeden=c(round(100*data_girls_know_studies_one/num_girls,1),round(100*data_boys_know_studies_one/num_boys,1)),
@@ -104,6 +110,11 @@ data_boys_know_work_one <- nrow(data_boys) - data_boys_know_work_both - data_boy
 
 num_girls = nrow(data_girls)
 num_boys = nrow(data_boys)
+
+vgirls = c(rep(0, data_girls_know_work_none), rep(1, data_girls_know_work_one), rep(2, data_girls_know_work_both))
+vboys = c(rep(0, data_boys_know_work_none), rep(1, data_boys_know_work_one), rep(2, data_boys_know_work_both))
+print("Wyniki testu statystycznej istotności większej wiedzy dziewczynek na temat pracy rodziców")
+print(wilcox.test(vgirls, vboys, alternative = "greater", correct = FALSE))
 
 #### WYKRES SLUPKOWY
 data <- structure(list(Nie=c(round(100*data_girls_know_work_none/num_girls,1),round(100*data_boys_know_work_none/num_boys,1)),
@@ -144,6 +155,10 @@ boxplot(mean_studying,ylim=lmts, ylab ="Srednia ocen", xlab ="Ze studiami", varw
 boxplot(mean_not_studying,ylim=lmts, xlab ="Bez studiow", varwidth=TRUE)
 title(main="Czy studia rodzicow wplywaja na oceny dzieci?", line = -2, outer=TRUE)
 par(mfrow = c(1, 1))
+
+print("Wyniki testu hipotezy: dzieci, których rodzice studiowali mają lepsze oceny")
+print(t.test(mean_studying, mean_not_studying, alternative = "greater"))
+
 
 ## Oceny dzieci vs. doping rodzicow
 
@@ -216,44 +231,6 @@ par(mfrow = c(1, 2))
 boxplot(k_studying,ylim=lmts, ylab ="Kapital naukowy", xlab ="Ze studiami", varwidth=TRUE)
 boxplot(k_not_studying,ylim=lmts, xlab ="Bez studiow", varwidth=TRUE)
 title(main="Czy studia rodzicow wplywaja na kapital naukowy dzieci?", line = -2, outer=TRUE)
-par(mfrow = c(1, 1))
-
-## Kapital dzieci (bez ocen) vs. studia rodzicow
-studying <- subset(ankieta, ankieta$studia_m == "tak" | ankieta$studia_t=="tak")
-k_studying<-data.frame(Kapital=studying$k_sum_4)
-studies_points<-as.numeric(as.character(studying[,"k_studia_m"]))+as.numeric(as.character(studying[,"k_studia_t"]))
-k_studying[,"Kapital"]<-as.numeric(as.character(k_studying[,"Kapital"]))-studies_points
-
-notes_studying<-data.frame(Matematyka=studying$ocena_matematyka,Polski=studying$ocena_jezyk_polski,Przyroda=studying$ocena_przyroda)
-notes_studying_num<-data.frame(Matematyka=studying$ocena_matematyka,Polski=studying$ocena_jezyk_polski,Przyroda=studying$ocena_przyroda)
-notes_studying_num[,"Matematyka"]<-as.numeric(as.character(notes_studying[,"Matematyka"]))
-notes_studying_num[,"Polski"]<-as.numeric(as.character(notes_studying[,"Polski"]))
-notes_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_studying[,"Przyroda"]))
-
-sum_studying <- rowSums(notes_studying_num, na.rm = TRUE)
-k_studying <- k_studying - sum_studying
-
-not_studying <- subset(ankieta, (ankieta$studia_m == "nie" & ankieta$studia_t=="nie") | (is.na(ankieta$studia_m) & ankieta$studia_t=="nie") | (ankieta$studia_m == "nie" & is.na(ankieta$studia_t)))
-k_not_studying<-data.frame(Kapital=not_studying$k_sum_4)
-studies_points<-as.numeric(as.character(not_studying[,"k_studia_m"]))+as.numeric(as.character(not_studying[,"k_studia_t"]))
-k_not_studying[,"Kapital"]<-as.numeric(as.character(k_not_studying[,"Kapital"]))-studies_points
-
-notes_not_studying<-data.frame(Matematyka=not_studying$ocena_matematyka,Polski=not_studying$ocena_jezyk_polski,Przyroda=not_studying$ocena_przyroda)
-notes_not_studying_num<-data.frame(Matematyka=not_studying$ocena_matematyka,Polski=not_studying$ocena_jezyk_polski,Przyroda=not_studying$ocena_przyroda)
-notes_not_studying_num[,"Matematyka"]<-as.numeric(as.character(notes_not_studying[,"Matematyka"]))
-notes_not_studying_num[,"Polski"]<-as.numeric(as.character(notes_not_studying[,"Polski"]))
-notes_not_studying_num[,"Przyroda"]<-as.numeric(as.character(notes_not_studying[,"Przyroda"]))
-
-sum_not_studying <- rowSums(notes_not_studying_num, na.rm = TRUE)
-k_not_studying <- k_not_studying - sum_not_studying
-
-
-lmts <- range(k_studying,k_not_studying, na.rm = TRUE)
-
-par(mfrow = c(1, 2))
-boxplot(k_studying,ylim=lmts, ylab ="Kapital naukowy", xlab ="Ze studiami", varwidth=TRUE)
-boxplot(k_not_studying,ylim=lmts, xlab ="Bez studiow", varwidth=TRUE)
-title(main="Czy studia rodzicow wplywaja na kapital naukowy(bez ocen) dzieci?", line = -2, outer=TRUE)
 par(mfrow = c(1, 1))
 
 ## Kapital (bez ocen) vs. oceny
