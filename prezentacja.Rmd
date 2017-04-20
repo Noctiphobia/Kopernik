@@ -1,0 +1,15 @@
+---
+title: "Obserwacje dzieci z CNK"
+author: "Ahmed Abdelkarim, Aleksandra Hernik, Ada Wrońska"
+date: "20 kwietnia 2017"
+output: html_document
+---
+
+#Cechy dzieci i czynniki środowiskowe
+
+
+#Obserwacja grupek w CNK
+
+
+#Analiza eksponatów
+
