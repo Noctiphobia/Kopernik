@@ -1,0 +1,27 @@
+---
+title: "Obserwacje dzieci z CNK"
+author: "Ahmed Abdelkarim, Aleksandra Hernik, Ada Wrońska"
+date: "20 kwietnia 2017"
+output: html_document
+---
+
+```{r, echo=FALSE}
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+source("data.R")
+```
+
+
+#Cechy dzieci i czynniki środowiskowe
+
+
+#Obserwacja grupek w CNK
+```{r, echo=FALSE}
+
+```
+
+
+#Analiza eksponatów
+```{r}
+
+```
+
