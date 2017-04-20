@@ -1,4 +1,6 @@
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+library(dplyr)
+library(sqldf)
+
 ankieta = read.csv('ankieta.csv', na.strings=c(""," ","NA","nie wie","nie wiem","nieczytelne pismo", "dualizm odpowiedzi","brak odpowiedzi","nie pamieta"))
 obserwacje = read.csv('obserwacje.csv', na.strings = c("", " ", "NA"))
 
@@ -326,7 +328,7 @@ notes_duzo_num[,"Polski"]<-as.numeric(as.character(notes_duzo[,"Polski"]))
 notes_duzo_num[,"Przyroda"]<-as.numeric(as.character(notes_duzo[,"Przyroda"]))
 mean_duzo <- rowMeans(notes_duzo_num, na.rm = TRUE)
 
-kilka<-subset(ankieta, ankieta$p_16_2_4=="kilka (mniej niĹĽ 20)")
+kilka<-subset(ankieta, ankieta$p_16_2_4=="kilka (mniej niz 20)")
 notes_kilka<-data.frame(Matematyka=kilka$ocena_matematyka,Polski=kilka$ocena_jezyk_polski,Przyroda=kilka$ocena_przyroda)
 notes_kilka_num<-data.frame(Matematyka=kilka$ocena_matematyka,Polski=kilka$ocena_jezyk_polski,Przyroda=kilka$ocena_przyroda)
 notes_kilka_num[,"Matematyka"]<-as.numeric(as.character(notes_kilka[,"Matematyka"]))
@@ -457,7 +459,6 @@ barplot(as.matrix(data), main="Czy oceny dzieci sa zalezne od typu pracy, ktora 
 # EKSPONATY
 
 #Najpopularniejsze
-library(dplyr)
 istotne = filter(obserwacje, kategorie==2)
 
 #galerie
@@ -579,8 +580,6 @@ t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_bottom$n, alternative = 
 t.test(unikalne_odwiedzenia_top$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
 
 ###Creating dataframe groups
-library(dplyr)
-library(sqldf)
 obserwacje2 = obserwacje
 bad_records = c()
 for (i in 1:dim(obserwacje)[1])
@@ -619,6 +618,7 @@ rozklad_licznosci_grupek = function()
 {
   licznosci = summarize(group_by(grupki_wszystkie, liczba_dzieci), sum(n))
   barplot(unlist(licznosci[, 2]), names.arg = 1:9)
+  title("Rozklad grupek roznych wielkosci")
 }
 
 liczba_eksponatow_podczas_wizyty = function()
@@ -656,9 +656,9 @@ grupki_plec = function()
 trwale_grupki = function()
 {
   print("Wszystkie grupki")
-  arrange(grupki_wszystkie, desc(n))
+  print(arrange(grupki_wszystkie, desc(n))[1:15, c("n", "liczba_dzieci", "procent_dziewczynek")])
   grupki_wyczyszczone = arrange(filter(grupki, liczba_dzieci == liczba_dziewczynek + liczba_chlopcow), desc(n))
   print("Tylko grupki zawierajace co najmniej dwie osoby i da sie okreslic plec wszystkich dzieci")
-  print(grupki_wyczyszczone)
+  print(grupki_wyczyszczone[1:15, c("n", "liczba_dzieci", "procent_dziewczynek")])
 }
 
