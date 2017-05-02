@@ -456,9 +456,9 @@ data_km<-kmeans(data, 6, nstart=20)
 
 
 par(mfrow = c(1, 2))
-plot(data$Mean,data$Ksiazki,xlab="Średnia ocen", ylab="Ilość książek", main="Klaster z ocenami", col=data_km$cluster)
-
-plot(data_no_notes$Mean,data_no_notes$Ksiazki, xlab="Średnia ocen", ylab="", main="Klaster bez ocen",col=data_no_notes_km$cluster)
+plot(data$Mean,data$Ksiazki,xlab="", ylab="Ilość książek", main="Klaster z ocenami", col=data_km$cluster, pch=16)
+plot(data_no_notes$Mean,data_no_notes$Ksiazki, xlab="", ylab="", main="Klaster bez ocen",col=data_no_notes_km$cluster, pch=16)
+title(sub="Średnia ocen", line=-2, outer=TRUE)
 par(mfrow = c(1, 1))
 
 
