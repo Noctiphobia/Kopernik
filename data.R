@@ -402,6 +402,66 @@ data <- structure(list(Matematyka=c(round(mean_techniczne,2),round(mean_not_tech
 colors <- c("green", "purple")
 barplot(as.matrix(data), main="Czy oceny dzieci sa zalezne od typu pracy, ktora chcialyby wykonywac?", cex.lab = 1.5, cex.main = 1.4, beside=TRUE, ylab = "Srednia ocen", ylim=c(0,6), legend=c("Do zawodu", "Poza zawodem"), col=colors)
 
+#### CLUSTER
+
+##### BOOKS VS GRADES
+data<-data.frame(Matematyka=ankieta$ocena_matematyka,Polski=ankieta$ocena_jezyk_polski,Przyroda=ankieta$ocena_przyroda)
+notes_num<-data.frame(Matematyka=ankieta$ocena_matematyka,Polski=ankieta$ocena_jezyk_polski,Przyroda=ankieta$ocena_przyroda)
+notes_num[,"Matematyka"]<-as.numeric(as.character(data[,"Matematyka"]))
+notes_num[,"Polski"]<-as.numeric(as.character(data[,"Polski"]))
+notes_num[,"Przyroda"]<-as.numeric(as.character(data[,"Przyroda"]))
+mean <- rowMeans(notes_num, na.rm = TRUE)
+books <- as.vector(data.frame(Ksiazki=ankieta$p_16_2_4))
+data[,"Mean"] = mean
+data[,"Ksiazki"] = books
+data <- na.omit(data)
+mean <- data[,"Mean"]
+levels(data$Ksiazki) <- c(levels(data$Ksiazki), "1")
+data[data$Ksiazki=="nie ma ani jednej",]=1
+levels(data$Ksiazki) <- c(levels(data$Ksiazki), "2")
+data[data$Ksiazki=="kilka (mniej niz 20)",]=2
+levels(data$Ksiazki) <- c(levels(data$Ksiazki), "3")
+data[data$Ksiazki=="duzo (od 20 do 50)",]=3
+levels(data$Ksiazki) <- c(levels(data$Ksiazki), "4")
+data[data$Ksiazki=="bardzo duzo (wiecej niz 50 do 100)",]=4
+levels(data$Ksiazki) <- c(levels(data$Ksiazki), "5")
+data[data$Ksiazki=="cale mnostwo (wiecej niz 100)",]=5
+data$Ksiazki<-droplevels(data$Ksiazki)
+data[,"Mean"]<-mean
+
+data_no_notes<-data.frame(Mean=data$Mean)
+data_no_notes[,"Ksiazki"] = data$Ksiazki
+
+ratio_ss=rep(0,7)
+for (k in 1:7) {
+  data_km<-kmeans(data, k, nstart=20)
+  ratio_ss[k]<-data_km$tot.withinss/data_km$totss
+}
+plot(ratio_ss,type="b",xlab="k")
+abline(h=0.2)
+
+##### Z powyższego k=4
+data_km<-kmeans(data, 4, nstart=20)
+
+ratio_ss=rep(0,7)
+for (k in 1:7) {
+  data_no_notes_km<-kmeans(data_no_notes, k, nstart=20)
+  ratio_ss[k]<-data_no_notes_km$tot.withinss/data_no_notes_km$totss
+}
+plot(ratio_ss,type="b",xlab="k")
+abline(h=0.2)
+
+##### Z powyższego k=6
+data_km<-kmeans(data, 6, nstart=20)
+
+
+par(mfrow = c(1, 2))
+plot(data$Mean,data$Ksiazki,xlab="Średnia ocen", ylab="Ilość książek", main="Klaster z ocenami", col=data_km$cluster)
+
+plot(data_no_notes$Mean,data_no_notes$Ksiazki, xlab="Średnia ocen", ylab="", main="Klaster bez ocen",col=data_no_notes_km$cluster)
+par(mfrow = c(1, 1))
+
+
 
 # EKSPONATY
 
