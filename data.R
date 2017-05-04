@@ -94,7 +94,7 @@ data <- structure(list(Nie=c(round(100*data_girls_know_studies_none/num_girls,1)
 											 Tak=c(round(100*data_girls_know_studies_both/num_girls,1),round(100*data_boys_know_studies_both/num_boys,1))),
 									.Names = c("Nie", "O jednym", "Tak"), class = "data.frame", row.names = c(NA, -2L))
 colors <- c("red", "blue")
-barplot(as.matrix(data), main="Czy dzieci wiedza o studiach rodzicow?", cex.lab = 1.5, cex.main = 1.4, beside=TRUE, ylab = "Procent", ylim=c(0,100), legend=c("Dziewczynki", "chlopcy"), col=colors)
+barplot(as.matrix(data), main="Czy dzieci wiedza o studiach rodzicow?", cex.lab = 1.5, cex.main = 1.4, beside=TRUE, ylab = "Procent", ylim=c(0,100), legend=c("Dziewczynki", "Chlopcy"), col=colors)
 
 ### PRACA
 #### DANE
@@ -452,7 +452,7 @@ plot(ratio_ss,type="b",xlab="k")
 abline(h=0.2)
 
 ##### Z powyższego k=6
-data_km<-kmeans(data, 6, nstart=20)
+data_no_notes_km<-kmeans(data_no_notes, 6, nstart=20)
 
 
 par(mfrow = c(1, 2))
@@ -460,6 +460,19 @@ plot(data$Mean,data$Ksiazki,xlab="", ylab="Ilość książek", main="Klaster z o
 plot(data_no_notes$Mean,data_no_notes$Ksiazki, xlab="", ylab="", main="Klaster bez ocen",col=data_no_notes_km$cluster, pch=16)
 title(sub="Średnia ocen", line=-2, outer=TRUE)
 par(mfrow = c(1, 1))
+
+clusters_with <- hclust(dist(data))
+clusters_without <- hclust(dist(data_no_notes))
+
+clusterCut_with <- cutree(clusters_with, 4)
+clusterCut_without <- cutree(clusters_without, 6)
+
+par(mfrow = c(1,2))
+plot(data$Mean,data$Ksiazki,xlab="", ylab="Ilość książek", main="Klaster z ocenami", col=clusterCut_with, pch=16)
+plot(data_no_notes$Mean,data_no_notes$Ksiazki, xlab="", ylab="", main="Klaster bez ocen",col=clusterCut_without, pch=16)
+title(sub="Średnia ocen", line=-2, outer=TRUE)
+par(mfrow = c(1, 1))
+
 
 
 
