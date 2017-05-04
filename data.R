@@ -533,6 +533,8 @@ t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_top$n, alternative = "le
 t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
 t.test(unikalne_odwiedzenia_top$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
 
+plot(istotne$czas_w_sek, istotne$zach)
+
 ###Creating dataframe groups
 obserwacje2 = obserwacje
 bad_records = c()
