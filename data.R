@@ -593,7 +593,18 @@ t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_top$n, alternative = "le
 t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
 t.test(unikalne_odwiedzenia_top$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
 
-plot(istotne$czas_w_sek, istotne$zach)
+
+#klasteryzacja eksponatow
+numerize = function(x){ as.numeric(as.character(x)) }
+
+summed = summarize(group_by(istotne, eksponat, ID), czas = sum(numerize(czas_w_sek)), zach = mean(numerize(zach)), n = n())
+summed$ID = numerize(summed$ID)
+summed = summed[!is.na(summed$czas) & !is.na(summed$zach),]
+
+eksponaty = summarize(group_by(summed, eksponat), czas = mean(czas), zach = mean(zach), n = sum(n))
+eksponaty = filter(eksponaty, n>10)
+
+eksponaty_klastry = kmeans(eksponaty[,"czas","zach"], 4)
 
 ###Creating dataframe groups
 obserwacje2 = obserwacje
