@@ -606,6 +606,8 @@ t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_top$n, alternative = "le
 t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
 t.test(unikalne_odwiedzenia_top$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
 
+plot(istotne$czas_w_sek, istotne$zach)
+
 ###Creating dataframe groups
 obserwacje2 = obserwacje
 bad_records = c()
@@ -687,5 +689,26 @@ trwale_grupki = function()
   grupki_wyczyszczone = arrange(filter(grupki, liczba_dzieci == liczba_dziewczynek + liczba_chlopcow), desc(n))
   print("Tylko grupki zawierajace co najmniej dwie osoby i da sie okreslic plec wszystkich dzieci")
   print(grupki_wyczyszczone[1:15, c("n", "liczba_dzieci", "procent_dziewczynek")])
+  #boxplot(grupki_wyczyszczone, ylim = lim, ylab ="Wszyscy", horizontal = TRUE)
 }
+
+# Klasteryzacja - odwiedzone eksponaty
+obserwacje_lepsze = obserwacje
+obserwacje_lepsze[, "czas_w_sek"] = as.numeric(obserwacje_lepsze[, "czas_w_sek"])
+obserwacje_zsumowane = summarize(group_by(obserwacje_lepsze, ID), mean_time = mean(czas_w_sek), visits_number = n())
+do_klasteryzacji = obserwacje_zsumowane[, 2:3]
+res = numeric(15) 
+for (i in 1:15) res[i] <- sum(kmeans(do_klasteryzacji,
+                                     centers=i)$withinss)
+plot(1:15, res, type="b", xlab="Number of Clusters",
+     ylab="Within groups sum of squares")
+
+klastry = kmeans(do_klasteryzacji, 5, nstart=20)
+plot(do_klasteryzacji$mean_time, do_klasteryzacji$visits_number, 
+     xlab="Średni czas przy eksponacie", ylab="Liczba odwiedzonych eksponatów", 
+     main="Klasteryzacja na podstawie stylu zwiedzania",
+     col=klastry$cluster, pch=16)
+
+
+
 
