@@ -160,8 +160,8 @@ Studia rodziców zdają się mieć trochę większy wpływ na wyniki dzieci (ref
 
 Najlepsze efekty dało porównanie liczby książek w domu ze średnią (ref. Rysunek~\ref{fig:ksiazki_oceny}). Wyraźnie lepsze wyniki osiągają dzieci, w których otoczeniu znajduje się wiele książek. Jeśli w otoczeniu dziecka znajduje się przynajmniej 50 książek, to przeciętnie średnia ocen dziecka jest wyższa niż 4.0, co jest naprawdę bardzo dobrym wynikiem. Natomiast gdy nie ma żadnej książki, średnia spada poniżej 3.0. Jasno z tego wynika, że książki wpływają pozytywnie na rozwój dziecka.
 
-\subsection{Czy jest zależność między Kapitałem Naukowym a ocenami?}
-W ramach kolejnego zadania, chcieliśmy sprawdzić zależność między obliczonym Kapitałem Naukowym, a studiami rodziców i ocenami dzieci, jako że okazały się byc one najbardziej miarodajne.
+\subsection{Czy jest zależność między kapitałem naukowym a ocenami?}
+W ramach kolejnego zadania, chcieliśmy sprawdzić zależność między obliczonym kapitałem naukowym, a studiami rodziców i ocenami dzieci, jako że okazały się byc one najbardziej miarodajne.
 
 \begin{figure}
 	\centering
@@ -176,9 +176,9 @@ W ramach kolejnego zadania, chcieliśmy sprawdzić zależność między obliczon
 	\label{fig:oceny_kapital}
 \end{figure}
 
-Wzięcie pod uwagę Kapitału Naukowego (ref. Rysunek~\ref{fig:studia_kapital}) zamiast ocen (ref. Rysunek~\ref{fig:studia_oceny}) dało bardziej zrównane wyniki. Co może świadczyć o niedokładności Kapitału Naukowego lub o braku zależności między ocenami a studiami rodziców.
+Wzięcie pod uwagę kapitału naukowego (ref. Rysunek~\ref{fig:studia_kapital}) zamiast ocen (ref. Rysunek~\ref{fig:studia_oceny}) dało bardziej zrównane wyniki. Co może świadczyć o niedokładności kapitału naukowego lub o braku zależności między ocenami a studiami rodziców.
 
-Bardzo ładną natomiast okazała się zależność między ocenami, a Kapitałem Naukowym liczonym bez ocen (ref. Rysunek~\ref{fig:oceny_kapital}). Jest to prawie zależność liniowa, z niewielkimi odchyłami. Sugeruje ona, że Kapitał Naukowy jest dość dobrym przybliżeniem potencjału dziecka.
+Dość ładną natomiast okazała się zależność między ocenami, a kapitałem naukowym liczonym bez ocen (ref. Rysunek~\ref{fig:oceny_kapital}). Widać wyraźnie, że jest niezerowa korelacja. Sugeruje ona, że kapitał naukowy jest dość dobrym przybliżeniem potencjału dziecka.
 
 \subsection{Czy istnieje zależność między typem zawodu, a ocenami?}
 Wiele z danych, w tym na przykład zawody, zawierało literówki, bądź też bardzo różne formy opisu tego samego. W celu przefiltrowania danych pogrupowaliśmy zawody na związane z konkretnymi przedmiotami: Matematyką, Polskim i Przyrodą.
@@ -249,7 +249,7 @@ Następnie porównaliśmy to z dendrogramami dla danych (ref. Rysunek~\ref{fig:d
 	\label{fig:dendrogramam_dwa}
 \end{figure}
 
-Następnie korzystając z klastryzacji hierarchicznej otrzymaliśmy następujące wyniki (ref. Rysunek~\ref{fig:klaster}).
+Następnie korzystając z klastryzacji hierarchicznej otrzymaliśmy następujące wyniki (ref. Rysunek~\ref{fig:klaster}). Zdecydowaliśmy się na klasteryzację hierarchiczną, ponieważ jest ona lepsza dla stosunkowo małych zbiorów, a także w porównaniu do k-means jest bardziej dokładna.
 
 \begin{figure}
 	\centering
@@ -385,7 +385,26 @@ W obu porównaniach najgorzej wypada grupa dzieci, które były przy niewielu ek
 Dodatkowo średnio słabsze oceny mają dzieci, których średni czas przy eksponatach jest wysoki.
 Z kolei niższym kapitałem naukowym wykazują się osoby, których średni czas przy eksponacie jest raczej duży, a liczba odwiedzonych eksponatów średnia. Równocześnie dzieci z tej grupy osiągają dobre wyniki w szkole. 
 
+\subsection{Wielokrotne odwiedzanie eksponatów}
+Średnia liczba odwiedzeń eksponatu przez dziecko, które już go odwiedziło, wynosi:
+\begin{itemize}
+\item Dla wszystkich dzieci: 1.228,
+\item Dla 20 dzieci z najwyższym kapitałem naukowym: 1.167,
+\item Dla 20 dzieci z najniższym kapitałem naukowym: 1.234.
+\end{itemize}
+Rangowy test Wilcoxona potwierdza, że różnica między dziećmi z najwyższym kapitałem, a pozostałymi, jest statystycznie istotna -- rzadziej podchodzą więcej niż raz do tego samego eksponatu.
+\subsection{Liczba unikalnych odwiedzeń eksponatów}
+Średnia liczba unikalnych odwiedzeń eksponatów przez dzieci to:
+\begin{itemize}
+\item Dla wszystkich dzieci: 54.1,
+\item Dla 20 dzieci z najwyższym kapitałem naukowym: 55.4,
+\item Dla 20 dzieci z najniższym kapitałem naukowym: 49.4.
+\end{itemize}
+Ponieważ test Shapiro-Wilka nie odrzucił hipotezy o normalności rozkładu tych danych, w celu sprawdzenia statystycznej istotności różnic, zastosowany został t-test Studenta. Na jego podstawie różnice nie są istotne.
+>>>>>>> cc3d1700110c3b52eca3cf3d39c3a5d1452e1394
+
 \section{Analiza eksponatów}
+Analiza eksponatów została wykonana na wystawach z kategorii 2, czyli z wyłączeniem wszystkich przerw, a także obiektów sklasyfikowanych jako ,,inne", czyli na przykład \textit{Majsterni}.
 \subsection{Popularność galerii}
 Rysunek \ref{galerie} przedstawia liczbę odwiedzeń eksponatów w poszczególnych galeriach -- w wersji nieprzetworzonej, a także znormalizowanej ze względu na liczbę eksponatów w galerii.
 \begin{figure}[H]
@@ -413,7 +432,12 @@ Tabela \ref{top_eksponaty} przedstawia listę najpopularniejszych eksponatów.
 \hline
 \end{tabular}
 \end{table}
-Jak widać, pierwzse dwa eksponaty cieszyły się szczególną popularnością.
+Jak widać, pierwzse dwa eksponaty cieszyły się szczególną popularnością. Dalsze badania wskazały, że najpopularniejsze eksponaty dla grupy 20 uczniów z największym kapitałem naukowym i dla grupy 20 dzieci z najmniejszym kapitałem pokrywały się. Wyjątkami, czyli eksponatami występującymi wśród 10 najpopularniejszych u jednej grupy, ale niewystępującymi wśród 20 najpopularniejszych u drugieej grupy, były:
+\begin{itemize}
+\item \textit{Wahadło Foucault} na 7. miejscu u dzieci z najwyższym kapitałem,
+\item \textit{Silnik roślinny} na 10. miejscu u dzieci z najwyższym kapitałem,
+\item \textit{I tłoki turkocą} na 6. miejscu u dzieci z najniższym kapitałem.
+\end{itemize}
 \subsection{Najpopularniejsze eksponaty w obrębie każdej galerii}
 Tabela \ref{top_eksponaty_galerie} pokazuje najpopularniejszy eksponat w każdej galerii.
 
@@ -506,26 +530,216 @@ Ponieważ zdecydowaliśmy, że ,,bezmyślne" dotykanie eksponatu nie jest wyższ
 \hline
 \textbf{Lp.} & \textbf{Eksponat} & \textbf{Galeria} & \textbf{Poziom} \\
 \hline
-1  &                DJ &             ---        &     2.076923    \\
-2  &      DUCH PEPPERA &             Lustra     &        2.000000 \\
-3  &   KOLOROWE CIENIE &     Strefa Swiatla     &        2.000000 \\
-4  &       PODUSZKOWCE &             ---        &     2.000000    \\
-5  &          RURA 900 &             ---        &     1.962963    \\
-6  &  PRZEWROTNA KULKA & Nowy Swiat w Ruchu     &        1.952381 \\
-7  &          RUROCIAG &             ---        &     1.947368    \\
-8  &            MOTORY &             ---        &     1.937500    \\
-9  &           NA FALI &             ---        &     1.923077    \\
-10 &          ANATOMIA &             ---        &     1.916667    \\
+1  &                DJ &             ---        &     2.08    \\
+2  &      DUCH PEPPERA &             Lustra     &        2.00 \\
+3  &   KOLOROWE CIENIE &     Strefa Swiatla     &        2.00 \\
+4  &       PODUSZKOWCE &             ---        &     2.00    \\
+5  &          RURA 900 &             ---        &     1.96    \\
+6  &  PRZEWROTNA KULKA & Nowy Swiat w Ruchu     &        1.95 \\
+7  &          RUROCIAG &             ---        &     1.95    \\
+8  &            MOTORY &             ---        &     1.94    \\
+9  &           NA FALI &             ---        &     1.92    \\
+10 &          ANATOMIA &             ---        &     1.92    \\
 \hline
 \end{tabular}
 \end{table}
 Narzucającą się na pierwszy rzut oka obserwacją jest zdecydowana dominacja eksponatów spoza galerii -- sugeruje to, że zwykle są one bardziej interaktywne, niż pozostałe. Warto też zwrócić na eksponat \textit{Duch Peppera}: jest to eksponat z galerii \textit{Lustra}, przy którym dzieci spędzały najwięcej czasu (a jednocześnie poniżej przeciętnej) -- na podstawie powyższych informacji można wywnioskować, że po prostu ten eksponat nie wymagał dużo czasu, ponieważ trudno by było uwierzyć, żeby z jakiegokolwiek innego powodu dzieci spędzały go tak mało przy wyjątkowo absorbującym eksponacie.
-Tabela \ref{top_zach_b} nie uwzględnia eksponatów bez galerii 
+Tabela \ref{top_zach_b} nie uwzględnia eksponatów bez galerii.
+\begin{table}[H]
+\caption{Średni poziom eksploracji}
+\label{top_zach_b}
+\centering
+\begin{tabular}{|r|l|l|l|}
+\hline
+\textbf{Lp.} & \textbf{Eksponat} & \textbf{Galeria} & \textbf{Poziom} \\
+\hline
+1  &       DUCH PEPPERA &                Lustra & 2.00 \\
+2  &    KOLOROWE CIENIE &        Strefa Swiatla & 2.00 \\
+3  &   PRZEWROTNA KULKA &    Nowy Swiat w Ruchu & 1.95 \\
+4  &     ORKIESTRA TUSZ &  Korzenie Cywilizacji & 1.89 \\
+5  &        ZYWE SREBRO &    Nowy Swiat w Ruchu & 1.89 \\
+6  &              DIETA & Czlowiek i Srodowisko & 1.88 \\
+7  &   WAHADLO SWIETLNE &    Nowy Swiat w Ruchu & 1.88 \\
+8  & MAGNETYCZNA CHMURA &    Nowy Swiat w Ruchu & 1.86 \\
+9  &       WYSCIG LODZI &  Korzenie Cywilizacji & 1.82 \\
+10 &      PRZESLUCHANIE &        Strefa Swiatla & 1.81 \\
+\hline
+\end{tabular}
+\end{table}
+W tym zestawieniu rozkład galerii jest znacznie bardziej równomierny.
+Tabela \ref{top_zach_g} to zestawienie najbardziej eksplorowanych eksponatów w obrębie każdej galerii.
 
+\begin{table}[H]
+\caption{Średni poziom eksploracji}
+\label{top_zach_g}
+\centering
+\begin{tabular}{|r|l|l|l|}
+\hline
+\textbf{Lp.} & \textbf{Galeria} & \textbf{Eksponat} & \textbf{Poziom} \\
+\hline
+1 &                ---    &            DJ    &  2.08	\\
+2 & Czlowiek i Srodowisko &            DIETA &     1.88	\\
+3 &  Korzenie Cywilizacji &   ORKIESTRA TUSZ &     1.89	\\
+4 &                Lustra &     DUCH PEPPERA &                    2.00	\\
+5 &    Nowy Swiat w Ruchu & PRZEWROTNA KULKA &     1.95	\\
+6 &          Plyn lub Gin &   SRUBA NAPEDOWA &     1.56	\\
+7 &        Strefa Swiatla &  KOLOROWE CIENIE &                    2.00	\\
+\hline
+\end{tabular}
+\end{table}
+W powyższym zestawieniu warto zwrócić uwagę, że najbardziej eksplorowana wystawa z galerii \textit{Płyń lub giń} ma poziom 1.56, czyli niższy, niż średni w obrębie całej galerii -- można wnioskować, że to w tej galerii dzieci najczęściej bezmyślnie się bawią lub tylko obserwują. 
 
 \subsubsection{Frakcja dzieci, które przeczytały opis}
+Opis był czytany przez dzieci w 10\% przypadków. Należy zauważyć, że przeczytanie opisu raczej nie implikuje, że eksponat jest ciekawszy niż inne -- dzieci najprawdopodobniej robią to w ostateczności, jeśli bez tego nie mogą zrozumieć eksponatu. Z drugiej strony, jeśli wystawa nie wydaje im się ciekawa i jej nie rozumieją, dużo dzieci zamiast przeczytania opisu może się zniechęcić i odejść -- tak więc możliwym jest, że eksponaty, przy których dzieci najczęściej czytały opis, były relatywnie skomplikowane, ale jednocześnie ciekawe.
+Tabela \ref{top_opis} przedstawia wystawy, przy których dzieci najczęściej sięgały po opis.
+\begin{table}[H]
+\caption{Frakcja dzieci, które przeczytały opis}
+\label{top_opis}
+\centering
+\begin{tabular}{|r|p{3.3cm}|l|l|}
+\hline
+\textbf{Lp.} & \textbf{Eksponat} & \textbf{Galeria} & \textbf{Opis} \\
+\hline
+1  &                  DUCH PEPPERA &                Lustra & 0.58 \\
+2  &                 RADIO W GEBIE &    Nowy Swiat w Ruchu & 0.39 \\
+3  &              FIGURY LISSAJOUS &    Nowy Swiat w Ruchu & 0.36 \\
+4  &             OCZY Z TYLU GLOWY &                Lustra & 0.36 \\
+5  & CZESCI ZAMIENNE DLA CZLOWIEKA & Czlowiek i Srodowisko & 0.36 \\
+6  &                  PALACY CHLOD & Czlowiek i Srodowisko & 0.35 \\
+7  &               CHCA BYC PIEKNI & Czlowiek i Srodowisko & 0.33 \\
+8  &        PO GLOSIE CIE POZNAJA? & Czlowiek i Srodowisko & 0.33 \\
+9  &       PRZENOSNY MOST LEONARDA &  Korzenie Cywilizacji & 0.33 \\
+10 &                SKACZACA KULKA &    Nowy Swiat w Ruchu & 0.33 \\
+\hline
+\end{tabular}
+\end{table}
+Tylko przy jednej wystawie ponad połowa zwiedzających dzieci przeczytała opis. Wystąpiły aż dwa eksponaty z galerii \textit{Lustra} (w której było niewiele odwiedzonych eksponatów), w której maksymalny czas był mniejszy, niż średni czas z całego centrum nauki -- potwierdza to tezę, że wcześniejsza obserwacja wynikała jedynie z charakteru eksponatów, a nie braku zainteresowania. Ponadto, w zestawieniu nie wystąpił ani jeden eksponat bez galerii.
+Tabela \ref{top_opis_g} to zestawienie eksponatów, które najczęściej wymagały czytania opisu, dla każdej galerii.
+\begin{table}[H]
+\caption{Frakcja dzieci, które przeczytały opis}
+\label{top_opis_g}
+\centering
+\begin{tabular}{|r|l|p{3.3cm}|l|}
+\hline
+\textbf{Lp.} & \textbf{Galeria} & \textbf{Eksponat} & \textbf{Opis} \\
+\hline
+1 &                ---    &              OCZYSZCZALNIA    & 0.29 \\
+2 & Czlowiek i Srodowisko & CZESCI ZAMIENNE DLA CZLOWIEKA & 0.36 \\
+3 &  Korzenie Cywilizacji &       PRZENOSNY MOST LEONARDA & 0.33 \\
+4 &                Lustra &                  DUCH PEPPERA & 0.58 \\
+5 &    Nowy Swiat w Ruchu &                 RADIO W GEBIE & 0.39 \\
+6 &          Plyn lub Gin &                 LODZ PODWODNA & 0.23 \\
+7 &        Strefa Swiatla &               ZIELONY PROMIEN & 0.29 \\
+\hline
+\end{tabular}
+\end{table}
+W przypadku czytania opisu, znacząco wyróżnia się tylko galeria \textit{Lustra}.
 
 \subsubsection{Frakcja dzieci, które rozmawiały z animatorem}
+Tylko 4\% wizyt wiązało się z rozmową z animatorem. Tabela \ref{top_animator} pokazuje eksponaty, przy których najczęściej dochodziło do takiej interakcji.
+\begin{table}[H]
+\caption{Frakcja dzieci, które rozmawiały z animatorem}
+\label{top_animator}
+\centering
+\begin{tabular}{|r|p{3cm}|l|l|}
+\hline
+\textbf{Lp.} & \textbf{Eksponat} & \textbf{Galeria} & \textbf{Rozmowa} \\
+\hline
+1  &                ANATOMIA &               --- & 0.67 \\
+2  &         WYSTAWA CZASOWA &               --- & 0.43 \\
+3  &       LEWITUJACY BACZEK &   Nowy Swiat w Ruchu & 0.42 \\
+4  & PRZENOSNY MOST~LEONARDA & Korzenie Cywilizacji & 0.33 \\
+5  &                  SEKCJA &               --- & 0.33 \\
+6  &                MROZENIE &               --- & 0.29 \\
+7  &                    PULS &               --- & 0.28 \\
+8  &            ZAGRYZ NUTKE &               --- & 0.28 \\
+9  &                   HANOI & Korzenie Cywilizacji & 0.25 \\
+10 &                 KRZESLA &               --- & 0.25 \\
+\hline
+\end{tabular}
+\end{table}
+Prawie wszystkie z wiodących obserwacji nie należą do żadnej galerii -- wyjaśnia to, dlaczego dla eksponatów spoza galerii dzieci rzadko czytały opis.
+
+Tabela \ref{top_animator_b} to zestawienie z wykluczeniem wystaw bez galerii.
+\begin{table}[H]
+\caption{Frakcja dzieci, które rozmawiały z animatorem}
+\label{top_animator_b}
+\centering
+\begin{tabular}{|r|p{3cm}|l|l|}
+\hline
+\textbf{Lp.} & \textbf{Eksponat} & \textbf{Galeria} & \textbf{Rozmowa} \\
+\hline
+1  &       LEWITUJACY BACZEK &    Nowy Swiat w Ruchu & 0.42 \\
+2  & PRZENOSNY MOST~LEONARDA &  Korzenie Cywilizacji & 0.33 \\
+3  &                   HANOI &  Korzenie Cywilizacji & 0.25 \\
+4  &           ZOLTE SWIATLO &        Strefa Swiatla & 0.25 \\
+5  &      CZLOWIEK UKLADANKA & Czlowiek i Srodowisko & 0.24 \\
+6  &             WYCIERACZKI &        Strefa Swiatla & 0.23 \\
+7  &         ZAPISY LICZBOWE &  Korzenie Cywilizacji & 0.18 \\
+8  &      ROWEROWE PRZEKRETY &    Nowy Swiat w Ruchu & 0.18 \\
+9  &               ZALADUNEK &          Plyn lub Gin & 0.17 \\
+10 &                   DIETA & Czlowiek i Srodowisko & 0.15 \\
+\hline
+\end{tabular}
+\end{table}
+Otrzymane wyniki znacznie przewyższają średnią -- przypuszczalnie przy niektórych eksponatach animatorzy byli znacznie częściej, niż przy innych.
+
+W tabeli \ref{top_animator_g} przedstawione są eksponaty w obrębie galerii, dla których najczęściej dochodziło do rozmowy z animatorem.
+\begin{table}[H]
+\caption{Frakcja dzieci, które rozmawiały z animatorem}
+\label{top_animator_g}
+\centering
+\begin{tabular}{|r|l|p{3cm}|l|}
+\hline
+\textbf{Lp.} & \textbf{Galeria} & \textbf{Eksponat} & \textbf{Rozmowa} \\
+\hline
+1 &                --- &                ANATOMIA &  0.67	\\
+2 & Czlowiek i Srodowisko &      CZLOWIEK UKLADANKA &  0.24	\\
+3 &  Korzenie Cywilizacji & PRZENOSNY MOST~LEONARDA &  0.33	\\
+4 &                Lustra &  ZWIERCIADLANY LABIRYNT & 0.03	\\
+5 &    Nowy Swiat w Ruchu &       LEWITUJACY BACZEK &  0.42	\\
+6 &          Plyn lub Gin &               ZALADUNEK &  0.17	\\
+7 &        Strefa Swiatla &           ZOLTE SWIATLO &  0.25 \\
+\hline
+\end{tabular}
+\end{table}
+Widoczną anomalią jest galeria \textit{Lustra}, dla której maksymalnie tylko 3\% odwiedzeń wiązało się z rozmową z animatorem, co jest mniejszą wartością, niż średnia z Centrum Nauki Kopernik. Przypuszczalnie wiąże się to ze specyfiką galerii (eksponaty, przez które szybko się przechodzi), a jednocześnie tłumaczy to częstsze sięganie przez dzieci po opis.
+
+\subsection{Klasteryzacja eksponatów}
+Przeprowadzona została klasteryzacja eksponatów według wszystkich kombinacji par następujących zmiennych:
+\begin{itemize}
+\item Liczba odwiedzeń,
+\item Średni osiągany poziom eksploracji,
+\item Średni czas interakcji.
+\end{itemize}
+Wszystkie wartości zostały znormalizowane. Dobór liczby klastrów w każdej parze był początkowo bazowany na wykresach łokciowych, a następnie ręcznie modyfikowany.
+
+Klasteryzacja według wszystkich trzech zmiennych nie dała satysfakcjonujących rezultatów, więc została pominięta.
+
+Na rysunku \ref{klasteryzacja_czas_odw} przedstawione jest grupowanie eksponatów według czasu interakcji i liczby odwiedzeń. Jako czas interakcji w tym wypadku brana jest średnia dla wszystkich dzieci odwiedzających eksponat z sumy wszystkich interakcji, które dane dziecko odbyło z eksponatem, a jako liczba odwiedzeń brane są tylko unikalne odwiedzenia.
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{klasteryzacja_czas_odw.png}
+\caption{Klasteryzacja według czasu interakcji i liczby odwiedzeń}
+\label{klasteryzacja_czas_odw}
+\end{figure}
+Sam kształt wykresu pokazuje, że eksponaty zabierające dużo czasu nie znajdowały się wśród najczęściej odwiedzanych. Otrzymane klastry odpowiadają ,,szybkim i bardzo popularnym", ,,szybkim i mało popularnym" i ,,wolnym, a przy okazji przeciętnie popularnym" eksponatom i sytuacjami pomiędzy nimi.
+
+Rysunek \ref{klasteryzacja_czas_zach} ilustruje klasteryzację według czasu interakcji i poziomu eksploracji (w zakresie 1-3, z połączonym wyłącznym dotykaniem i wyłącznym patrzeniem).
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{klasteryzacja_czas_zach.png}
+\caption{Klasteryzacja według czasu interakcji i poziomu eksploracji}
+\label{klasteryzacja_czas_zach}
+\end{figure}
+Eksponaty, które nie były eksplorowane (być może dlatego, że nie pozwalały), nie zatrzymywały dzieci na długo. Otrzymane grupy to eksponaty ,,szybkie, mało angażujące", ,,szybkie, dosyć angażujące", ,,szybkie, bardzo angażujące", ,,wolne, dosyć angażujące" i ,,bardzo wolne, dosyć angażujące".
+
+Na wykresie \ref{klasteryzacja_odw_zach} przedstawiona jest ostatnia para -- grupowanie według liczby odwiedzeń i poziomu eksploracji.
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{klasteryzacja_odw_zach.png}
+\caption{Klasteryzacja według liczby odwiedzeń i poziomu eksploracji}
+\label{klasteryzacja_odw_zach}
+\end{figure}
+Na wykresie widać, że najczęściej odwiedzane były eksponaty, które były dosyć eksplorowane -- dla porównania istnieje tylko jedna nieeksplorowana wystawa, która uzyskała dużo odwiedzeń -- chodzi tu o \textit{Wahadło Foucault}, które ze swojej natury nie pozwala na nic więcej, niż patrzenie, a jest ulokowane bardzo blisko wejścia. 
+Widoczne grupy to eksponaty ,,mało popularne, mało eksplorowane", ,,mało popularne, bardzo eksplorowane", ,,dosyć popularne, bardzo eksplorowane", ,,bardzo popularne, dosyć eksplorowane" i dwie grupy pośrednio eksplorowane i mało popularne.
 
 \section{Wnioski}
 
