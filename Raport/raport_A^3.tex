@@ -2,6 +2,8 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{blindtext, graphicx}
+\usepackage{float}
+
 
 \ifCLASSINFOpdf
   % \usepackage[pdftex]{graphicx}
@@ -100,8 +102,25 @@ Nasza analiza skupiła się na następujących kierunkach badań:
 \section{Cechy dzieci i czynniki środowiskowe}
 
 \section{Charakterystyka sposobu zwiedzania przez dzieci}
+\subsection{Liczba odwiedzeń eksponatów w zależności od płci}
+Na rysunku \ref{odwiedziny_plcie} przedstawiona jest zależność liczby odwiedzonych eksponatów od płci.
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{odwiedziny_plcie.png}
+\caption{Liczba odwiedzeń eksponatów w zależności od płci}
+\label{odwiedziny_plcie}
+\end{figure}
+Pierwszy z wykresów przedstawiający odwiedziny wszystkich dzieci zawiera dane o wszystkich dzieciach, a dwa następne jedynie o tych, które wypełniały ankietę -- wskazuje to na istotne braki w danych.
 
 \section{Analiza eksponatów}
+\subsection{Popularność galerii}
+Rysunek \ref{galerie} przedstawia liczbę odwiedzeń eksponatów w poszczególnych galeriach -- w wersji nieprzetworzonej, a także znormalizowanej ze względu na liczbę eksponatów w galerii.
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{galerie.png}
+\caption{Liczba odwiedzeń poszczególnych galerii}
+\label{galerie}
+\end{figure}
+Normalizacja nie jest w pełni dokładna, ponieważ liczone były jedynie te eksponaty, które zostały odwiedzone co najmniej raz (ze względu na brak kompletnej listy eksponatów) -- anomalie wynikające z tego są szczególnie widoczne w przypadku trzech ostatnich galerii, których liczba odwiedzeń była bardzo niewielka.
+
 
 \section{Wnioski}
 
