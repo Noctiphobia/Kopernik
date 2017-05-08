@@ -39,6 +39,12 @@ ankieta$p_16_2_4 = ordered(ankieta$p_16_2_4,
 													 					 "duzo (od 20 do 50)", "bardzo duzo (wiecej niz 50 do 100)",
 													 					 "cale mnostwo (wiecej niz 100)"))
 
+ankieta$ocena_jezyk_polski = as.numeric(ankieta$ocena_jezyk_polski)
+ankieta$ocena_matematyka = as.numeric(ankieta$ocena_matematyka)
+ankieta$ocena_przyroda = as.numeric(ankieta$ocena_przyroda)
+ankieta$k_sum_4 = as.numeric(ankieta$k_sum_4)
+ankieta$srednia = rowMeans(ankieta[, c("ocena_matematyka", "ocena_jezyk_polski", "ocena_przyroda")], na.rm = TRUE)
+ankieta$kapital_bez_ocen = ankieta$k_sum_4 - ankieta$ocena_jezyk_polski - ankieta$ocena_matematyka - ankieta$ocena_przyroda
 
 ###Cleaning - obserwacje
 for (i in 1:dim(ankieta)[2]){
@@ -676,26 +682,36 @@ trwale_grupki = function()
   grupki_wyczyszczone = arrange(filter(grupki, liczba_dzieci == liczba_dziewczynek + liczba_chlopcow), desc(n))
   print("Tylko grupki zawierajace co najmniej dwie osoby i da sie okreslic plec wszystkich dzieci")
   print(grupki_wyczyszczone[1:15, c("n", "liczba_dzieci", "procent_dziewczynek")])
-  #boxplot(grupki_wyczyszczone, ylim = lim, ylab ="Wszyscy", horizontal = TRUE)
+  par(mfrow = c(1, 2))
+  boxplot(filter(filter(grupki_wyczyszczone, n > 5), procent_dziewczynek == 1)[, "n"], ylim = lim, xlab ="Dziewczynki")
+  boxplot(filter(filter(grupki_wyczyszczone, n > 5), procent_dziewczynek == 0)[, "n"], ylim = lim, xlab ="Chłopcy")
+  par(mfrow = c(1, 1))
 }
 
 # Klasteryzacja - odwiedzone eksponaty
 obserwacje_lepsze = obserwacje
 obserwacje_lepsze[, "czas_w_sek"] = as.numeric(obserwacje_lepsze[, "czas_w_sek"])
 obserwacje_zsumowane = summarize(group_by(obserwacje_lepsze, ID), mean_time = mean(czas_w_sek), visits_number = n())
+obserwacje_zsumowane = inner_join(obserwacje_zsumowane, ankieta, c("ID" = "id_ucznia"))
 do_klasteryzacji = obserwacje_zsumowane[, 2:3]
 res = numeric(15) 
 for (i in 1:15) res[i] <- sum(kmeans(do_klasteryzacji,
                                      centers=i)$withinss)
-plot(1:15, res, type="b", xlab="Number of Clusters",
-     ylab="Within groups sum of squares")
 
 klastry = kmeans(do_klasteryzacji, 5, nstart=20)
 plot(do_klasteryzacji$mean_time, do_klasteryzacji$visits_number, 
      xlab="Średni czas przy eksponacie", ylab="Liczba odwiedzonych eksponatów", 
      main="Klasteryzacja na podstawie stylu zwiedzania",
      col=klastry$cluster, pch=16)
+sklastrowane = obserwacje_zsumowane
+sklastrowane$klaster = klastry$cluster
 
+par(mfrow = c(1, 2))
 
+srednia_dla_klastrow = summarize(group_by(filter(sklastrowane, !is.na(srednia)), klaster), srednia=mean(srednia))
+barplot(srednia_dla_klastrow$srednia, col=srednia_dla_klastrow$klaster, xlab = "Średnie")
 
+kapital_dla_klastrow = summarize(group_by(filter(sklastrowane, !is.na(kapital_bez_ocen)), klaster), kapital=mean(kapital_bez_ocen))
+barplot(kapital_dla_klastrow$kapital, col=kapital_dla_klastrow$klaster, xlab = "Kapitał")
 
+par(mfrow = c(1, 1))
