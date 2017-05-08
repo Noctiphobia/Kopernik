@@ -53,8 +53,41 @@ Celem tego raportu jest przedstawienie wyników analizy danych dotyczących spos
 
 
 \section{Wstęp}
-Opisywany projekt polegał na przeanalizowaniu danych z wizyt dwunastoletnich dzieci w Centrum Nauki Kopernik. Dostępne dane znajdowały się w dwóch tabelach -- 
-
+\subsection{Opis danych}
+Opisywany projekt polegał na przeanalizowaniu danych z wizyt dwunastoletnich dzieci w Centrum Nauki Kopernik. Dostępne dane znajdowały się w dwóch tabelach:
+\begin{itemize}
+\item \textit{Ankieta.csv} (237 wierszy), składająca się z: \begin{itemize}
+\item ID (numer klasy i ucznia),
+\item Informacja, czy uczeń był obserwowany,
+\item Płeć,
+\item Ukończenie studiów przez rodziców,
+\item Praca rodziców,
+\item Oceny z matematyki, przyrody i języka polskiego,
+\item Wymarzony zawód,
+\item Jego pokrewieństwo z nauką,
+\item Odpowiedzi na poszczególne pytania z ankiety (poziom kontaktu z nauką).
+\end{itemize}
+\item \textit{Obserwacje.csv} (15225 wierszy), składająca się z: \begin{itemize}
+\item ID ucznia,
+\item Nazwa eksponatu,
+\item Galeria,
+\item Kategoria zdarzenia (przerwa, eksponat i inne),
+\item Czas rozpoczęcia, trwania i zakończenia zdarzenia,
+\item Osoby towarzyszące w zdarzeniu,
+\item Poziom eksploracji eksponatu (patrzenie, dotykanie, używanie lub eksperymentowanie)
+\item Informacja o tym, czy dziecko przeczytało opis,
+\item Informacja o tym, czy dziecko rozmawiało z animatorem,
+\item Uwagi na temat zdarzenia.
+\end{itemize}
+\end{itemize}
+Przed rozpoczęciem analizy dane zostały do niej przygotowane poprzez:
+\begin{itemize}
+\item Usunięcie brakujących danych (np. nieczytelne pismo jako wymarzona praca),
+\item Posortowanie odpowiedzi w ankiecie (factor w~języku R),
+\item Poprawienie literówek i usunięcie nadmiarowych spacji w nazwach eksponatów,
+\item Usunięcie nieznanych osób towarzyszących.
+\end{itemize}
+Wstępna analiza wykazała, że liczba obserwowanych dzieci, dla których są dane z~ankiety, była bardzo ograniczona (jedynie 79 dzieci). Z~tego powodu konieczne było zrezygnowanie z~niektórych kierunków badań, szczególnie tych, które dotyczyły analizy sposobu zwiedzania przez grupki dzieci -- w~zdecydowanej większości z~nich znajdowały się dzieci, które nie były obserwowane lub nie wypełniały ankiety.
 \subsection{Subsection Heading Here}
 \blindtext
 
