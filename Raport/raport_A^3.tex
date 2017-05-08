@@ -22,7 +22,9 @@
   % \DeclareGraphicsExtensions{.eps}
 \fi
 
-
+% Graphics:
+% \graphicspath{{folder/}{otherfolder/}}
+\graphicspath{{ObrazAnkieta/}}
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
@@ -98,6 +100,112 @@ Nasza analiza skupiła się na następujących kierunkach badań:
 \end{itemize}
 
 \section{Cechy dzieci i czynniki środowiskowe}
+W celu poszukiwania zależności między cechami dziecka, a jego środowiskiem skupiliśmy się na analizie danych zawartych w Ankiecie. Dane te zostały zebrane za pomocą odpowiedzi zebranych z ankiet wypełnionych przez dzieci. W ramach wstępnej obróbki danych zastąpiliśmy zwoty takie jak "Nie wiem", "Nie wie" itp. standardową formą zapisu braku danych (NA). To bardzo ułatwiło analizę danych dotyczących wiedzy dzieci na temat ich własnych rodziców.
+
+Pierwszym zadaniem było spojrzenie na studia i pracę rodziców oczami dzieci. Chcieliśmy sprawdzić zależność między płcią dziecka, a jego wiedzą na temat rodziców. W tym celu wybraliśmy dane w oparciu na płeć i później pogrupowaliśmy ze względu na wiedzę. Podzieliliśmy to na trzy kategorie:
+
+\begin{itemize}
+	\item Tak - dziecko ma wiedzę o obojgu rodzicach,
+	\item O jednym - dziecko ma wiedzę o jednym z rodziców,
+	\item Nie - dziecko nie wie nic o rodzicach.
+\end{itemize}
+
+W ten sposób otrzymaliśmy poniższe wyniki:
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{1.png}
+	\caption{Graf dotyczący wiedzy dzieci o studiach rodziców.}
+	\label{fig:studies_knowledge}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{2.png}
+	\caption{Graf dotyczący wiedzy dzieci o pracy rodziców.}
+	\label{fig:work_knowledge}
+\end{figure}
+
+Jak widać na załączonych rysunkach (ref. Rysunek~\ref{fig:studies_knowledge} oraz Rysunek~\ref{fig:work_knowledge}) dziewczynki mają lepszą wiedzę o rodzicach. Dodatkowo okazuje się, że dzieci więcej wiedzą o pracy rodziców, niż o ich studiach.
+
+Kolejną z rzeczy, które chcieliśmy sprawdzić była zależność między otoczeniem dziecka, a jego ocenami. W związku z tym chcieliśmy sprawdzić zależność między ilością książek, studiami lub dopingiem rodziców. W tym celu policzyliśmy dla każdego dziecka średnią ocen.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{3.png}
+	\caption{Graf dotyczący zależności między dopingiem rodziców a  średnią ocen.}
+	\label{fig:doping_oceny}
+\end{figure}
+
+Jak widać na załączonym grafie (ref. Rysunek~\ref{fig:doping_oceny}), doping rodziców zdaje się nie mieć wpływu na oceny uczniów. Niestety może to być związane z brakiem zrozumienia pytania przez dzieci.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{4.png}
+	\caption{Graf dotyczący zależności między studiami rodziców a średnią ocen.}
+	\label{fig:studia_oceny}
+\end{figure}
+
+Studia rodziców zdają się mieć trochę większy wpływ na wyniki dzieci (ref. Rysunek~\ref{fig:studia_oceny}). Dzieci, których rodzice ukończyli studia i dzieci o tym wiedzą mają średnio lepsze wyniki w nauce.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{5.png}
+	\caption{Graf dotyczący zależności między ilością książek w domu a średnią ocen.}
+	\label{fig:ksiazki_oceny}
+\end{figure}
+
+Najlepsze efekty dało porównanie ilości książek w domu ze średnią (ref. Rysunek~\ref{fig:ksiazki_oceny}). Wyraźnie lepsze wyniki osiągają dzieci, w których otoczeniu znajduje się wiele książek. Jeśli w otoczeniu dziecka znajduje się przynajmniej 50 książek, to przeciętnie średnia ocen dziecka jest wyższa niż 4.0, co jest naprawdę bardzo dobrym wynikiem. Natomiast gdy nie ma żadnej książki, średnia spada poniżej 3.0. Jasno z tego wynika, że książki wpływają pozytywnie na rozwój dziecka.
+
+W ramach kolejnego zadania, chcieliśmy sprawdzić zależność między obliczonym Kapitałem Naukowym, a studiami rodziców i ocenami dzieci, jako że okazały się byc one najbardziej miarodajne.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{6.png}
+	\caption{Graf dotyczący zależności między studiami rodziców a kapitałem naukowym.}
+	\label{fig:studia_kapital}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{7.png}
+	\caption{Graf dotyczący zależności między ocenami a kapitałem naukowym z odliczonymi ocenami.}
+	\label{fig:oceny_kapital}
+\end{figure}
+
+Wzięcie pod uwagę Kapitału Naukowego (ref. Rysunek~\ref{fig:studia_kapital}) zamiast ocen (ref. Rysunek~\ref{fig:studia_oceny}) dało bardziej zrównane wyniki. Co może świadczyć o niedokładności Kapitału Naukowego lub o braku zależności między ocenami a studiami rodziców.
+
+Bardzo ładną natomiast okazała się zależność między ocenami, a Kapitałem Naukowym liczonym bez ocen (ref. Rysunek~\ref{fig:oceny_kapital}). Jest to prawie zależność liniowa, z niewielkimi odchyłami. Sugeruje ona, że Kapitał Naukowy jest dość dobrym przybliżeniem potencjału dziecka.
+
+Wiele z danych, w tym na przykład zawody, zawierało literówki, bądź też bardzo różne formy opisu tego samego. W celu przefiltrowania danych pogrupowaliśmy zawody na związane z konkretnymi przedmiotami: Matematyką, Polskim i Przyrodą.
+Chcieliśmy to także powiązać z ocenami z konkretnych przedmiotów. W tym celu pogrupowaliśmy oceny wedle przedmiotów by zobaczyć czy istnieje jakaś zależność.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{8.png}
+	\caption{Graf dotyczący ocen z konkretnych przedmiotów.}
+	\label{fig:oceny}
+\end{figure}
+
+Jak widać na załączonym boxplocie (ref. Rysunek~\ref{fig:oceny}) oceny są bardzo wyrównane, choć matematyka zdaje się ogółem sprawiać więcej problemów.
+
+Do przetwarzania ocen wykorzystaliśmy tylko oceny dzieci, których rodzice mieli zawód związany z Matematyką, Polskim i Przyrodą, natomiast odrzuciliśmy Inne i NA. Stworzyliśmy trzy grupy wedle przedmiotów i w nich podzieliliśmy dane na związane z przedmiotem (uczeń miał rodzica związanego z przedmiotem gdy przynajmniej jeden rodzic pracował \"w przedmiocie\"), bądź też nie. Wewnątrz tych podgrup wyliczyliśmy średnią ocen i porównaliśmy.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{9.png}
+	\caption{Graf dotyczący zależności między pracą rodziców a oceną z danego przedmiotu.}
+	\label{fig:oceny_praca}
+\end{figure}
+
+Jak widać (ref. Rysunek~\ref{fig:oceny_praca}), uczniowie najwięcej mogą zyskać, gdy praca ich rodziców jest powiązana z językiem polskim - różnica ocen między dziećmi osób niezwiązanych z polskim była największa. Zaskakująco najmniejsza była związana z matematyką.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{10.png}
+	\caption{Graf dotyczący zależności między wymarzoną pracą a oceną z danego przedmiotu.}
+	\label{fig:oceny_wymarzona}
+\end{figure}
+
+Bardzo podobne wyniki osiągnęliśmy przy porównaniu ocen z wymarzoną pracą (ref. Rysunek~\ref{fig:oceny_wymarzona}). W tym przypadku jednak była większa różnica między ocenami dzieci "Do zawodu", a ocenami "Poza zawodem". Uznaliśmy, że może to wynikać z tego, że przedmiot typu matematyka jest uznawany za bardziej ustruktyruzowany, a co za tym idzie powtarzalny, w przeciwieństwie do polskiego, który jest bardziej oparty na kreatywności, której nie da się wpisać w schemat.
 
 \section{Charakterystyka sposobu zwiedzania przez dzieci}
 
