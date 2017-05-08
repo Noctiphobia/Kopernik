@@ -345,10 +345,46 @@ Wykres \ref{grupki_plec} przedstawia podział grupek na 3 kategorie: wyłącznie
 \begin{figure}[H]
 \includegraphics[width=0.48\textwidth]{grupki_plec.png}
 \caption{Liczba grupek w zależności od płci dzieci}
-
-
 \label{grupki_plec}
 \end{figure}
+
+\subsection{Klasteryzacja dzieci ze względu na styl zwiedzania}
+W celu wyznaczenia klastrów, reprezentujących style zwiedzania zostały najpierw wybrane dwie cechy, opisujące zwiedzanie - liczba odwiedzonych eksponatów i średni czas przy eksponacie. Wybór liczby klastrów przebiegał dwustopniowo. Najpierw możliwe liczby klastrów zostały wybrane na podstawie wykresu \ref{style_zwiedzania_elbow}.
+
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{style_zwiedzania_elbow.png}
+\caption{Wykres łokciowy}
+\label{style_zwiedzania_elbow}
+\end{figure}
+
+Wydaje się, że najkorzystniejszy byłby wybór 4 klastrów, jednak po sprawdzeniu efektów podziału na 3, 4 i 5 klastrów za najbardziej obiecującą została uznana ostatnia opcja - tylko w tej wersji wyodrębnił się klaster zawierający dzieci, które zwiedziły niewiele eksponatów przy każdym spędzając stosunkowo krótki czas.
+
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{style_zwiedzania.png}
+\caption{Klasteryzacja względem liczby odwiedzonych eksponatów i średniego czasu przy eksponacie}
+\label{style_zwiedzania}
+\end{figure}
+
+Można zauważyć, że prawy górny róg wykresu jest pusty. Jest to oczekiwany wynik - czas trwania wizyt w CNK był za krótki, żeby jednocześnie obejrzeć wiele eksponatów i każdemu poświęcić dużo czasu.
+
+Dla uzyskanych klastrów została policzona średnia dwóch parametrów: średniej (rysunek \ref{srednie_w_klastrach}) i kapitału naukowego bez ocen (rysunek \ref{kapital_w_klastrach}).
+
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{srednie_w_klastrach.png}
+\caption{Średnia ocen w klastrach}
+\label{srednie_w_klastrach}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{kapital_w_klastrach.png}
+\caption{Kapitał naukowy w klastrach}
+\label{kapital_w_klastrach}
+\end{figure}
+
+W obu porównaniach najgorzej wypada grupa dzieci, które były przy niewielu eksponatach, średnio dość krótko przy każdym.
+Dodatkowo średnio słabsze oceny mają dzieci, których średni czas przy eksponatach jest wysoki.
+Z kolei niższym kapitałem naukowym wykazują się osoby, których średni czas przy eksponacie jest raczej duży, a liczba odwiedzonych eksponatów średnia. Równocześnie dzieci z tej grupy osiągają dobre wyniki w szkole. 
+
 \section{Analiza eksponatów}
 \subsection{Popularność galerii}
 Rysunek \ref{galerie} przedstawia liczbę odwiedzeń eksponatów w poszczególnych galeriach -- w wersji nieprzetworzonej, a także znormalizowanej ze względu na liczbę eksponatów w galerii.
