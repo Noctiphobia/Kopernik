@@ -213,7 +213,52 @@ Jak widać (ref. Rysunek~\ref{fig:oceny_praca}), uczniowie najwięcej mogą zysk
 
 Bardzo podobne wyniki osiągnęliśmy przy porównaniu ocen z wymarzoną pracą (ref. Rysunek~\ref{fig:oceny_wymarzona}). W tym przypadku jednak była większa różnica między ocenami dzieci "Do zawodu", a ocenami "Poza zawodem". Uznaliśmy, że może to wynikać z tego, że przedmiot typu matematyka jest uznawany za bardziej ustruktyruzowany, a co za tym idzie powtarzalny, w przeciwieństwie do polskiego, który jest bardziej oparty na kreatywności, której nie da się wpisać w schemat.
 
+\subsection{Czy istnieje jakiś podział dzieci na grupy wedle ocen i ilości książek?}
 
+Kolejnym zadaniem związanym z Ankietą było sprawdzenie czy korzystając z klasteryzacji jesteśmy w stanie wyróżnić jakieś grupy opierając się na wynikach uczniów i ilości książek w domu.
+
+W tym celu wyszczególniliśmy dwa zbiory danych. W każdym znajdowała się średnia ocen dzieci i ilość książek, natomiast w jednym dodaliśmy także oceny do przetwarzania przez algorytm.
+
+Najpierw musieliśmy się dowiedzieć, na ile klastrów powinniśmy podzielić nasz zbiór. Skorzystaliśmy z metody kolana by to ustalić (ref. Rysunek~\ref{fig:kolano_jeden} i Rysunek~\ref{fig:kolano_dwa}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{11.png}
+	\caption{Graf dotyczący ilości klastrów (średnia z ocenami).}
+	\label{fig:kolano_jeden}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{12.png}
+	\caption{Graf dotyczący ilości klastrów (tylko średnia).}
+	\label{fig:kolano_dwa}
+\end{figure}
+
+Następnie porównaliśmy to z dendrogramami dla danych (ref. Rysunek~\ref{fig:dendrogramam_jeden} i Rysunek~\ref{fig:dendrogramam_dwa}). Niestety nie byliśmy w stanie określić jaka byłaby poprawna ilość klastrów, dlatego skorzystaliśmy z danych wyliczonych wcześniej.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{13.png}
+	\caption{Dendrogram (średnia z ocenami).}
+	\label{fig:dendrogramam_jeden}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{14.png}
+	\caption{Dendrogram (tylko średnia).}
+	\label{fig:dendrogramam_dwa}
+\end{figure}
+
+Następnie korzystając z klastryzacji hierarchicznej otrzymaliśmy następujące wyniki (ref. Rysunek~\ref{fig:klaster}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{15.png}
+	\caption{Klater oceny i książki.}
+	\label{fig:klaster}
+\end{figure}
+
+Z zadowoleniem znaleźliśmy potwierdzenie (ref. Rysunek~\ref{fig:klaster}) naszych obserwacji dotyczących istnienia pozytywnej zależności między ilością książek znajdujących się w domu, a ocenami (ref. Rysunek~\ref{fig:ksiazki_oceny}). Za korzystną uznaliśmy także zbieżność grup stworzonych poprzez dodanie ocen do jednej z grup - klaster okazał się być dzięki temu bardziej szczegółowy.
 
 
 \section{Charakterystyka sposobu zwiedzania przez dzieci}
