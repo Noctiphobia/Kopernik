@@ -24,7 +24,9 @@
   % \DeclareGraphicsExtensions{.eps}
 \fi
 
-
+% Graphics:
+% \graphicspath{{folder/}{otherfolder/}}
+\graphicspath{{ObrazAnkieta/}}
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
@@ -100,6 +102,164 @@ Nasza analiza skupiła się na następujących kierunkach badań:
 \end{itemize}
 
 \section{Cechy dzieci i czynniki środowiskowe}
+W celu poszukiwania zależności między cechami dziecka, a jego środowiskiem skupiliśmy się na analizie danych zawartych w Ankiecie. Dane te zostały zebrane za pomocą odpowiedzi zebranych z ankiet wypełnionych przez dzieci. W ramach wstępnej obróbki danych zastąpiliśmy zwoty takie jak "Nie wiem", "Nie wie" itp. standardową formą zapisu braku danych (NA). To bardzo ułatwiło analizę danych dotyczących wiedzy dzieci na temat ich własnych rodziców.
+
+\subsection{Co dzieci wiedzą o rodzicach?}
+Pierwszym zadaniem było spojrzenie na studia i pracę rodziców oczami dzieci. Chcieliśmy sprawdzić zależność między płcią dziecka, a jego wiedzą na temat rodziców. W tym celu wybraliśmy dane w oparciu na płeć i później pogrupowaliśmy ze względu na wiedzę. Podzieliliśmy to na trzy kategorie:
+
+\begin{itemize}
+	\item Tak - dziecko ma wiedzę o obojgu rodzicach,
+	\item O jednym - dziecko ma wiedzę o jednym z rodziców,
+	\item Nie - dziecko nie wie nic o rodzicach.
+\end{itemize}
+
+W ten sposób otrzymaliśmy następujące wyniki:
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{1.png}
+	\caption{Graf dotyczący wiedzy dzieci o studiach rodziców.}
+	\label{fig:studies_knowledge}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{2.png}
+	\caption{Graf dotyczący wiedzy dzieci o pracy rodziców.}
+	\label{fig:work_knowledge}
+\end{figure}
+
+Jak widać na załączonych rysunkach (ref. Rysunek~\ref{fig:studies_knowledge} oraz Rysunek~\ref{fig:work_knowledge}) dziewczynki mają lepszą wiedzę o rodzicach. Dodatkowo okazuje się, że dzieci więcej wiedzą o pracy rodziców, niż o ich studiach.
+
+\subsection{Jaki jest wpływ otoczenia dziecka na oceny?}
+Kolejną z rzeczy, które chcieliśmy sprawdzić była zależność między otoczeniem dziecka, a jego ocenami. W związku z tym chcieliśmy sprawdzić zależność między ilością książek, studiami lub dopingiem rodziców. W tym celu policzyliśmy dla każdego dziecka średnią ocen.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{3.png}
+	\caption{Graf dotyczący zależności między dopingiem rodziców a  średnią ocen.}
+	\label{fig:doping_oceny}
+\end{figure}
+
+Jak widać na załączonym grafie (ref. Rysunek~\ref{fig:doping_oceny}), doping rodziców zdaje się nie mieć wpływu na oceny uczniów. Niestety może to być związane z brakiem zrozumienia pytania przez dzieci.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{4.png}
+	\caption{Graf dotyczący zależności między studiami rodziców a średnią ocen.}
+	\label{fig:studia_oceny}
+\end{figure}
+
+Studia rodziców zdają się mieć trochę większy wpływ na wyniki dzieci (ref. Rysunek~\ref{fig:studia_oceny}). Dzieci, których rodzice ukończyli studia i dzieci o tym wiedzą mają średnio lepsze wyniki w nauce.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{5.png}
+	\caption{Graf dotyczący zależności między ilością książek w domu a średnią ocen.}
+	\label{fig:ksiazki_oceny}
+\end{figure}
+
+Najlepsze efekty dało porównanie ilości książek w domu ze średnią (ref. Rysunek~\ref{fig:ksiazki_oceny}). Wyraźnie lepsze wyniki osiągają dzieci, w których otoczeniu znajduje się wiele książek. Jeśli w otoczeniu dziecka znajduje się przynajmniej 50 książek, to przeciętnie średnia ocen dziecka jest wyższa niż 4.0, co jest naprawdę bardzo dobrym wynikiem. Natomiast gdy nie ma żadnej książki, średnia spada poniżej 3.0. Jasno z tego wynika, że książki wpływają pozytywnie na rozwój dziecka.
+
+\subsection{Czy jest zależność między Kapitałem Naukowym a ocenami?}
+W ramach kolejnego zadania, chcieliśmy sprawdzić zależność między obliczonym Kapitałem Naukowym, a studiami rodziców i ocenami dzieci, jako że okazały się byc one najbardziej miarodajne.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{6.png}
+	\caption{Graf dotyczący zależności między studiami rodziców a kapitałem naukowym.}
+	\label{fig:studia_kapital}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{7.png}
+	\caption{Graf dotyczący zależności między ocenami a kapitałem naukowym z odliczonymi ocenami.}
+	\label{fig:oceny_kapital}
+\end{figure}
+
+Wzięcie pod uwagę Kapitału Naukowego (ref. Rysunek~\ref{fig:studia_kapital}) zamiast ocen (ref. Rysunek~\ref{fig:studia_oceny}) dało bardziej zrównane wyniki. Co może świadczyć o niedokładności Kapitału Naukowego lub o braku zależności między ocenami a studiami rodziców.
+
+Bardzo ładną natomiast okazała się zależność między ocenami, a Kapitałem Naukowym liczonym bez ocen (ref. Rysunek~\ref{fig:oceny_kapital}). Jest to prawie zależność liniowa, z niewielkimi odchyłami. Sugeruje ona, że Kapitał Naukowy jest dość dobrym przybliżeniem potencjału dziecka.
+
+\subsection{Czy istnieje zależność między typem zawodu, a ocenami?}
+Wiele z danych, w tym na przykład zawody, zawierało literówki, bądź też bardzo różne formy opisu tego samego. W celu przefiltrowania danych pogrupowaliśmy zawody na związane z konkretnymi przedmiotami: Matematyką, Polskim i Przyrodą.
+Chcieliśmy to także powiązać z ocenami z konkretnych przedmiotów. W tym celu pogrupowaliśmy oceny wedle przedmiotów by zobaczyć czy istnieje jakaś zależność.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{8.png}
+	\caption{Graf dotyczący ocen z konkretnych przedmiotów.}
+	\label{fig:oceny}
+\end{figure}
+
+Jak widać na załączonym boxplocie (ref. Rysunek~\ref{fig:oceny}) oceny są bardzo wyrównane, choć matematyka zdaje się ogółem sprawiać więcej problemów.
+
+Do przetwarzania ocen wykorzystaliśmy tylko oceny dzieci, których rodzice mieli zawód związany z Matematyką, Polskim i Przyrodą, natomiast odrzuciliśmy Inne i NA. Stworzyliśmy trzy grupy wedle przedmiotów i w nich podzieliliśmy dane na związane z przedmiotem (uczeń miał rodzica związanego z przedmiotem gdy przynajmniej jeden rodzic pracował \"w przedmiocie\"), bądź też nie. Wewnątrz tych podgrup wyliczyliśmy średnią ocen i porównaliśmy.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{9.png}
+	\caption{Graf dotyczący zależności między pracą rodziców a oceną z danego przedmiotu.}
+	\label{fig:oceny_praca}
+\end{figure}
+
+Jak widać (ref. Rysunek~\ref{fig:oceny_praca}), uczniowie najwięcej mogą zyskać, gdy praca ich rodziców jest powiązana z językiem polskim - różnica ocen między dziećmi osób niezwiązanych z polskim była największa. Zaskakująco najmniejsza była związana z matematyką.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{10.png}
+	\caption{Graf dotyczący zależności między wymarzoną pracą a oceną z danego przedmiotu.}
+	\label{fig:oceny_wymarzona}
+\end{figure}
+
+Bardzo podobne wyniki osiągnęliśmy przy porównaniu ocen z wymarzoną pracą (ref. Rysunek~\ref{fig:oceny_wymarzona}). W tym przypadku jednak była większa różnica między ocenami dzieci "Do zawodu", a ocenami "Poza zawodem". Uznaliśmy, że może to wynikać z tego, że przedmiot typu matematyka jest uznawany za bardziej ustruktyruzowany, a co za tym idzie powtarzalny, w przeciwieństwie do polskiego, który jest bardziej oparty na kreatywności, której nie da się wpisać w schemat.
+
+\subsection{Czy istnieje jakiś podział dzieci na grupy wedle ocen i ilości książek?}
+
+Kolejnym zadaniem związanym z Ankietą było sprawdzenie czy korzystając z klasteryzacji jesteśmy w stanie wyróżnić jakieś grupy opierając się na wynikach uczniów i ilości książek w domu.
+
+W tym celu wyszczególniliśmy dwa zbiory danych. W każdym znajdowała się średnia ocen dzieci i ilość książek, natomiast w jednym dodaliśmy także oceny do przetwarzania przez algorytm.
+
+Najpierw musieliśmy się dowiedzieć, na ile klastrów powinniśmy podzielić nasz zbiór. Skorzystaliśmy z metody kolana by to ustalić (ref. Rysunek~\ref{fig:kolano_jeden} i Rysunek~\ref{fig:kolano_dwa}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{11.png}
+	\caption{Graf dotyczący ilości klastrów (średnia z ocenami).}
+	\label{fig:kolano_jeden}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{12.png}
+	\caption{Graf dotyczący ilości klastrów (tylko średnia).}
+	\label{fig:kolano_dwa}
+\end{figure}
+
+Następnie porównaliśmy to z dendrogramami dla danych (ref. Rysunek~\ref{fig:dendrogramam_jeden} i Rysunek~\ref{fig:dendrogramam_dwa}). Niestety nie byliśmy w stanie określić jaka byłaby poprawna ilość klastrów, dlatego skorzystaliśmy z danych wyliczonych wcześniej.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{13.png}
+	\caption{Dendrogram (średnia z ocenami).}
+	\label{fig:dendrogramam_jeden}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{14.png}
+	\caption{Dendrogram (tylko średnia).}
+	\label{fig:dendrogramam_dwa}
+\end{figure}
+
+Następnie korzystając z klastryzacji hierarchicznej otrzymaliśmy następujące wyniki (ref. Rysunek~\ref{fig:klaster}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{15.png}
+	\caption{Klater oceny i książki.}
+	\label{fig:klaster}
+\end{figure}
+
+Z zadowoleniem znaleźliśmy potwierdzenie (ref. Rysunek~\ref{fig:klaster}) naszych obserwacji dotyczących istnienia pozytywnej zależności między ilością książek znajdujących się w domu, a ocenami (ref. Rysunek~\ref{fig:ksiazki_oceny}). Za korzystną uznaliśmy także zbieżność grup stworzonych poprzez dodanie ocen do jednej z grup - klaster okazał się być dzięki temu bardziej szczegółowy.
+
 
 \section{Charakterystyka sposobu zwiedzania przez dzieci}
 \subsection{Liczba odwiedzeń eksponatów w zależności od płci}
@@ -110,6 +270,86 @@ Na rysunku \ref{odwiedziny_plcie} przedstawiona jest zależność liczby odwiedz
 \label{odwiedziny_plcie}
 \end{figure}
 Pierwszy z wykresów przedstawiający odwiedziny wszystkich dzieci zawiera dane o wszystkich dzieciach, a dwa następne jedynie o tych, które wypełniały ankietę -- wskazuje to na istotne braki w danych.
+
+\subsection{Liczebności grupek}
+Na 204 dzieci zaobserwowano 3, które cały czas znajdowały się w jakiejś grupce i 3, które cały czas zwiedzały same. Pozostałe 198 część eksponatów odwiedziło w grupce, a część samemu.
+
+Wykres \ref{grupki_liczba_eksponatow} przedstawia liczbę eksponatów zwiedzonych przez grupki różnych wielkości. Samotne zwiedzanie jest częstsze niż w grupce o jakiejkolwiek innej liczności, jednak zwiedzanie w grupce (dowolnej wielkości) jest częstsze niż samemu.
+
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{grupki_liczba_eksponatow.png}
+\caption{Liczba grupek w zależności od płci dzieci}
+\label{grupki_plec}
+\end{figure}
+
+\subsection{Liczba odwiedzonych eksponatów w grupkach}
+Tabela \ref{top_grupki1} przedstawia 10 grupek, które odwiedziły najwięcej eksponatów. Wystąpiły tam wyłącznie grupki 1- i 2-osobowe. Wynika to prawdopodobnie z faktu, że trudno, żeby większe grupki nie rozdzieliły się przez tak długi czas.
+\begin{table}[H]
+\caption{10 grupek o największej liczbie odwiedzonych eksponatów}
+\label{top_grupki1}
+\centering
+\begin{tabular}{|c|r|r|}
+\hline
+ & \textbf{Liczba odwiedzonych eksponatów} & \textbf{Liczność grupki} \\
+\hline
+ 1  &  101 & 1 \\
+ 2  &   90 & 2 \\
+ 3  &   86 & 2 \\
+ 4  &   84 & 2 \\
+ 5  &   82 & 1 \\
+ 6  &   80 & 2 \\
+ 7  &   78 & 2 \\
+ 8  &   77 & 1 \\
+ 9  &   72 & 2 \\
+ 10 &   70 & 1 \\
+\hline
+\end{tabular}
+\end{table}
+
+Kolejnym podejściem do tematu jest przyjrzenie się wyłącznie grupkom co najmniej 2 osobowym i tylko takim, dla których dało się sprawdzić płeć wszystkich dzieci. W tabeli \ref{top_grupki2} zostały wprowadzone te ograniczenia. Można zauważyć, że aż 8 z 10 najtrwalszych grupek składa się wyłącznie z dziewczyn. To sugeruje, że chłopcy częściej zmieniają towarzyszy podczas zwiedzania.
+
+\begin{table}[H]
+\caption{10 grupek o największej liczbie odwiedzonych eksponatów (dane przefiltrowane)}
+\label{top_grupki2}
+\centering
+\begin{tabular}{|c|r|r|r|}
+\hline
+ & \textbf{Liczba odwiedzonych eksponatów} & \textbf{Liczność grupki}  & \textbf{Płeć grupki} \\
+\hline
+ 1  & 78 & 2 & dziewczęca \\
+ 2  & 62 & 3 & dziewczęca \\
+ 3  & 60 & 2 & dziewczęca \\
+ 4  & 59 & 2 & dziewczęca \\
+ 5  & 57 & 2 & dziewczęca \\
+ 6  & 56 & 2 & mieszana  \\
+ 7  & 54 & 3 & dziewczęca \\
+ 8  & 50 & 2 & dziewczęca \\
+ 9  & 45 & 2 & chłopięca  \\
+ 10 & 44 & 2 & dziewczęca \\
+\hline
+\end{tabular}
+\end{table}
+
+Zależność tę można pokazać korzystając z całego zestawu danych. Wykres \ref{grupki_d_c_liczba_eksponatow} obrazuje liczby odwiedzonych eksponatów dla grupek, które odwiedziły co najmniej 5 eksponatów (większość grupek odwiedziło niewiele eksponatów w stałym składzie, więc uwzględnienie ich ukrywało zależność występującą dla trwalszych grupek). Można zauważyć, że o ile mediana jest podobna dla chłopców i dziewczynek, to w przypadku górnego kwartyla i decyla 9/10 są one znacznie większe dla dziewczynek.
+
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{grupki_d_c_liczba_eksponatow.png}
+\caption{Wykres pudełkowy liczby eksponatów odwiedzonych przez grupki dziewczęce i chłopięce}
+\label{grupki_d_c_liczba_eksponatow}
+\end{figure}
+
+
+\subsection{Rozkład grupek ze względu na płeć}
+Wykres \ref{grupki_plec} przedstawia podział grupek na 3 kategorie: wyłącznie dziewczęce (239), wyłącznie chłopięce (271) i mieszane (294). Liczba grupek każdego z tych rodzajów jest zbliżona, jednak najwięcej jest grupek mieszanych.
+
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{grupki_plec.png}
+\caption{Liczba grupek w zależności od płci dzieci}
+
+
+\label{grupki_plec}
+\end{figure}
+
 
 \subsection{Wielokrotne odwiedzanie eksponatów}
 Średnia liczba odwiedzeń eksponatu przez dziecko, które już go odwiedziło, wynosi:
@@ -129,6 +369,7 @@ Rangowy test Wilcoxona potwierdza, że różnica między dziećmi z najwyższym 
 Ponieważ test Shapiro-Wilka nie odrzucił hipotezy o normalności rozkładu tych danych, w celu sprawdzenia statystycznej istotności różnic, zastosowany został t-test Studenta. Na jego podstawie różnice nie są istotne.
 
 \section{Analiza eksponatów}
+Analiza eksponatów została wykonana na wystawach z kategorii 2, czyli z wyłączeniem wszystkich przerw, a także obiektów sklasyfikowanych jako ,,inne", czyli na przykład \textit{Majsterni}.
 \subsection{Popularność galerii}
 Rysunek \ref{galerie} przedstawia liczbę odwiedzeń eksponatów w poszczególnych galeriach -- w wersji nieprzetworzonej, a także znormalizowanej ze względu na liczbę eksponatów w galerii.
 \begin{figure}[H]
@@ -156,7 +397,12 @@ Tabela \ref{top_eksponaty} przedstawia listę najpopularniejszych eksponatów.
 \hline
 \end{tabular}
 \end{table}
-Jak widać, pierwzse dwa eksponaty cieszyły się szczególną popularnością.
+Jak widać, pierwzse dwa eksponaty cieszyły się szczególną popularnością. Dalsze badania wskazały, że najpopularniejsze eksponaty dla grupy 20 uczniów z największym kapitałem naukowym i dla grupy 20 dzieci z najmniejszym kapitałem pokrywały się. Wyjątkami, czyli eksponatami występującymi wśród 10 najpopularniejszych u jednej grupy, ale niewystępującymi wśród 20 najpopularniejszych u drugieej grupy, były:
+\begin{itemize}
+\item \textit{Wahadło Foucault} na 7. miejscu u dzieci z najwyższym kapitałem,
+\item \textit{Silnik roślinny} na 10. miejscu u dzieci z najwyższym kapitałem,
+\item \textit{I tłoki turkocą} na 6. miejscu u dzieci z najniższym kapitałem.
+\end{itemize}
 \subsection{Najpopularniejsze eksponaty w obrębie każdej galerii}
 Tabela \ref{top_eksponaty_galerie} pokazuje najpopularniejszy eksponat w każdej galerii.
 
@@ -423,6 +669,42 @@ W tabeli \ref{top_animator_g} przedstawione są eksponaty w obrębie galerii, dl
 \end{tabular}
 \end{table}
 Widoczną anomalią jest galeria \textit{Lustra}, dla której maksymalnie tylko 3\% odwiedzeń wiązało się z rozmową z animatorem, co jest mniejszą wartością, niż średnia z Centrum Nauki Kopernik. Przypuszczalnie wiąże się to ze specyfiką galerii (eksponaty, przez które szybko się przechodzi), a jednocześnie tłumaczy to częstsze sięganie przez dzieci po opis.
+
+\subsection{Klasteryzacja eksponatów}
+Przeprowadzona została klasteryzacja eksponatów według wszystkich kombinacji par następujących zmiennych:
+\begin{itemize}
+\item Liczba odwiedzeń,
+\item Średni osiągany poziom eksploracji,
+\item Średni czas interakcji.
+\end{itemize}
+Wszystkie wartości zostały znormalizowane. Dobór liczby klastrów w każdej parze był początkowo bazowany na wykresach łokciowych, a następnie ręcznie modyfikowany.
+
+Klasteryzacja według wszystkich trzech zmiennych nie dała satysfakcjonujących rezultatów, więc została pominięta.
+
+Na rysunku \ref{klasteryzacja_czas_odw} przedstawione jest grupowanie eksponatów według czasu interakcji i liczby odwiedzeń. Jako czas interakcji w tym wypadku brana jest średnia dla wszystkich dzieci odwiedzających eksponat z sumy wszystkich interakcji, które dane dziecko odbyło z eksponatem, a jako liczba odwiedzeń brane są tylko unikalne odwiedzenia.
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{klasteryzacja_czas_odw.png}
+\caption{Klasteryzacja według czasu interakcji i liczby odwiedzeń}
+\label{klasteryzacja_czas_odw}
+\end{figure}
+Sam kształt wykresu pokazuje, że eksponaty zabierające dużo czasu nie znajdowały się wśród najczęściej odwiedzanych. Otrzymane klastry odpowiadają ,,szybkim i bardzo popularnym", ,,szybkim i mało popularnym" i ,,wolnym, a przy okazji przeciętnie popularnym" eksponatom i sytuacjami pomiędzy nimi.
+
+Rysunek \ref{klasteryzacja_czas_zach} ilustruje klasteryzację według czasu interakcji i poziomu eksploracji (w zakresie 1-3, z połączonym wyłącznym dotykaniem i wyłącznym patrzeniem).
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{klasteryzacja_czas_zach.png}
+\caption{Klasteryzacja według czasu interakcji i poziomu eksploracji}
+\label{klasteryzacja_czas_zach}
+\end{figure}
+Eksponaty, które nie były eksplorowane (być może dlatego, że nie pozwalały), nie zatrzymywały dzieci na długo. Otrzymane grupy to eksponaty ,,szybkie, mało angażujące", ,,szybkie, dosyć angażujące", ,,szybkie, bardzo angażujące", ,,wolne, dosyć angażujące" i ,,bardzo wolne, dosyć angażujące".
+
+Na wykresie \ref{klasteryzacja_odw_zach} przedstawiona jest ostatnia para -- grupowanie według liczby odwiedzeń i poziomu eksploracji.
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{klasteryzacja_odw_zach.png}
+\caption{Klasteryzacja według liczby odwiedzeń i poziomu eksploracji}
+\label{klasteryzacja_odw_zach}
+\end{figure}
+Na wykresie widać, że najczęściej odwiedzane były eksponaty, które były dosyć eksplorowane -- dla porównania istnieje tylko jedna nieeksplorowana wystawa, która uzyskała dużo odwiedzeń -- chodzi tu o \textit{Wahadło Foucault}, które ze swojej natury nie pozwala na nic więcej, niż patrzenie, a jest ulokowane bardzo blisko wejścia. 
+Widoczne grupy to eksponaty ,,mało popularne, mało eksplorowane", ,,mało popularne, bardzo eksplorowane", ,,dosyć popularne, bardzo eksplorowane", ,,bardzo popularne, dosyć eksplorowane" i dwie grupy pośrednio eksplorowane i mało popularne.
 
 \section{Wnioski}
 
