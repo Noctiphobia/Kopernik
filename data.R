@@ -566,8 +566,8 @@ bottom_kapital_obserwacje = inner_join(bottom_kapital, istotne, by = c("id_uczni
 
 ankieta_obserwacje = inner_join(ankieta, obserwacje, by = c("id_ucznia" = "ID"))
 
-top_eksponaty_top_kapital = as.data.frame(head(arrange(count(top_kapital_obserwacje, eksponat, galeria), desc(n)), 6))
-top_eksponaty_bottom_kapital = as.data.frame(head(arrange(count(bottom_kapital_obserwacje, eksponat, galeria), desc(n)), 6))
+top_eksponaty_top_kapital = as.data.frame(head(arrange(count(top_kapital_obserwacje, eksponat, galeria), desc(n)), 20))
+top_eksponaty_bottom_kapital = as.data.frame(head(arrange(count(bottom_kapital_obserwacje, eksponat, galeria), desc(n)), 20))
 
 #wielokrotnie odwiedzane
 #wszystkie
@@ -606,7 +606,80 @@ t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_top$n, alternative = "le
 t.test(unikalne_odwiedzenia_all$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
 t.test(unikalne_odwiedzenia_top$n, unikalne_odwiedzenia_bottom$n, alternative = "greater")$p.value < 0.05
 
-plot(istotne$czas_w_sek, istotne$zach)
+
+#klasteryzacja eksponatow
+numerize = function(x){ as.numeric(as.character(x)) }
+
+summed = summarize(group_by(istotne, eksponat, ID), czas = sum(numerize(czas_w_sek)), zach = mean(numerize(zach)), n = n())
+summed$ID = numerize(summed$ID)
+summed = summed[!is.na(summed$czas) & !is.na(summed$zach),]
+
+eksponaty = summarize(group_by(summed, eksponat), czas = mean(czas), zach = mean(zach), n = n())
+eksponaty = filter(eksponaty, n>8)
+
+#czas, zach
+eksponaty_scaled = scale(eksponaty[,c("czas", "zach")])
+res = numeric(15)
+for (i in 1:15)
+	res[i] = sum(kmeans(eksponaty_scaled, i)$withinss)
+
+plot(1:15, res, type = "b", xlab="Number of clusters", ylab="Within groups sum of squares")
+
+
+eksponaty_klastry = kmeans(eksponaty_scaled, 5)
+plot(eksponaty$czas, eksponaty$zach, col = eksponaty_klastry$cluster , pch = 16, xlab="Średni czas", ylab="Średni poziom zaangażowania", main="Klasteryzacja eksponatów")
+
+eksponaty_summary = cbind(eksponaty, eksponaty_klastry$cluster) 
+colnames(eksponaty_summary)[5] = "cluster_czas_zach"
+
+
+#czas, n
+eksponaty_scaled = scale(eksponaty[,c("czas", "n")])
+res = numeric(15)
+for (i in 1:15)
+	res[i] = sum(kmeans(eksponaty_scaled, i)$withinss)
+
+plot(1:15, res, type = "b", xlab="Number of clusters", ylab="Within groups sum of squares")
+
+
+eksponaty_klastry = kmeans(eksponaty_scaled, 7)
+plot(eksponaty$czas, eksponaty$n, col = eksponaty_klastry$cluster , pch = 16, xlab="Średni czas", ylab="Liczba odwiedzeń", main="Klasteryzacja eksponatów")
+
+eksponaty_summary = cbind(eksponaty_summary, eksponaty_klastry$cluster) 
+colnames(eksponaty_summary)[6] = "cluster_czas_n"
+
+#n, zach
+eksponaty_scaled = scale(eksponaty[,c("n", "zach")])
+res = numeric(15)
+for (i in 1:15)
+	res[i] = sum(kmeans(eksponaty_scaled, i)$withinss)
+
+plot(1:15, res, type = "b", xlab="Number of clusters", ylab="Within groups sum of squares")
+
+
+eksponaty_klastry = kmeans(eksponaty_scaled, 6)
+plot(eksponaty$n, eksponaty$zach, col = eksponaty_klastry$cluster , pch = 16, xlab="Liczba odwiedzeń", ylab="Średni poziom zaangażowania", main="Klasteryzacja eksponatów")
+
+eksponaty_summary = cbind(eksponaty_summary, eksponaty_klastry$cluster) 
+colnames(eksponaty_summary)[7] = "cluster_n_zach"
+
+
+
+t = inner_join(inner_join(eksponaty_summary, select(istotne, eksponat, ID), by = "eksponat"), ankieta, by = c("ID" = "id_ucznia"))
+t = select(t, eksponat, cluster_czas_zach, cluster_czas_n, cluster_n_zach, k_sum_4, plec, ocena_matematyka, ocena_jezyk_polski, ocena_przyroda)
+
+mean(ankieta$plec == "chlopak")
+
+t_summary = summarize(group_by(t, eksponat, cluster_czas_zach, cluster_czas_n, cluster_n_zach), chlopcy = mean(plec == "chlopak", na.rm = TRUE), srednia = mean((numerize(ocena_matematyka) + numerize(ocena_jezyk_polski) + numerize(ocena_przyroda))/3, na.rm = TRUE), kapital = mean(numerize(k_sum_4), na.rm = TRUE))
+
+t_czas_zach = summarize(group_by(t_summary, cluster_czas_zach), chlopcy = mean(chlopcy), srednia = mean(srednia), kapital = mean(kapital))
+t_czas_n = summarize(group_by(t_summary, cluster_czas_n), chlopcy = mean(chlopcy), srednia = mean(srednia), kapital = mean(kapital))
+t_n_zach = summarize(group_by(t_summary, cluster_n_zach), chlopcy = mean(chlopcy), srednia = mean(srednia), kapital = mean(kapital))
+
+View(t_czas_zach)
+View(t_czas_n)
+View(t_n_zach)
+
 
 ###Creating dataframe groups
 obserwacje2 = obserwacje
