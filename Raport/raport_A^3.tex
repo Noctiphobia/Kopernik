@@ -2,6 +2,8 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{blindtext, graphicx}
+\usepackage{float}
+
 
 \ifCLASSINFOpdf
   % \usepackage[pdftex]{graphicx}
@@ -208,8 +210,156 @@ Jak widać (ref. Rysunek~\ref{fig:oceny_praca}), uczniowie najwięcej mogą zysk
 Bardzo podobne wyniki osiągnęliśmy przy porównaniu ocen z wymarzoną pracą (ref. Rysunek~\ref{fig:oceny_wymarzona}). W tym przypadku jednak była większa różnica między ocenami dzieci "Do zawodu", a ocenami "Poza zawodem". Uznaliśmy, że może to wynikać z tego, że przedmiot typu matematyka jest uznawany za bardziej ustruktyruzowany, a co za tym idzie powtarzalny, w przeciwieństwie do polskiego, który jest bardziej oparty na kreatywności, której nie da się wpisać w schemat.
 
 \section{Charakterystyka sposobu zwiedzania przez dzieci}
+\subsection{Liczba odwiedzeń eksponatów w zależności od płci}
+Na rysunku \ref{odwiedziny_plcie} przedstawiona jest zależność liczby odwiedzonych eksponatów od płci.
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{odwiedziny_plcie.png}
+\caption{Liczba odwiedzeń eksponatów w zależności od płci}
+\label{odwiedziny_plcie}
+\end{figure}
+Pierwszy z wykresów przedstawiający odwiedziny wszystkich dzieci zawiera dane o wszystkich dzieciach, a dwa następne jedynie o tych, które wypełniały ankietę -- wskazuje to na istotne braki w danych.
 
 \section{Analiza eksponatów}
+\subsection{Popularność galerii}
+Rysunek \ref{galerie} przedstawia liczbę odwiedzeń eksponatów w poszczególnych galeriach -- w wersji nieprzetworzonej, a także znormalizowanej ze względu na liczbę eksponatów w galerii.
+\begin{figure}[H]
+\includegraphics[width=0.48\textwidth]{galerie.png}
+\caption{Liczba odwiedzeń poszczególnych galerii}
+\label{galerie}
+\end{figure}
+Normalizacja nie jest w pełni dokładna, ponieważ liczone były jedynie te eksponaty, które zostały odwiedzone co najmniej raz (ze względu na brak kompletnej listy eksponatów) -- anomalie wynikające z tego są szczególnie widoczne w przypadku trzech ostatnich galerii, których liczba odwiedzeń była bardzo niewielka.
+\subsection{Popularność eksponatów}
+Tabela \ref{top_eksponaty} przedstawia listę najpopularniejszych eksponatów.
+\begin{table}[H]
+\caption{Najpopularniejsze eksponaty}
+\label{top_eksponaty}
+\centering
+\begin{tabular}{|r|l|l|l|}
+\hline
+\textbf{Lp.} & \textbf{Eksponat} & \textbf{Galeria} & \textbf{Odwiedziny} \\
+\hline
+ 1 &   ALARM NA STATKU  &     Plyn lub Gin     &         220 \\
+ 2 &   OKNO KOPERNIKA & Nowy Swiat w Ruchu    &          209 \\
+ 3 &   MYDLANA SCIANA & Nowy Swiat w Ruchu   &           113 \\
+ 4 &           CHOMIK  &           ---    &          111 \\
+ 5 &          TORNADO & Nowy Swiat w Ruchu    &          110 \\
+ 6 & DOMEK ZE SKRZYNIA  &           ---   &          108 \\
+\hline
+\end{tabular}
+\end{table}
+Jak widać, pierwzse dwa eksponaty cieszyły się szczególną popularnością.
+\subsection{Najpopularniejsze eksponaty w obrębie każdej galerii}
+Tabela \ref{top_eksponaty_galerie} pokazuje najpopularniejszy eksponat w każdej galerii.
+
+\begin{table}[H]
+\caption{Najpopularniejsze eksponaty w obrębie każdej galerii}
+\label{top_eksponaty_galerie}
+\centering
+\begin{tabular}{|r|l|l|l|}
+\hline
+\textbf{Lp.} & \textbf{Galeria} & \textbf{Eksponat} & \textbf{Odw.} \\
+\hline
+
+1  &          Plyn lub Gin &           ALARM NA STATKU &  220  \\
+2  &    Nowy Swiat w Ruchu &            OKNO KOPERNIKA &              209  \\
+3  &                ---    &                    CHOMIK &              111  \\
+4  &  Korzenie Cywilizacji &            LASEROWA HARFA &               95  \\
+5  & Czlowiek i Srodowisko & BIEGANIE (3,2,1\ldots START!) &               83  \\
+6  &        Strefa Swiatla &        UKRYTA PERSPEKTYWA &               42  \\
+7  &                Lustra &    ZWIERCIADLANY LABIRYNT &               30  \\
+8  &          Patrz Ziemia &     ODBIORNIK SATELITARNY &                7  \\
+9  &                Bzzzzz &                  OSWOJAKI &                4  \\
+10 &           Regeneracja &      ROZPOZNAWANIE TWARZY &                2  \\
+\hline
+\end{tabular}
+\end{table}
+Zgodnie z intuicją, w rzadziej odwiedzanych galeriach (patrz rys. \ref{galerie}) również najpopularniejsze eksponaty otrzymały znacząco mniejszą liczbę odwiedzin.
+
+\subsection{Najbardziej absorbujące eksponaty}
+Przeprowadzona została analiza najbardziej absorbujących eksponatów, według następujących kryteriów:
+\begin{itemize}
+\item Średniego spędzonego czasu,
+\item Średniego osiąganego poziomu eksploracji,
+\item Frakcji dzieci, które przeczytały opis,
+\item Frakcji dzieci, które rozmawiały z animatorem.
+\end{itemize}
+Dla każdego z tych kryteriów zostały znalezione wiodące eksponaty. Uwzględniane były jedynie eksponaty, które zostały odwiedzone ponad 10 razy, w celu odrzucenia anomalii spowodowanej bardzo małą próbką. Ponadto, znalezione zostały najlepsze według tych kryteriów eksponaty w obrębie każdej galerii, z wyłączeniem trzech najrzadziej odwiedzanych. Dla niektórych kryteriów dodatkowo powstały dodatkowe listy pomijające eksponaty nieposiadające galerii, ze względu na ich widoczną dominację.
+\subsubsection{Średni spędzony czas}
+Średni czas spędzony na pojedynczym eksponacie to 56.5 sekundy. Tabela \ref{top_czas} przedstawia eksponaty, przy których wizyty średnio zajmowały najwięcej czasu. Podany czas jest reprezentowany w sekundach.
+
+\begin{table}[H]
+\caption{Średni czas wizyty przy eksponacie}
+\label{top_czas}
+\centering
+\begin{tabular}{|r|l|l|l|}
+\hline
+\textbf{Lp.} & \textbf{Eksponat} & \textbf{Galeria} & \textbf{Czas} \\
+\hline
+1  &         PRZEBUDOWA &                --- &  408.4    \\
+2  &       MEMORY FLOOR &                --- &  275.7    \\
+3  &             OCULUS &                --- &  256.2    \\
+4  &    PIJANY KIEROWCA & Czlowiek i Srodowisko &  181.2    \\
+5  &  POJEDYNEK UMYSLOW & Czlowiek i Srodowisko &  179.6    \\
+6  & LABIRYNT PRZESZKOD & Czlowiek i Srodowisko &  167.3    \\
+7  & KOSMICZNY SMIETNIK &    Nowy Swiat w Ruchu &  162.6    \\
+8  &             SEKCJA &                --- &  157.4    \\
+9  & AUKCJA HOLENDERSKA &  Korzenie Cywilizacji &  150.6    \\
+10 &           ANATOMIA &                --- &  149.4    \\
+\hline
+\end{tabular}
+\end{table}
+Pierwsze trzy eksponaty istotnie wyróżniają się. Warto zauważyć, że są to eksponaty poza galeriami. Pozostałe siedem eksponatów ma już bardziej zbliżony średni czas wizyty.
+
+W tabeli \ref{top_czas_g} wskazane są eksponaty o najdłuższym średnim czasie wizyty dla każdej galerii.
+\begin{table}[H]
+\caption{Średni czas wizyty przy eksponacie}
+\label{top_czas_g}
+\centering
+\begin{tabular}{|r|l|p{3.4cm}|l|}
+\hline
+\textbf{Lp.} & \textbf{Galeria} & \textbf{Eksponat} & \textbf{Czas} \\
+\hline
+1 &                ---    &              PRZEBUDOWA    & 408.4 \\
+2 & Czlowiek i Srodowisko &            PIJANY KIEROWCA & 181.2 \\
+3 &  Korzenie Cywilizacji &         AUKCJA HOLENDERSKA & 150.6 \\
+4 &                Lustra &               DUCH PEPPERA & 49.4 \\
+5 &    Nowy Swiat w Ruchu &         KOSMICZNY SMIETNIK & 162.6 \\
+6 &          Plyn lub Gin & ZJAZD DO TRATWY RATUNKOWEJ & 132.5 \\
+7 &        Strefa Swiatla &              ZOLTE SWIATLO & 111.8 \\
+\hline
+\end{tabular}
+\end{table}
+Zgodnie z przewidywaniami, istotną grupą wśród najdłużej używanych eksponatów są wystawy w formie gier, tak jak \textit{Kosmiczny śmietnik}, czy \textit{Pijany kierowca}. Poza wcześniej wspomnianymi odstającymi obserwacjami spoza galerii, to zestawienie ujawniło, że eksponaty w galerii \textit{Lustra} są wykorzystywane bardzo krótko -- najdłuższy czas w tej galerii, 49.4 sekundy, to mniej, niż przeciętny czas spędzony przy eksponacie w obrębie całego centrum nauki. 
+\subsubsection{Średni osiągnięty poziom eksploracji}
+Ponieważ zdecydowaliśmy, że ,,bezmyślne" dotykanie eksponatu nie jest wyższym poziomem, niż patrzenie (a w wielu przypadkach można nawet stwierdzić, że to niższy poziom), pierwotna skala została zmodyfikowana -- 1 oznacza jedynie dotykanie lub jedynie patrzenie, 2 -- korzystanie, a 3 -- eksperymentowanie. Średni poziom w tej skali dla wszystkich eksponatów to 1.66. Warto zwrócić uwagę, że nie wszystkie eksponaty pozwalały na każdy poziom -- na niektóre można było tylko patrzeć, a w wielu nie były możliwe eksperymenty. Tabela \ref{top_zach} przedstawia najbardziej eksplorowane wystawy.
+\begin{table}[H]
+\caption{Średni poziom eksploracji}
+\label{top_zach}
+\centering
+\begin{tabular}{|r|l|l|l|}
+\hline
+\textbf{Lp.} & \textbf{Eksponat} & \textbf{Galeria} & \textbf{Poziom} \\
+\hline
+1  &                DJ &             ---        &     2.076923    \\
+2  &      DUCH PEPPERA &             Lustra     &        2.000000 \\
+3  &   KOLOROWE CIENIE &     Strefa Swiatla     &        2.000000 \\
+4  &       PODUSZKOWCE &             ---        &     2.000000    \\
+5  &          RURA 900 &             ---        &     1.962963    \\
+6  &  PRZEWROTNA KULKA & Nowy Swiat w Ruchu     &        1.952381 \\
+7  &          RUROCIAG &             ---        &     1.947368    \\
+8  &            MOTORY &             ---        &     1.937500    \\
+9  &           NA FALI &             ---        &     1.923077    \\
+10 &          ANATOMIA &             ---        &     1.916667    \\
+\hline
+\end{tabular}
+\end{table}
+Narzucającą się na pierwszy rzut oka obserwacją jest zdecydowana dominacja eksponatów spoza galerii -- sugeruje to, że zwykle są one bardziej interaktywne, niż pozostałe. Warto też zwrócić na eksponat \textit{Duch Peppera}: jest to eksponat z galerii \textit{Lustra}, przy którym dzieci spędzały najwięcej czasu (a jednocześnie poniżej przeciętnej) -- na podstawie powyższych informacji można wywnioskować, że po prostu ten eksponat nie wymagał dużo czasu, ponieważ trudno by było uwierzyć, żeby z jakiegokolwiek innego powodu dzieci spędzały go tak mało przy wyjątkowo absorbującym eksponacie.
+Tabela \ref{top_zach_b} nie uwzględnia eksponatów bez galerii 
+
+
+\subsubsection{Frakcja dzieci, które przeczytały opis}
+
+\subsubsection{Frakcja dzieci, które rozmawiały z animatorem}
 
 \section{Wnioski}
 
